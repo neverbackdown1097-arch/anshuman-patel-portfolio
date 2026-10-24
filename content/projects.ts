@@ -19,6 +19,7 @@ export const categories = [
   "Brand Films",
   "Social Media Videos",
   "Travel Films",
+  "SaaS & Product Videos",
 ] as const;
 
 export type Category = (typeof categories)[number];
@@ -111,6 +112,44 @@ export const projects: Project[] = [
         "Voiceover over a restructured music edit: the full entry, the dip and the closing slam are each moved to land on a story beat.",
       color:
         "Shot-by-shot exposure and white-balance matching, then four looks — night, warm, epic and craft — with gentle halation. Mastered in 4K at 24 fps.",
+    },
+  },
+  {
+    slug: "codevibe-saas-brand-film",
+    title: "From First Idea to Production",
+    subtitle: "Your next big idea deserves more than just code.",
+    brand: "Codevibe",
+    context: "SaaS brand film for Codevibe",
+    date: "2026-10-24",
+    categories: ["SaaS & Product Videos", "Motion Graphics", "Brand Films"],
+    format: "16:9",
+    duration: 58,
+    summary:
+      "A 58-second SaaS-style brand film for Codevibe, built from the studio's real website, screens and brand system — mastered in 4K.",
+    role: ["Concept", "Motion design", "UI animation", "Editing", "Sound design"],
+    tools: [],
+    credits: ["Music: “Your Breath” by Eugenio Mininni (Mixkit)", "Sound effects: custom-designed", "Interface: Codevibe's own website and screens"],
+    media: media("codevibe-saas-film", "WE TURN IDEAS INTO DIGITAL PRODUCTS THAT SCALE beside floating Codevibe website and phone screens on dark navy", [
+      "Three phone screens showing analytics and checkout for the Mobile Applications chapter",
+      "An AI processing node pulling in emails, forms, documents and spreadsheets for the AI & Automation chapter",
+      "Type specimen, colour swatches and a Launch day card for the UI/UX Design chapter",
+      "Codevibe website and case-study screens floating in depth around a soft blue glow",
+    ]),
+    story: {
+      overview:
+        "A premium SaaS-style film that walks through what Codevibe builds — web, mobile, AI, cloud and design — and how it works with clients, in under a minute.",
+      challenge:
+        "Make a services company feel like a product. Five services and a full delivery process had to read clearly in 58 seconds without turning into a slideshow.",
+      concept:
+        "Everything is real: the fonts, colours and screens come straight from codevibe.in. Floating browser and phone panels, a single glowing trace line and numbered chapters give it the calm confidence of a product launch film.",
+      edit:
+        "Six acts: the hook, the promise, five service chapters (01–05), the working principles, the journey from first idea to production, and the logo lock-up with a call to action.",
+      motion:
+        "Panels assemble in 3D depth, interface elements animate the way the real product would, and every headline reveals line by line in Space Grotesk.",
+      sound:
+        "A 120 bpm track re-mapped to the edit — a pulse for the hook, a breakdown for the principles, a re-entry for the journey and a clean resolve on the logo — plus custom interface sounds for ticks, traces and confirmations.",
+      color:
+        "Codevibe's own navy, blue and teal. Soft glows and deep navy gradients keep it premium and readable at any size. Mastered in 4K.",
     },
   },
   {
@@ -319,7 +358,7 @@ export const projects: Project[] = [
     subtitle: "Designed to feel different.",
     context: "Self-initiated UI motion reel",
     date: "2026-10-18",
-    categories: ["Motion Graphics"],
+    categories: ["Motion Graphics", "SaaS & Product Videos"],
     format: "16:9",
     duration: 27,
     summary:
@@ -348,7 +387,7 @@ export const projects: Project[] = [
     brand: "Codevibe",
     context: "Pitch film for Codevibe",
     date: "2026-06-12",
-    categories: ["Motion Graphics", "Brand Films"],
+    categories: ["Motion Graphics", "Brand Films", "SaaS & Product Videos"],
     format: "16:9",
     duration: 35,
     summary:

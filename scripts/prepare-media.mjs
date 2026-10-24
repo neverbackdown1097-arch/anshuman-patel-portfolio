@@ -5,7 +5,7 @@
 // pass --force to rebuild them.
 import { spawnSync } from "node:child_process";
 import { existsSync, mkdirSync, writeFileSync, rmSync } from "node:fs";
-import { join, resolve } from "node:path";
+import { isAbsolute, join, resolve } from "node:path";
 import { tmpdir } from "node:os";
 
 const FFMPEG =
@@ -28,6 +28,7 @@ const jobs = {
   "codevibe-type": { file: "codevibe-type-9x16.mp4", vertical: true, poster: 31, stills: [2.8, 8.4, 19.7, 42.2], preview: [26, 6] },
   "codevibe-future": { file: "codevibe-future-reel.mp4", vertical: true, poster: 4.7, stills: [1.57, 7.8, 14.1, 23.5], preview: [0, 6] },
   "codevibe-web": { file: "codevibe-reel.mp4", vertical: true, poster: 6.57, stills: [10.95, 15.3, 19.7, 28.5], preview: [4, 6] },
+  "codevibe-saas-film": { file: "G:/pf/codevibe-film-4k.mp4", poster: 10.5, stills: [15.5, 18.5, 24.5, 43.5], preview: [12, 6] },
 };
 
 // Text-free shots for the silent hero background loop: [file, start, length].
@@ -58,7 +59,7 @@ for (const [slug, j] of Object.entries(jobs)) {
   if (only.length && !only.includes(slug)) continue;
   const dir = join(OUT, slug);
   mkdirSync(dir, { recursive: true });
-  const src = join(SRC, j.file);
+  const src = isAbsolute(j.file) ? j.file : join(SRC, j.file);
   const full = j.vertical ? "scale=1080:1920" : "scale=1920:1080";
   const small = j.vertical ? "scale=360:640" : "scale=640:360";
   console.log(`▸ ${slug}`);

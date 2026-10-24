@@ -126,6 +126,7 @@ export const site = {
       "Brand film",
       "Social media content",
       "Travel film",
+      "SaaS / product video",
       "Something else",
     ],
     /** Budget choices are optional for the visitor. Replace with your own ranges if you like. */
