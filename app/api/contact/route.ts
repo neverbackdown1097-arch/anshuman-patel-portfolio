@@ -13,8 +13,13 @@ import { validateContact, type ContactInput, type ContactResponse } from "@/lib/
  *   Formspree (no domain needed)
  *     FORMSPREE_ENDPOINT  https://formspree.io/f/xxxxxxx
  *
- * With neither set, the route answers 503 "not_configured" and the form tells
- * visitors to email you directly. It never pretends a message was sent.
+ *   FormSubmit (default, nothing to configure)
+ *     Sends to CONTACT_TO_EMAIL or the email in content/site.ts. Click the
+ *     one-time "Activate form" email FormSubmit sends you. Set
+ *     FORMSUBMIT_DISABLED=1 to turn it off.
+ *
+ * If delivery fails the form tells visitors their message was NOT sent and
+ * offers a pre-filled email instead. It never pretends a message was sent.
  */
 
 const json = (body: ContactResponse, status = 200) => Response.json(body, { status });
@@ -78,6 +83,38 @@ export async function POST(request: Request) {
         body: JSON.stringify({ ...data, _replyto: data.email, _subject: subject }),
       });
       if (!res.ok) throw new Error(`Formspree ${res.status}: ${await res.text()}`);
+      return json({ ok: true });
+    }
+
+    // Default: FormSubmit (no account or key). The first message to a new
+    // address triggers a one-time "Activate form" email; until that link is
+    // clicked FormSubmit reports failure, and so do we.
+    const to = process.env.CONTACT_TO_EMAIL ?? site.social.email;
+    if (to && process.env.FORMSUBMIT_DISABLED !== "1") {
+      const origin = new URL(request.url).origin;
+      const res = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(to)}`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Origin: origin,
+          Referer: `${origin}/`,
+        },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          "Company / brand": data.company || "—",
+          "Project type": data.projectType,
+          Budget: data.budget || "—",
+          message: data.message,
+          _replyto: data.email,
+          _subject: subject,
+          _template: "table",
+          _captcha: "false",
+        }),
+      });
+      const out = (await res.json().catch(() => null)) as { success?: string | boolean; message?: string } | null;
+      if (!res.ok || String(out?.success) !== "true") throw new Error(`FormSubmit ${res.status}: ${out?.message ?? "no body"}`);
       return json({ ok: true });
     }
   } catch (err) {

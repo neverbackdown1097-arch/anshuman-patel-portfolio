@@ -4,6 +4,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { site } from "@/content/site";
 import { limits, validateContact, type ContactErrors, type ContactInput, type ContactResponse } from "@/lib/contact";
+import { Select } from "./select";
 
 type Status = "idle" | "submitting" | "success" | "not_configured" | "failed";
 
@@ -41,11 +42,13 @@ export function ContactForm() {
     if (status === "success") doneRef.current?.focus();
   }, [status]);
 
-  const set = (key: keyof ContactInput) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const next = { ...values, [key]: e.target.value };
+  const setValue = (key: keyof ContactInput, value: string) => {
+    const next = { ...values, [key]: value };
     setValues(next);
     if (attempted) setErrors(validateContact(next));
   };
+  const set = (key: keyof ContactInput) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setValue(key, e.target.value);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -154,28 +157,30 @@ export function ContactForm() {
           <input {...field("company")} type="text" autoComplete="organization" maxLength={limits.company} className={inputCls} />
         </Field>
         <Field label="Project type" required error={errors.projectType} htmlFor={`${id}-projectType`} errorId={`${id}-projectType-error`}>
-          <select {...field("projectType")} required className={`${inputCls} appearance-none bg-[length:12px] bg-[right_0.25rem_center] bg-no-repeat pr-8`} style={{ backgroundImage: chevron }}>
-            <option value="" disabled>
-              Select one
-            </option>
-            {site.contact.projectTypes.map((t) => (
-              <option key={t} value={t}>
-                {t}
-              </option>
-            ))}
-          </select>
+          <Select
+            id={`${id}-projectType`}
+            name="projectType"
+            value={values.projectType}
+            options={site.contact.projectTypes}
+            placeholder="Select one"
+            invalid={Boolean(errors.projectType)}
+            describedBy={errors.projectType ? `${id}-projectType-error` : undefined}
+            onChange={(v) => setValue("projectType", v)}
+            onBlur={() => attempted && setErrors(validateContact(values))}
+          />
         </Field>
       </div>
 
       <Field label="Budget range" optional error={errors.budget} htmlFor={`${id}-budget`} errorId={`${id}-budget-error`}>
-        <select {...field("budget")} className={`${inputCls} appearance-none bg-[length:12px] bg-[right_0.25rem_center] bg-no-repeat pr-8`} style={{ backgroundImage: chevron }}>
-          <option value="">Prefer not to say</option>
-          {site.contact.budgets.map((b) => (
-            <option key={b} value={b}>
-              {b}
-            </option>
-          ))}
-        </select>
+        <Select
+          id={`${id}-budget`}
+          name="budget"
+          value={values.budget}
+          options={site.contact.budgets}
+          placeholder="Prefer not to say"
+          emptyLabel="Prefer not to say"
+          onChange={(v) => setValue("budget", v)}
+        />
       </Field>
 
       <Field label="Project description" required error={errors.message} htmlFor={`${id}-message`} errorId={`${id}-message-error`}>
@@ -233,7 +238,7 @@ export function ContactForm() {
           type="submit"
           disabled={status === "submitting"}
           aria-busy={status === "submitting"}
-          className="label group inline-flex items-center gap-4 bg-signal px-8 py-5 text-ink transition-colors duration-300 hover:bg-bone disabled:cursor-wait disabled:opacity-70"
+          className="label group inline-flex w-full items-center justify-center gap-4 whitespace-nowrap bg-signal px-8 py-5 text-ink transition-[background-color,transform] duration-300 hover:bg-bone active:scale-[0.98] disabled:cursor-wait disabled:opacity-70 sm:w-auto"
         >
           {status === "submitting" ? "Sending…" : "Send project brief"}
           <span aria-hidden className="transition-transform duration-500 group-hover:translate-x-1">
@@ -254,7 +259,6 @@ export function ContactForm() {
 const inputCls =
   "block w-full border-0 border-b border-line bg-transparent px-0 py-3 text-lg text-bone placeholder:text-dim transition-colors duration-300 hover:border-bone/40 focus:border-signal focus:outline-none focus-visible:outline-none aria-[invalid]:border-signal";
 
-const chevron = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%23eeeae2' stroke-width='1.4'><path d='M1 1.5l5 5 5-5'/></svg>")`;
 
 function Field({
   label,

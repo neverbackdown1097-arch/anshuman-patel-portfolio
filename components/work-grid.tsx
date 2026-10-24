@@ -6,43 +6,33 @@ import type { Project } from "@/content/projects";
 import { FilterBar, filterProjects, type Filter } from "./filter-bar";
 import { ProjectTile } from "./project-tile";
 
-const WIDE = "(min-width: 768px) 60vw, 100vw";
-const NARROW = "(min-width: 768px) 34vw, 75vw";
+const WIDE = "(min-width: 1024px) 60vw, (min-width: 768px) 48vw, 100vw";
+const NARROW = "(min-width: 1024px) 34vw, (min-width: 768px) 48vw, 100vw";
 
 /**
- * Editorial gallery: projects are laid out in pairs on a 12-column grid,
- * with spans and vertical offsets chosen by the pair's mix of 16:9 and 9:16.
+ * Phones: one full-width column. Tablets: two columns with the right one
+ * dropped lower for a staggered rhythm. Large screens: an editorial 12-column
+ * grid laid out in pairs, with spans and offsets chosen by each pair's mix of
+ * 16:9 and 9:16 work.
  */
 function layout(items: Project[]) {
   const out: { cls: string; sizes: string }[] = [];
   const tall = (p: Project) => p.format === "9:16";
-  // On phones, tall cards take three quarters of the width and alternate sides.
-  const phoneTall = (left: boolean) => `w-3/4 md:w-auto ${left ? "" : "ml-auto md:ml-0"}`;
+  const sizes = (cls: string) => (/span-[78]/.test(cls) ? WIDE : NARROW);
   for (let i = 0; i < items.length; i += 2) {
     const a = items[i];
     const b = items[i + 1];
     const flip = (i / 2) % 2 === 1;
-    if (!b) {
-      out.push(
-        tall(a)
-          ? { cls: `${phoneTall(true)} md:col-span-4 md:col-start-5`, sizes: NARROW }
-          : { cls: "md:col-span-8 md:col-start-3", sizes: WIDE },
-      );
-    } else if (!tall(a) && !tall(b)) {
-      out.push(
-        { cls: flip ? "md:col-span-5 md:mt-40" : "md:col-span-7", sizes: flip ? NARROW : WIDE },
-        { cls: flip ? "md:col-span-7" : "md:col-span-5 md:mt-48", sizes: flip ? WIDE : NARROW },
-      );
-    } else if (!tall(a)) {
-      out.push({ cls: "md:col-span-8", sizes: WIDE }, { cls: `${phoneTall(false)} md:col-span-4 md:mt-36`, sizes: NARROW });
-    } else if (!tall(b)) {
-      out.push({ cls: `${phoneTall(true)} md:col-span-4`, sizes: NARROW }, { cls: "md:col-span-8 md:mt-56", sizes: WIDE });
-    } else {
-      out.push(
-        { cls: `${phoneTall(true)} md:col-span-4 md:col-start-2`, sizes: NARROW },
-        { cls: `${phoneTall(false)} md:col-span-4 md:col-start-8 md:mt-40`, sizes: NARROW },
-      );
-    }
+    let pair: [string, string];
+    if (!b) pair = [tall(a) ? "lg:col-span-4 lg:col-start-5" : "lg:col-span-8 lg:col-start-3", ""];
+    else if (!tall(a) && !tall(b))
+      pair = flip ? ["lg:col-span-5 lg:mt-40", "lg:col-span-7 lg:mt-0"] : ["lg:col-span-7", "lg:col-span-5 lg:mt-48"];
+    else if (!tall(a)) pair = ["lg:col-span-8", "lg:col-span-4 lg:mt-36"];
+    else if (!tall(b)) pair = ["lg:col-span-4", "lg:col-span-8 lg:mt-56"];
+    else pair = ["lg:col-span-4 lg:col-start-2", "lg:col-span-4 lg:col-start-8 lg:mt-40"];
+    out.push({ cls: pair[0], sizes: sizes(pair[0]) });
+    // The second card of each pair sits lower on tablets.
+    if (b) out.push({ cls: `md:mt-28 ${pair[1]}`, sizes: sizes(pair[1]) });
   }
   return out;
 }
@@ -55,7 +45,7 @@ export function WorkGrid({ projects }: { projects: Project[] }) {
   return (
     <div>
       <FilterBar projects={projects} value={filter} onChange={setFilter} />
-      <ul className="mt-12 grid grid-cols-1 gap-x-[clamp(1.25rem,3vw,3.5rem)] gap-y-16 md:mt-16 md:grid-cols-12 md:gap-y-28">
+      <ul className="mt-10 grid grid-cols-1 gap-x-[clamp(1.25rem,3vw,3.5rem)] gap-y-14 md:mt-14 md:grid-cols-2 md:gap-y-20 lg:mt-16 lg:grid-cols-12 lg:gap-y-28">
         <AnimatePresence mode="popLayout" initial={false}>
           {visible.map((p, i) => (
             <motion.li
@@ -65,7 +55,7 @@ export function WorkGrid({ projects }: { projects: Project[] }) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, transition: { duration: 0.25 } }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className={slots[i].cls}
+              className={`min-w-0 ${slots[i].cls}`}
             >
               <ProjectTile project={p} index={projects.indexOf(p)} sizes={slots[i].sizes} />
             </motion.li>

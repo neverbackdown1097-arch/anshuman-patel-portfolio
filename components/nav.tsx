@@ -169,7 +169,7 @@ export function Nav() {
                       <a
                         href={s.href}
                         className="label text-mute hover:text-bone"
-                        {...(s.key === "email" ? {} : { target: "_blank", rel: "noopener noreferrer" })}
+                        {...(s.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                       >
                         {s.label}
                       </a>

@@ -141,6 +141,10 @@ export const site = {
   /** Leave any value as "" to hide it. */
   social: {
     email: "anshumanpatel619@gmail.com",
+    /** Digits only, with country code. Used for tel: and WhatsApp links. */
+    phone: "917651916121",
+    /** WhatsApp chat on the same number. Set to "" to hide. */
+    whatsapp: "https://wa.me/917651916121",
     linkedin: "https://www.linkedin.com/in/anshuman-patel-069b04193/",
     instagram: "https://www.instagram.com/anshuman__1097/",
     x: "https://x.com/Anshuma26586120",
@@ -182,6 +186,8 @@ export type SocialKey = keyof typeof site.social;
 
 export const socialLabels: Record<SocialKey, string> = {
   email: "Email",
+  phone: "Call",
+  whatsapp: "WhatsApp",
   linkedin: "LinkedIn",
   instagram: "Instagram",
   x: "X / Twitter",
@@ -189,13 +195,24 @@ export const socialLabels: Record<SocialKey, string> = {
   youtube: "YouTube",
 };
 
-/** Configured social links in display order, with mailto: applied to email. */
+/** "917651916121" → "+91 76519 16121" */
+export function formatPhone(digits: string) {
+  const cc = digits.slice(0, digits.length - 10);
+  const n = digits.slice(-10);
+  return `${cc ? `+${cc} ` : ""}${n.slice(0, 5)} ${n.slice(5)}`;
+}
+
+const hrefFor = (k: SocialKey) =>
+  k === "email" ? `mailto:${site.social.email}` : k === "phone" ? `tel:+${site.social.phone}` : site.social[k];
+
+/** Configured links in display order. `external` links open in a new tab. */
 export function socialLinks() {
   return (Object.keys(site.social) as SocialKey[])
     .filter((k) => site.social[k])
     .map((k) => ({
       key: k,
       label: socialLabels[k],
-      href: k === "email" ? `mailto:${site.social.email}` : site.social[k],
+      href: hrefFor(k),
+      external: k !== "email" && k !== "phone",
     }));
 }

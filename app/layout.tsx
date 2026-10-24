@@ -6,6 +6,7 @@ import { Providers } from "@/components/providers";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { Cursor } from "@/components/cursor";
+import { FloatingCta } from "@/components/floating-cta";
 
 const anton = Anton({ variable: "--font-anton", weight: "400", subsets: ["latin"] });
 const interTight = Inter_Tight({ variable: "--font-inter-tight", subsets: ["latin"] });
@@ -65,6 +66,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <main id="main" tabIndex={-1} className="outline-none">{children}</main>
           <Footer />
           <Cursor />
+          <FloatingCta />
         </Providers>
         <div className="grain" aria-hidden />
       </body>

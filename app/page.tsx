@@ -6,6 +6,7 @@ import {
   ProcessSection,
   ServicesSection,
   ShowreelSection,
+  SkillsMarquee,
   WorkSection,
 } from "@/components/sections";
 import { JsonLd } from "@/components/json-ld";
@@ -26,6 +27,7 @@ export default function Home() {
             jobTitle: site.jobTitle,
             url: site.url,
             email: `mailto:${site.social.email}`,
+            ...(site.social.phone ? { telephone: `+${site.social.phone}` } : {}),
             sameAs,
             knowsAbout: [...site.about.strengths],
           },
@@ -40,6 +42,7 @@ export default function Home() {
       />
       <Hero />
       <ShowreelSection />
+      <SkillsMarquee />
       <WorkSection />
       <AboutSection />
       <ServicesSection />

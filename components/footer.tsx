@@ -36,10 +36,10 @@ export function Footer() {
                   <a
                     href={s.href}
                     className="link-underline text-bone/85 hover:text-bone"
-                    {...(s.key === "email" ? {} : { target: "_blank", rel: "noopener noreferrer" })}
+                    {...(s.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                   >
                     {s.label}
-                    {s.key !== "email" && <span className="sr-only"> (opens in a new tab)</span>}
+                    {s.external && <span className="sr-only"> (opens in a new tab)</span>}
                   </a>
                 </li>
               ))}

@@ -55,9 +55,11 @@ All links live in `site.social` in `content/site.ts`. A blank value (`""`) hides
 
 ## Connecting the contact form
 
-The form posts to `/api/contact`, which validates the input and delivers it through one of two services. Until you configure one, the form clearly tells visitors that their message was **not** sent. It also offers a pre-filled email instead. It never shows a fake success message.
+The form posts to `/api/contact`, which validates the input and delivers it. If delivery fails for any reason, the form tells visitors their message was **not** sent and offers a pre-filled email instead. It never shows a fake success message.
 
-Set environment variables in your host (Vercel → Project → Settings → Environment Variables), or locally in `.env.local`. See `.env.example`.
+**Default: FormSubmit (works with no setup).** Messages go to the email in `content/site.ts` (or `CONTACT_TO_EMAIL`). The first time it is used, FormSubmit emails you an **"Activate Form"** link. Click it once (check Spam too). Until then, messages are not delivered. Set `FORMSUBMIT_DISABLED=1` to turn it off.
+
+For a branded sender or higher volume, use one of the options below instead. Set environment variables in your host (Vercel → Project → Settings → Environment Variables), or locally in `.env.local`. See `.env.example`. The first option configured wins.
 
 **Option A: Resend (emails land directly in your inbox)**
 1. Create a free account at resend.com, then verify a domain you own.
