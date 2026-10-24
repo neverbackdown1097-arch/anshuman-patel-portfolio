@@ -86,41 +86,14 @@ export async function POST(request: Request) {
       return json({ ok: true });
     }
 
-    // Default: FormSubmit (no account or key). The first message to a new
-    // address triggers a one-time "Activate form" email; until that link is
-    // clicked FormSubmit reports failure, and so do we.
-    const to = process.env.CONTACT_TO_EMAIL ?? site.social.email;
-    if (to && process.env.FORMSUBMIT_DISABLED !== "1") {
-      const origin = new URL(request.url).origin;
-      const res = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(to)}`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Origin: origin,
-          Referer: `${origin}/`,
-        },
-        body: JSON.stringify({
-          name: data.name,
-          email: data.email,
-          "Company / brand": data.company || "—",
-          "Project type": data.projectType,
-          Budget: data.budget || "—",
-          message: data.message,
-          _replyto: data.email,
-          _subject: subject,
-          _template: "table",
-          _captcha: "false",
-        }),
-      });
-      const out = (await res.json().catch(() => null)) as { success?: string | boolean; message?: string } | null;
-      if (!res.ok || String(out?.success) !== "true") throw new Error(`FormSubmit ${res.status}: ${out?.message ?? "no body"}`);
-      return json({ ok: true });
-    }
   } catch (err) {
     console.error("[contact] delivery failed", err);
     return json({ ok: false, code: "delivery_failed" }, 502);
   }
+
+  // Default: FormSubmit, sent from the visitor's browser (its bot protection
+  // rejects server-to-server requests). The message passed validation above.
+  if (process.env.FORMSUBMIT_DISABLED !== "1") return json({ ok: false, code: "deliver_in_browser" });
 
   return json({ ok: false, code: "not_configured" }, 503);
 }

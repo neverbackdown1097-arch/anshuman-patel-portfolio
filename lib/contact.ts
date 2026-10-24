@@ -14,7 +14,33 @@ export type ContactErrors = Partial<Record<keyof ContactInput, string>>;
 export type ContactResponse =
   | { ok: true }
   | { ok: false; code: "invalid"; errors: ContactErrors }
-  | { ok: false; code: "not_configured" | "delivery_failed" | "spam" };
+  | { ok: false; code: "not_configured" | "delivery_failed" | "spam" | "deliver_in_browser" };
+
+/**
+ * Sends a validated enquiry through FormSubmit from the browser.
+ * Resolves true only when FormSubmit confirms delivery. Before the one-time
+ * activation link (emailed to `to`) is clicked, it reports failure.
+ */
+export async function sendViaFormSubmit(to: string, data: ContactInput): Promise<boolean> {
+  const res = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(to)}`, {
+    method: "POST",
+    headers: { Accept: "application/json", "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: data.name,
+      email: data.email,
+      "Company / brand": data.company || "—",
+      "Project type": data.projectType,
+      Budget: data.budget || "—",
+      message: data.message,
+      _replyto: data.email,
+      _subject: `New project enquiry — ${data.projectType} — ${data.name}`,
+      _template: "table",
+      _captcha: "false",
+    }),
+  });
+  const out = (await res.json().catch(() => null)) as { success?: string | boolean } | null;
+  return res.ok && String(out?.success) === "true";
+}
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 

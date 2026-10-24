@@ -3,7 +3,14 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { site } from "@/content/site";
-import { limits, validateContact, type ContactErrors, type ContactInput, type ContactResponse } from "@/lib/contact";
+import {
+  limits,
+  sendViaFormSubmit,
+  validateContact,
+  type ContactErrors,
+  type ContactInput,
+  type ContactResponse,
+} from "@/lib/contact";
 import { Select } from "./select";
 
 type Status = "idle" | "submitting" | "success" | "not_configured" | "failed";
@@ -71,6 +78,8 @@ export function ContactForm() {
       const data = (await res.json().catch(() => null)) as ContactResponse | null;
       if (data?.ok) {
         setStatus("success");
+      } else if (data?.code === "deliver_in_browser") {
+        setStatus((await sendViaFormSubmit(site.social.email, values)) ? "success" : "failed");
       } else if (data && data.code === "invalid") {
         setErrors(data.errors);
         setStatus("idle");
