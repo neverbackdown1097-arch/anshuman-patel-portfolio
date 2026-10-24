@@ -12,6 +12,8 @@
  * ─────────────────────────────────────────────────────────────────────────
  */
 
+import ownTheElements from "./breakdowns/own-the-elements.json";
+
 export const categories = [
   "Cinematic Storytelling",
   "Motion Graphics",
@@ -25,6 +27,43 @@ export const categories = [
 export type Category = (typeof categories)[number];
 
 export type Still = { src: string; alt: string };
+
+/** Raw-vs-final "edit room" data. Built from content/breakdowns/<slug>.json. */
+export type Breakdown = {
+  rawReel: string;
+  rawPoster: string;
+  finalReel: string;
+  finalPoster: string;
+  /** Frame rate of the cut list below. */
+  fps: number;
+  /** The final cut, shot by shot: frames [from, to) and the raw source used (id null = no footage). */
+  clips: { from: number; to: number; id: string | null; label: string; width?: number; height?: number; fps?: number }[];
+  pairs: { key: string; title: string; changes: string[]; raw: string; final: string }[];
+  stats: { delivered: number; used: number; shots: number; rawSeconds: number; finalSeconds: number };
+  extras: { value: string; label: string }[];
+};
+
+type BreakdownJson = Omit<Breakdown, "rawReel" | "rawPoster" | "finalReel" | "finalPoster" | "pairs" | "extras"> & {
+  pairs: { key: string; title: string; changes: string[] }[];
+};
+
+const breakdown = (slug: string, json: BreakdownJson, extras: Breakdown["extras"] = []): Breakdown => ({
+  rawReel: `/media/${slug}/raw.mp4`,
+  rawPoster: `/media/${slug}/raw-poster.jpg`,
+  finalReel: `/media/${slug}/film.mp4`,
+  finalPoster: `/media/${slug}/poster.jpg`,
+  fps: json.fps,
+  clips: json.clips,
+  stats: json.stats,
+  pairs: json.pairs.map((p) => ({
+    key: p.key,
+    title: p.title,
+    changes: p.changes,
+    raw: `/media/${slug}/compare/${p.key}-raw.jpg`,
+    final: `/media/${slug}/compare/${p.key}-final.jpg`,
+  })),
+  extras,
+});
 
 export type Project = {
   slug: string;
@@ -66,6 +105,8 @@ export type Project = {
     color?: string;
   };
   placeholder?: boolean;
+  /** Optional raw-vs-final section shown under the film. */
+  breakdown?: Breakdown;
 };
 
 const media = (slug: string, posterAlt: string, stills: string[]) => ({
@@ -150,6 +191,50 @@ export const projects: Project[] = [
         "A 120 bpm track re-mapped to the edit — a pulse for the hook, a breakdown for the principles, a re-entry for the journey and a clean resolve on the logo — plus custom interface sounds for ticks, traces and confirmations.",
       color:
         "Codevibe's own navy, blue and teal. Soft glows and deep navy gradients keep it premium and readable at any size. Mastered in 4K.",
+    },
+  },
+  {
+    slug: "own-the-elements",
+    title: "Own the Elements",
+    subtitle: "Not just outerwear. An attitude.",
+    context: "Spec campaign — women's outerwear",
+    date: "2026-10-24",
+    categories: ["Brand Films", "Social Media Videos", "Cinematic Storytelling"],
+    format: "9:16",
+    duration: 35,
+    summary:
+      "A 35-second outerwear campaign for Instagram, cut from 18 unrelated stock clips into one look — with the untouched raw footage shown side by side.",
+    role: ["Creative direction", "Editing", "Color grading", "Motion design", "Sound design"],
+    tools: [],
+    credits: [
+      "Footage: licensed stock (Pexels), 18 clips from different shoots",
+      "Music: “Cat Walk” (Mixkit)",
+      "Sound effects: Freesound (CC0)",
+    ],
+    media: media("own-the-elements", "A woman in a black wool coat and turtleneck, the final look of the Own the Elements campaign", [
+      "A woman in a green trench walking under an umbrella beneath the title Built to Stand Out",
+      "A woman in a long leather coat walking across a city square, titled The Leather",
+      "A man in a teal puffer jacket at night pulling the collar over his mouth, titled The Puffer",
+      "A freeze-frame of a twirl with the words Your Style layered behind her",
+    ]),
+    breakdown: breakdown("own-the-elements", ownTheElements, [
+      { value: "127", label: "BPM cut grid" },
+    ]),
+    story: {
+      overview:
+        "A spec campaign for a women's outerwear label: four key pieces, one attitude, built for a vertical feed. The brand name is left as a placeholder for the client.",
+      challenge:
+        "The footage came from different shoots and cameras — 25, 30, 50 and 60 fps, mixed light, mixed colour. It had to feel like one campaign shot on one day.",
+      concept:
+        "Weather as a stage. Wind, rain, night and city light become the backdrop for a collection that's built for all of it: the trench, the leather, the wool, the puffer — and the woman wearing them.",
+      edit:
+        "Every cut sits on a 127 BPM grid. The track starts mid-song so its drop lands exactly 3 seconds in; scenes then change on bar lines and speed ramps slow each stride on the beat.",
+      motion:
+        "Editorial serif titles, lookbook cards for each piece, whip-in transitions and a freeze-frame where the subject is cut out of a 4K frame so the type can sit between her and the background.",
+      sound:
+        "“Cat Walk” edited to the picture, layered with fabric, leather, zip, heel and camera-shutter effects so each look has its own texture.",
+      color:
+        "Each shot graded to match the others first, then a shared campaign finish — deeper contrast and slightly restrained saturation for a premium, editorial feel.",
     },
   },
   {

@@ -1,0 +1,335 @@
+{
+  "rawDir": "G:/motion graphics/codevibe-reel-v3/fashion-source/raw",
+  "final": "G:/motion graphics/codevibe-reel-v3/out/own-the-elements-ig.mp4",
+  "clips": [
+    {
+      "from": 0,
+      "to": 20,
+      "id": "5119544",
+      "start": 1.44,
+      "label": "Trench in the dunes",
+      "width": 2160,
+      "height": 4096,
+      "fps": 25
+    },
+    {
+      "from": 20,
+      "to": 34,
+      "id": "6642854",
+      "start": 2.4,
+      "label": "Profile close-up",
+      "width": 2160,
+      "height": 4096,
+      "fps": 25
+    },
+    {
+      "from": 34,
+      "to": 48,
+      "id": "28513743",
+      "start": 1.26,
+      "label": "Green trench, colonnade",
+      "width": 2160,
+      "height": 3840,
+      "fps": 50
+    },
+    {
+      "from": 48,
+      "to": 62,
+      "id": "19339408",
+      "start": 0.6,
+      "label": "Boots on pavement",
+      "width": 1080,
+      "height": 1920,
+      "fps": 50
+    },
+    {
+      "from": 62,
+      "to": 76,
+      "id": "7870845",
+      "start": 0.36,
+      "label": "Leather jacket, studio",
+      "width": 2160,
+      "height": 4096,
+      "fps": 25
+    },
+    {
+      "from": 76,
+      "to": 90,
+      "id": "37050676",
+      "start": 2,
+      "label": "Puddle at night",
+      "width": 2160,
+      "height": 3840,
+      "fps": 29.97
+    },
+    {
+      "from": 90,
+      "to": 147,
+      "id": "28441971",
+      "start": 1.56,
+      "label": "Umbrella walk",
+      "width": 2160,
+      "height": 3840,
+      "fps": 50
+    },
+    {
+      "from": 147,
+      "to": 175,
+      "id": "28379641",
+      "start": 0.6,
+      "label": "Green trench, portrait",
+      "width": 2160,
+      "height": 3840,
+      "fps": 50
+    },
+    {
+      "from": 175,
+      "to": 232,
+      "id": "28513782",
+      "start": 1.56,
+      "label": "The twirl",
+      "width": 2160,
+      "height": 3840,
+      "fps": 50
+    },
+    {
+      "from": 232,
+      "to": 260,
+      "id": "28379580",
+      "start": 0.48,
+      "label": "Hair touch",
+      "width": 2160,
+      "height": 3840,
+      "fps": 50
+    },
+    {
+      "from": 260,
+      "to": 303,
+      "id": "5119544",
+      "start": 1.92,
+      "label": "Trench in the dunes",
+      "width": 2160,
+      "height": 4096,
+      "fps": 25
+    },
+    {
+      "from": 303,
+      "to": 331,
+      "id": "5119544",
+      "start": 6.48,
+      "label": "Trench in the wind",
+      "width": 2160,
+      "height": 4096,
+      "fps": 25
+    },
+    {
+      "from": 331,
+      "to": 374,
+      "id": "30728372",
+      "start": 1.1,
+      "label": "Leather coat walk",
+      "width": 2160,
+      "height": 3840,
+      "fps": 60
+    },
+    {
+      "from": 374,
+      "to": 402,
+      "id": "8641685",
+      "start": 10.2,
+      "label": "Navy jacket, skyline",
+      "width": 2160,
+      "height": 4096,
+      "fps": 25
+    },
+    {
+      "from": 402,
+      "to": 445,
+      "id": "6532089",
+      "start": 10.2,
+      "label": "Wool coat, colonnade",
+      "width": 2160,
+      "height": 4096,
+      "fps": 25
+    },
+    {
+      "from": 445,
+      "to": 473,
+      "id": "6532085",
+      "start": 13.8,
+      "label": "Wool coat, look up",
+      "width": 2160,
+      "height": 4096,
+      "fps": 25
+    },
+    {
+      "from": 473,
+      "to": 509,
+      "id": "10380602",
+      "start": 6,
+      "label": "Puffer at night",
+      "width": 2160,
+      "height": 4096,
+      "fps": 25
+    },
+    {
+      "from": 509,
+      "to": 544,
+      "id": "20089503",
+      "start": 1.6,
+      "label": "Puffer and beanie",
+      "width": 2160,
+      "height": 3840,
+      "fps": 60
+    },
+    {
+      "from": 544,
+      "to": 601,
+      "id": "28513782",
+      "start": 3.3,
+      "label": "The twirl — becomes the freeze-frame",
+      "width": 2160,
+      "height": 3840,
+      "fps": 50
+    },
+    {
+      "from": 601,
+      "to": 657,
+      "id": "30728372",
+      "start": 1.7,
+      "label": "Leather coat — becomes the split-screen grid",
+      "width": 2160,
+      "height": 3840,
+      "fps": 60
+    },
+    {
+      "from": 657,
+      "to": 714,
+      "id": "7870845",
+      "start": 5.28,
+      "label": "Leather jacket, studio",
+      "width": 2160,
+      "height": 4096,
+      "fps": 25
+    },
+    {
+      "from": 714,
+      "to": 771,
+      "id": "5119544",
+      "start": 3.84,
+      "label": "Trench in the wind — becomes the fabric-wipe transition",
+      "width": 2160,
+      "height": 4096,
+      "fps": 25
+    },
+    {
+      "from": 771,
+      "to": 857,
+      "id": "7224720",
+      "start": 2.64,
+      "label": "Cream coat, arcade",
+      "width": 2160,
+      "height": 3840,
+      "fps": 25
+    },
+    {
+      "from": 857,
+      "to": 941,
+      "id": "6535749",
+      "start": 12,
+      "label": "Black coat, final look",
+      "width": 2160,
+      "height": 4096,
+      "fps": 25
+    },
+    {
+      "from": 941,
+      "to": 1050,
+      "id": null,
+      "start": 0,
+      "label": "Brand lock-up — typography only, no source footage"
+    }
+  ],
+  "pairs": [
+    {
+      "key": "walk",
+      "title": "Built to stand out",
+      "finalAt": 4,
+      "id": "28441971",
+      "rawAt": 1.97,
+      "changes": [
+        "Speed ramp 1× → 0.4× on the stride",
+        "Slow push-in 1.18× → 1.3×",
+        "Campaign grade and kinetic title"
+      ]
+    },
+    {
+      "key": "trench",
+      "title": "The Trench",
+      "finalAt": 9.3,
+      "id": "5119544",
+      "rawAt": 2.68,
+      "changes": [
+        "Reframed for 9:16 with a slow push-in",
+        "Warm desert grade, deeper shadows",
+        "Lookbook title card"
+      ]
+    },
+    {
+      "key": "leather",
+      "title": "The Leather",
+      "finalAt": 11.6,
+      "id": "30728372",
+      "rawAt": 1.31,
+      "changes": [
+        "Whip-in transition from the previous look",
+        "Speed ramp 1× → 0.4×",
+        "Deeper contrast so it sits with the other looks"
+      ]
+    },
+    {
+      "key": "puffer",
+      "title": "The Puffer",
+      "finalAt": 16.3,
+      "id": "10380602",
+      "rawAt": 7.5,
+      "changes": [
+        "Whip-in with a 1.5° counter-rotation",
+        "Speed eased 1.4× → 1×",
+        "Night footage graded to match the collection"
+      ]
+    },
+    {
+      "key": "twirl",
+      "title": "Your Style",
+      "finalAt": 19.3,
+      "id": "28513782",
+      "rawAt": 3.5,
+      "changes": [
+        "Freeze-frame on the peak of the twirl",
+        "Subject cut out from a 4K frame",
+        "Type layered between her and the background"
+      ]
+    },
+    {
+      "key": "hero",
+      "title": "The final look",
+      "finalAt": 29.3,
+      "id": "6535749",
+      "rawAt": 12.5,
+      "changes": [
+        "Push-in 1.08× → 1.22× to a portrait crop",
+        "Contrast up, saturation down for a luxury finish",
+        "Holds on the last beat before the brand lock-up"
+      ]
+    }
+  ],
+  "stats": {
+    "delivered": 27,
+    "used": 18,
+    "shots": 25,
+    "rawSeconds": 462,
+    "finalSeconds": 35
+  },
+  "fps": 30
+}

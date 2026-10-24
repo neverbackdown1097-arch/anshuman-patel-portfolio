@@ -4,7 +4,7 @@
 // FFMPEG_PATH overrides the ffmpeg binary. Existing outputs are skipped;
 // pass --force to rebuild them.
 import { spawnSync } from "node:child_process";
-import { existsSync, mkdirSync, writeFileSync, rmSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync, rmSync } from "node:fs";
 import { isAbsolute, join, resolve } from "node:path";
 import { tmpdir } from "node:os";
 
@@ -29,7 +29,20 @@ const jobs = {
   "codevibe-future": { file: "codevibe-future-reel.mp4", vertical: true, poster: 4.7, stills: [1.57, 7.8, 14.1, 23.5], preview: [0, 6] },
   "codevibe-web": { file: "codevibe-reel.mp4", vertical: true, poster: 6.57, stills: [10.95, 15.3, 19.7, 28.5], preview: [4, 6] },
   "codevibe-saas-film": { file: "G:/pf/codevibe-film-4k.mp4", poster: 10.5, stills: [15.5, 18.5, 24.5, 43.5], preview: [12, 6] },
+  "own-the-elements": {
+    file: "G:/motion graphics/codevibe-reel-v3/out/own-the-elements-ig.mp4",
+    vertical: true,
+    poster: 29.6,
+    stills: [4.0, 11.6, 16.3, 19.3],
+    preview: [3, 6],
+  },
 };
+
+// Raw-vs-final breakdowns: slug → content/breakdowns/<slug>.json. Produces
+// compare/<key>-raw.jpg + -final.jpg (same moment, 1080x1920), raw.mp4 (every
+// source clip that made the cut, untouched, in edit order) and fills in the
+// measured clip metadata (resolution, frame rate, durations) in the JSON.
+const breakdowns = ["own-the-elements"];
 
 // Text-free shots for the silent hero background loop: [file, start, length].
 const hero = [
@@ -79,6 +92,77 @@ for (const [slug, j] of Object.entries(jobs)) {
     const p = join(dir, `${name}.jpg`);
     if (todo(p)) ff("-ss", String(t), "-i", src, "-frames:v", "1", "-vf", full, "-q:v", "2", p);
   }
+}
+
+const FFPROBE = FFMPEG.replace(/ffmpeg(\.exe)?$/, "ffprobe$1");
+function probe(file) {
+  const r = spawnSync(FFPROBE, ["-v", "error", "-select_streams", "v:0", "-show_entries",
+    "stream=width,height,r_frame_rate:format=duration", "-of", "json", file], { encoding: "utf8" });
+  const j = JSON.parse(r.stdout);
+  const [n, d] = j.streams[0].r_frame_rate.split("/").map(Number);
+  return { width: j.streams[0].width, height: j.streams[0].height, fps: Math.round((n / d) * 100) / 100, duration: Number(j.format.duration) };
+}
+
+for (const slug of breakdowns) {
+  if (only.length && !only.includes(slug)) continue;
+  console.log(`▸ ${slug} breakdown`);
+  const cfgPath = resolve(import.meta.dirname, `../content/breakdowns/${slug}.json`);
+  const cfg = JSON.parse(readFileSync(cfgPath, "utf8"));
+  const dir = join(OUT, slug);
+  const cmp = join(dir, "compare");
+  mkdirSync(cmp, { recursive: true });
+  const rawFile = (id) => join(cfg.rawDir, `${id}.mp4`);
+  // Fill a 1080x1920 frame regardless of the source's exact vertical ratio.
+  const fill = "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920";
+
+  for (const p of cfg.pairs) {
+    const raw = join(cmp, `${p.key}-raw.jpg`);
+    const fin = join(cmp, `${p.key}-final.jpg`);
+    if (todo(raw)) ff("-ss", String(p.rawAt), "-i", rawFile(p.id), "-frames:v", "1", "-vf", fill, "-q:v", "3", raw);
+    if (todo(fin)) ff("-ss", String(p.finalAt), "-i", cfg.final, "-frames:v", "1", "-vf", fill, "-q:v", "3", fin);
+  }
+
+  // Raw reel locked to the final's cut list: each shot is the untouched source
+  // clip from its in-point, at native speed, for exactly that shot's length.
+  // Shots with no source footage (id: null) are black.
+  const montage = join(dir, "raw.mp4");
+  if (todo(montage)) {
+    const tmp = join(tmpdir(), `raw-${Date.now()}`);
+    mkdirSync(tmp, { recursive: true });
+    const enc = ["-r", "30", "-an", "-c:v", "libx264", "-preset", "fast", "-crf", "18", "-pix_fmt", "yuv420p"];
+    const parts = cfg.clips.map((c, i) => {
+      const p = join(tmp, `p${i}.mp4`);
+      // Exact frame counts (not durations) so 25 shots add up to the final's length with no drift.
+      const frames = ["-frames:v", String(c.to - c.from)];
+      if (c.id)
+        ff("-ss", String(c.start), "-i", rawFile(c.id),
+          "-vf", "scale=720:1280:force_original_aspect_ratio=increase,crop=720:1280", ...frames, ...enc, p);
+      else ff("-loop", "1", "-framerate", "30", "-i", resolve(import.meta.dirname, "assets/black-720x1280.jpg"), ...frames, ...enc, p);
+      return p;
+    });
+    const list = join(tmp, "list.txt");
+    writeFileSync(list, parts.map((p) => `file '${p.replaceAll("\\", "/")}'`).join("\n"));
+    ff("-f", "concat", "-safe", "0", "-i", list, "-c:v", "libx264", "-preset", "slow", "-crf", "26",
+      "-pix_fmt", "yuv420p", "-movflags", "+faststart", montage);
+    ff("-ss", "0.5", "-i", parts[0], "-frames:v", "1", "-vf", "scale=1080:1920", "-q:v", "3", join(dir, "raw-poster.jpg"));
+    rmSync(tmp, { recursive: true, force: true });
+  }
+
+  // Measured facts for the page: every file delivered, and which ones were used.
+  const delivered = readdirSync(cfg.rawDir).filter((f) => /\.(mp4|mov)$/i.test(f));
+  const meta = Object.fromEntries(delivered.map((f) => [f.replace(/\.\w+$/, ""), probe(join(cfg.rawDir, f))]));
+  cfg.clips = cfg.clips.map((c) => ({ ...c, ...pick(meta[c.id]) }));
+  cfg.stats = {
+    delivered: delivered.length,
+    used: new Set(cfg.clips.map((c) => c.id).filter(Boolean)).size,
+    shots: cfg.clips.length,
+    rawSeconds: Math.round(Object.values(meta).reduce((s, m) => s + m.duration, 0)),
+    finalSeconds: Math.round(probe(cfg.final).duration * 10) / 10,
+  };
+  writeFileSync(cfgPath, JSON.stringify(cfg, null, 2) + "\n");
+}
+function pick(m) {
+  return m ? { width: m.width, height: m.height, fps: m.fps } : {};
 }
 
 if (!only.length || only.includes("hero")) {
