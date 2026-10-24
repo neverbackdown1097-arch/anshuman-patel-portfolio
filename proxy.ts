@@ -10,7 +10,7 @@ const slugs = new Set(projects.map((p) => p.slug));
 export function proxy(request: NextRequest) {
   const slug = request.nextUrl.pathname.split("/")[2];
   if (slug && !slugs.has(decodeURIComponent(slug))) {
-    return NextResponse.rewrite(new URL("/404", request.url));
+    return NextResponse.rewrite(new URL("/404", request.url), { status: 404 });
   }
 }
 
