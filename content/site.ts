@@ -178,6 +178,7 @@ export const site = {
 /** Navigation. Hash links point at sections on the home page. */
 export const navItems = [
   { label: "Work", href: "/#work" },
+  { label: "Shop", href: "/#shop" },
   { label: "About", href: "/#about" },
   { label: "Services", href: "/#services" },
   { label: "Contact", href: "/#contact" },

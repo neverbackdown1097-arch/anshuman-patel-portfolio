@@ -1,0 +1,397 @@
+{
+  "fps": 24,
+  "categories": [
+    {
+      "id": "A",
+      "name": "Cinematic"
+    },
+    {
+      "id": "B",
+      "name": "Speed & Motion"
+    },
+    {
+      "id": "C",
+      "name": "Glitch & Digital"
+    },
+    {
+      "id": "D",
+      "name": "Minimal & Modern"
+    },
+    {
+      "id": "E",
+      "name": "3D & Spatial"
+    },
+    {
+      "id": "F",
+      "name": "Light & Energy"
+    },
+    {
+      "id": "G",
+      "name": "Travel & Adventure"
+    },
+    {
+      "id": "H",
+      "name": "Luxury & Automotive"
+    },
+    {
+      "id": "I",
+      "name": "Wedding & Romantic"
+    },
+    {
+      "id": "J",
+      "name": "Experimental & Creative"
+    }
+  ],
+  "transitions": [
+    {
+      "n": 1,
+      "cat": "A",
+      "name": "Cinematic Film Burn",
+      "frames": 24,
+      "usesElement": true
+    },
+    {
+      "n": 2,
+      "cat": "A",
+      "name": "Anamorphic Light Sweep",
+      "frames": 20,
+      "usesElement": true
+    },
+    {
+      "n": 3,
+      "cat": "A",
+      "name": "Premium Lens Flare Wipe",
+      "frames": 24,
+      "usesElement": true
+    },
+    {
+      "n": 4,
+      "cat": "A",
+      "name": "Cinematic Smoke Reveal",
+      "frames": 38,
+      "usesElement": true
+    },
+    {
+      "n": 5,
+      "cat": "A",
+      "name": "Film Gate Flash",
+      "frames": 16,
+      "usesElement": false
+    },
+    {
+      "n": 6,
+      "cat": "B",
+      "name": "Velocity Zoom",
+      "frames": 14,
+      "usesElement": false
+    },
+    {
+      "n": 7,
+      "cat": "B",
+      "name": "Whip Pan Left",
+      "frames": 12,
+      "usesElement": false
+    },
+    {
+      "n": 8,
+      "cat": "B",
+      "name": "Whip Pan Right",
+      "frames": 12,
+      "usesElement": false
+    },
+    {
+      "n": 9,
+      "cat": "B",
+      "name": "Motion Blur Spin",
+      "frames": 16,
+      "usesElement": false
+    },
+    {
+      "n": 10,
+      "cat": "B",
+      "name": "Hyper Speed Ramp",
+      "frames": 18,
+      "usesElement": false
+    },
+    {
+      "n": 11,
+      "cat": "C",
+      "name": "RGB Split Glitch",
+      "frames": 12,
+      "usesElement": false
+    },
+    {
+      "n": 12,
+      "cat": "C",
+      "name": "Digital Signal Distortion",
+      "frames": 16,
+      "usesElement": false
+    },
+    {
+      "n": 13,
+      "cat": "C",
+      "name": "Datamosh-Style Transition",
+      "frames": 20,
+      "usesElement": false
+    },
+    {
+      "n": 14,
+      "cat": "C",
+      "name": "Cyberpunk Scanline Wipe",
+      "frames": 24,
+      "usesElement": true
+    },
+    {
+      "n": 15,
+      "cat": "C",
+      "name": "Digital Pixel Disintegration",
+      "frames": 20,
+      "usesElement": false
+    },
+    {
+      "n": 16,
+      "cat": "D",
+      "name": "Smooth Push",
+      "frames": 20,
+      "usesElement": false
+    },
+    {
+      "n": 17,
+      "cat": "D",
+      "name": "Directional Slide",
+      "frames": 20,
+      "usesElement": false
+    },
+    {
+      "n": 18,
+      "cat": "D",
+      "name": "Seamless Zoom",
+      "frames": 20,
+      "usesElement": false
+    },
+    {
+      "n": 19,
+      "cat": "D",
+      "name": "Mask Reveal",
+      "frames": 24,
+      "usesElement": false
+    },
+    {
+      "n": 20,
+      "cat": "D",
+      "name": "Minimal Shape Wipe",
+      "frames": 18,
+      "usesElement": false
+    },
+    {
+      "n": 21,
+      "cat": "E",
+      "name": "3D Cube Rotation",
+      "frames": 22,
+      "usesElement": false
+    },
+    {
+      "n": 22,
+      "cat": "E",
+      "name": "Perspective Flip",
+      "frames": 16,
+      "usesElement": false
+    },
+    {
+      "n": 23,
+      "cat": "E",
+      "name": "3D Page Turn",
+      "frames": 24,
+      "usesElement": false
+    },
+    {
+      "n": 24,
+      "cat": "E",
+      "name": "Depth Zoom Reveal",
+      "frames": 24,
+      "usesElement": false
+    },
+    {
+      "n": 25,
+      "cat": "E",
+      "name": "Rotating Tunnel Transition",
+      "frames": 20,
+      "usesElement": false
+    },
+    {
+      "n": 26,
+      "cat": "F",
+      "name": "Electric Energy Flash",
+      "frames": 16,
+      "usesElement": true
+    },
+    {
+      "n": 27,
+      "cat": "F",
+      "name": "Neon Light Trail",
+      "frames": 20,
+      "usesElement": true
+    },
+    {
+      "n": 28,
+      "cat": "F",
+      "name": "Plasma Burst",
+      "frames": 16,
+      "usesElement": true
+    },
+    {
+      "n": 29,
+      "cat": "F",
+      "name": "Golden Light Sweep",
+      "frames": 24,
+      "usesElement": true
+    },
+    {
+      "n": 30,
+      "cat": "F",
+      "name": "Energy Wave Distortion",
+      "frames": 18,
+      "usesElement": false
+    },
+    {
+      "n": 31,
+      "cat": "G",
+      "name": "Drone Dive Transition",
+      "frames": 20,
+      "usesElement": false
+    },
+    {
+      "n": 32,
+      "cat": "G",
+      "name": "Map Zoom Transition",
+      "frames": 20,
+      "usesElement": true
+    },
+    {
+      "n": 33,
+      "cat": "G",
+      "name": "Speed Blur Travel Cut",
+      "frames": 14,
+      "usesElement": false
+    },
+    {
+      "n": 34,
+      "cat": "G",
+      "name": "Sky Flash Transition",
+      "frames": 20,
+      "usesElement": false
+    },
+    {
+      "n": 35,
+      "cat": "G",
+      "name": "Match Cut Zoom",
+      "frames": 12,
+      "usesElement": false
+    },
+    {
+      "n": 36,
+      "cat": "H",
+      "name": "Headlight Flash Transition",
+      "frames": 18,
+      "usesElement": false
+    },
+    {
+      "n": 37,
+      "cat": "H",
+      "name": "Premium Car Whip",
+      "frames": 14,
+      "usesElement": false
+    },
+    {
+      "n": 38,
+      "cat": "H",
+      "name": "Chrome Reflection Wipe",
+      "frames": 24,
+      "usesElement": true
+    },
+    {
+      "n": 39,
+      "cat": "H",
+      "name": "Dark Metallic Shutter",
+      "frames": 16,
+      "usesElement": true
+    },
+    {
+      "n": 40,
+      "cat": "H",
+      "name": "Luxury Light Streak Transition",
+      "frames": 16,
+      "usesElement": true
+    },
+    {
+      "n": 41,
+      "cat": "I",
+      "name": "Soft Dreamy Blur",
+      "frames": 30,
+      "usesElement": false
+    },
+    {
+      "n": 42,
+      "cat": "I",
+      "name": "Elegant White Flash",
+      "frames": 24,
+      "usesElement": false
+    },
+    {
+      "n": 43,
+      "cat": "I",
+      "name": "Golden Dust Reveal",
+      "frames": 38,
+      "usesElement": true
+    },
+    {
+      "n": 44,
+      "cat": "I",
+      "name": "Romantic Light Leak",
+      "frames": 36,
+      "usesElement": false
+    },
+    {
+      "n": 45,
+      "cat": "I",
+      "name": "Silk Flow Transition",
+      "frames": 30,
+      "usesElement": false
+    },
+    {
+      "n": 46,
+      "cat": "J",
+      "name": "Liquid Morph Transition",
+      "frames": 20,
+      "usesElement": false
+    },
+    {
+      "n": 47,
+      "cat": "J",
+      "name": "Ink Splash Reveal",
+      "frames": 34,
+      "usesElement": true
+    },
+    {
+      "n": 48,
+      "cat": "J",
+      "name": "Organic Fluid Warp",
+      "frames": 24,
+      "usesElement": false
+    },
+    {
+      "n": 49,
+      "cat": "J",
+      "name": "Kaleidoscope Spin",
+      "frames": 20,
+      "usesElement": false
+    },
+    {
+      "n": 50,
+      "cat": "J",
+      "name": "Cinematic Shatter Transition",
+      "frames": 29,
+      "usesElement": true
+    }
+  ]
+}

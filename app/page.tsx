@@ -10,6 +10,8 @@ import {
   WorkSection,
 } from "@/components/sections";
 import { JsonLd } from "@/components/json-ld";
+import { ProductFeature } from "@/components/product-feature";
+import { products } from "@/content/products";
 
 export default function Home() {
   const sameAs = [site.social.linkedin, site.social.instagram, site.social.x, site.social.vimeo, site.social.youtube].filter(
@@ -44,6 +46,9 @@ export default function Home() {
       <ShowreelSection />
       <SkillsMarquee />
       <WorkSection />
+      {products.map((p) => (
+        <ProductFeature key={p.slug} p={p} />
+      ))}
       <AboutSection />
       <ServicesSection />
       <ProcessSection />

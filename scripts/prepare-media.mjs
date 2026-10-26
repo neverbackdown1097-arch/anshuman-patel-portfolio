@@ -165,6 +165,43 @@ function pick(m) {
   return m ? { width: m.width, height: m.height, fps: m.fps } : {};
 }
 
+// Digital products: showreel + loop + one silent preview per item in the gallery.
+const products = {
+  "transition-lab": {
+    dir: "G:/motion graphics/TRANSITION LAB 50",
+    showreel: "04 Showreel/TRANSITION LAB 50 - Showreel (1080p).mp4",
+    poster: 41.5,
+    loop: [10, 6],
+    gallery: "05 Preview Gallery/16x9",
+    count: 50,
+  },
+};
+for (const [slug, p] of Object.entries(products)) {
+  if (only.length && !only.includes(slug)) continue;
+  console.log(`▸ ${slug} (product)`);
+  const dir = join(OUT, slug);
+  const gal = join(dir, "gallery");
+  mkdirSync(gal, { recursive: true });
+  const reel = join(p.dir, p.showreel);
+  if (todo(join(dir, "film.mp4")))
+    ff("-i", reel, "-vf", "scale=1920:1080", "-c:v", "libx264", "-preset", "slow", "-crf", "23", "-maxrate", "5M",
+      "-bufsize", "10M", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", join(dir, "film.mp4"));
+  if (todo(join(dir, "poster.jpg")))
+    ff("-ss", String(p.poster), "-i", reel, "-frames:v", "1", "-vf", "scale=1920:1080", "-q:v", "2", join(dir, "poster.jpg"));
+  if (todo(join(dir, "loop.mp4")))
+    ff("-ss", String(p.loop[0]), "-t", String(p.loop[1]), "-i", reel, "-vf", "scale=960:540", "-an", "-c:v", "libx264",
+      "-preset", "slow", "-crf", "27", "-pix_fmt", "yuv420p", "-movflags", "+faststart", join(dir, "loop.mp4"));
+  for (let n = 1; n <= p.count; n++) {
+    const id = `TL${String(n).padStart(2, "0")}`;
+    const src = join(p.dir, p.gallery, `${id}.mp4`);
+    if (todo(join(gal, `${id}.mp4`)))
+      ff("-i", src, "-vf", "scale=640:360", "-an", "-c:v", "libx264", "-preset", "slow", "-crf", "28",
+        "-pix_fmt", "yuv420p", "-movflags", "+faststart", join(gal, `${id}.mp4`));
+    if (todo(join(gal, `${id}.jpg`)))
+      ff("-i", join(p.dir, p.gallery, `${id}.jpg`), "-vf", "scale=960:540", "-q:v", "3", join(gal, `${id}.jpg`));
+  }
+}
+
 if (!only.length || only.includes("hero")) {
   const dir = join(OUT, "hero");
   mkdirSync(dir, { recursive: true });
