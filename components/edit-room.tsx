@@ -12,37 +12,51 @@ const tc = (s: number) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).pa
  * cut play side by side in sync, then matched frames compare with a wipe.
  */
 export function EditRoom({ b, title }: { b: Breakdown; title: string }) {
-  const stats = [
+  const d = b.display ?? {};
+  const stats = d.stats ?? [
     { value: String(b.stats.delivered), label: "Raw clips delivered" },
     { value: String(b.stats.used), label: "Made the cut" },
     { value: String(b.stats.shots), label: "Shots in the cut" },
     { value: tc(b.stats.rawSeconds), label: "Of raw footage" },
     ...b.extras,
   ];
+  const accentLast = (line: string) => {
+    const words = line.split(" ");
+    const last = words.pop();
+    return (
+      <>
+        {words.join(" ")} <span className="font-serif normal-case italic tracking-normal text-signal">{last}</span>
+      </>
+    );
+  };
 
   return (
     <section aria-labelledby="edit-room-title" className="mt-24 border-y border-line bg-coal md:mt-36">
       <div className="shell py-20 md:py-28 lg:py-36">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
-            <Eyebrow index="↳">The edit room · Raw → Final</Eyebrow>
+            <Eyebrow index="↳">{d.eyebrow ?? "The edit room · Raw → Final"}</Eyebrow>
             <LineReveal
               id="edit-room-title"
-              lines={[
+              lines={
+                d.headline
+                  ? [d.headline[0], <span key="b">{accentLast(d.headline[1])}</span>]
+                  : [
                 <span key="a">
                   <span className="text-signal">{tc(b.stats.rawSeconds)}</span> of raw.
                 </span>,
                 <span key="b">
                   {tc(b.stats.finalSeconds)} of <span className="font-serif normal-case italic tracking-normal text-signal">final.</span>
                 </span>,
-              ]}
+                    ]
+              }
               className="display mt-6 text-[clamp(3rem,11vw,8.5rem)] text-bone md:mt-8 lg:text-[clamp(3rem,8vw,8.5rem)]"
             />
           </div>
           <Reveal className="lg:col-span-4 lg:pb-3" delay={0.15}>
             <p className="max-w-sm text-bone/75">
-              The left screen plays the untouched source of every shot — no grade, no reframe, no speed change — locked
-              frame-for-frame to the finished cut on the right. Press play and watch the edit happen.
+              {d.intro ??
+                "The left screen plays the untouched source of every shot — no grade, no reframe, no speed change — locked frame-for-frame to the finished cut on the right. Press play and watch the edit happen."}
             </p>
           </Reveal>
         </div>
@@ -64,14 +78,14 @@ export function EditRoom({ b, title }: { b: Breakdown; title: string }) {
 
         <div className="mt-20 lg:mt-28">
           <div className="flex flex-wrap items-end justify-between gap-4">
-            <h3 className="display text-[clamp(2.2rem,6vw,4rem)] text-bone">Same frame. Two worlds.</h3>
+            <h3 className="display text-[clamp(2.2rem,6vw,4rem)] text-bone">{d.compareTitle ?? "Same frame. Two worlds."}</h3>
             <p className="label text-mute">Drag across each frame</p>
           </div>
           <ul className="mt-8 grid grid-cols-2 gap-x-3 gap-y-10 md:gap-x-6 lg:grid-cols-3 lg:gap-y-14">
             {b.pairs.map((p, i) => (
               <li key={p.key} className="min-w-0">
                 <Reveal delay={(i % 3) * 0.08}>
-                  <Compare pair={p} index={i} />
+                  <Compare pair={p} index={i} rawTag={d.rawTag ?? "Raw"} finalTag={d.finalTag ?? "Final"} />
                 </Reveal>
               </li>
             ))}
@@ -93,6 +107,9 @@ function DualPlayer({ b, title }: { b: Breakdown; title: string }) {
   const frame = Math.floor(t * b.fps);
   const seg = Math.max(0, b.clips.findIndex((c) => frame >= c.from && frame < c.to));
   const clip = b.clips[seg];
+  const d = b.display ?? {};
+  const rawTag = d.rawTag ?? "Raw";
+  const finalTag = d.finalTag ?? "Final";
 
   useEffect(() => {
     const r = rawRef.current;
@@ -140,7 +157,7 @@ function DualPlayer({ b, title }: { b: Breakdown; title: string }) {
   const panel = "relative aspect-[9/16] overflow-hidden bg-ink";
 
   return (
-    <div role="group" aria-label={`Raw footage and final cut of ${title}, played side by side`}>
+    <div role="group" aria-label={`${rawTag} and ${finalTag.toLowerCase()} of ${title}, played side by side`}>
       <div className="mx-auto grid max-w-4xl grid-cols-2 gap-2 md:gap-5">
         <figure>
           <div className={panel}>
@@ -156,17 +173,19 @@ function DualPlayer({ b, title }: { b: Breakdown; title: string }) {
               className="absolute inset-0 h-full w-full object-cover"
             />
             <span className="label absolute left-2 top-2 bg-ink/70 px-2 py-1 text-bone backdrop-blur-sm md:left-3 md:top-3">
-              Raw
+              {rawTag}
             </span>
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent p-2 pt-10 md:p-4 md:pt-14">
               <p className="truncate text-xs text-bone md:text-sm">{clip.label}</p>
               <p className="label mt-1 text-[0.58rem] text-bone/60 md:text-[0.65rem]">
-                {clip.id ? `${clip.width}×${clip.height} · ${clip.fps} fps · ungraded` : "Built in motion design"}
+                {clip.id ? `${clip.width}×${clip.height} · ${clip.fps} fps · ${d.rawMeta ?? "ungraded"}` : "Built in motion design"}
               </p>
             </div>
           </div>
           <figcaption className="label mt-3 text-dim">
-            Shot {String(seg + 1).padStart(2, "0")} / {b.clips.length} · same moment as the final
+            {b.clips.length > 1
+              ? `Shot ${String(seg + 1).padStart(2, "0")} / ${b.clips.length} · same moment as the final`
+              : "Frame-locked to the final"}
           </figcaption>
         </figure>
         <figure>
@@ -187,9 +206,9 @@ function DualPlayer({ b, title }: { b: Breakdown; title: string }) {
               tabIndex={-1}
               className="absolute inset-0 h-full w-full object-cover"
             />
-            <span className="label absolute left-2 top-2 bg-signal px-2 py-1 text-ink md:left-3 md:top-3">Final</span>
+            <span className="label absolute left-2 top-2 bg-signal px-2 py-1 text-ink md:left-3 md:top-3">{finalTag}</span>
           </div>
-          <figcaption className="label mt-3 text-dim">Graded · cut on the beat · sound on</figcaption>
+          <figcaption className="label mt-3 text-dim">{d.finalCaption ?? "Graded · cut on the beat · sound on"}</figcaption>
         </figure>
       </div>
 
@@ -231,14 +250,24 @@ function DualPlayer({ b, title }: { b: Breakdown; title: string }) {
 }
 
 /** Before/after wipe. The handle is a real range input, so it works with keys and touch. */
-function Compare({ pair, index }: { pair: Breakdown["pairs"][number]; index: number }) {
+function Compare({
+  pair,
+  index,
+  rawTag,
+  finalTag,
+}: {
+  pair: Breakdown["pairs"][number];
+  index: number;
+  rawTag: string;
+  finalTag: string;
+}) {
   const [pos, setPos] = useState(50);
   return (
     <figure>
       <div className="group/cmp relative aspect-[9/16] select-none overflow-hidden bg-ink">
-        <Image src={pair.final} alt={`Final: ${pair.title}`} fill sizes="(min-width: 1024px) 30vw, 48vw" className="object-cover" />
+        <Image src={pair.final} alt={`${finalTag}: ${pair.title}`} fill sizes="(min-width: 1024px) 30vw, 48vw" className="object-cover" />
         <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
-          <Image src={pair.raw} alt={`Raw source frame: ${pair.title}`} fill sizes="(min-width: 1024px) 30vw, 48vw" className="object-cover" />
+          <Image src={pair.raw} alt={`${rawTag}: ${pair.title}`} fill sizes="(min-width: 1024px) 30vw, 48vw" className="object-cover" />
         </div>
         {/* Divider + handle */}
         <div aria-hidden className="pointer-events-none absolute inset-y-0 w-px bg-bone" style={{ left: `${pos}%` }}>
@@ -246,16 +275,16 @@ function Compare({ pair, index }: { pair: Breakdown["pairs"][number]; index: num
             ⟷
           </span>
         </div>
-        <span className="label pointer-events-none absolute left-2 top-2 bg-ink/70 px-2 py-1 text-bone">Raw</span>
-        <span className="label pointer-events-none absolute right-2 top-2 bg-signal px-2 py-1 text-ink">Final</span>
+        <span className="label pointer-events-none absolute left-2 top-2 bg-ink/70 px-2 py-1 text-bone">{rawTag}</span>
+        <span className="label pointer-events-none absolute right-2 top-2 bg-signal px-2 py-1 text-ink">{finalTag}</span>
         <input
           type="range"
           min={0}
           max={100}
           value={pos}
           onChange={(e) => setPos(Number(e.target.value))}
-          aria-label={`Compare raw and final: ${pair.title}`}
-          aria-valuetext={`${pos}% raw`}
+          aria-label={`Compare ${rawTag.toLowerCase()} and ${finalTag.toLowerCase()}: ${pair.title}`}
+          aria-valuetext={`${pos}% ${rawTag.toLowerCase()}`}
           className="absolute inset-0 h-full w-full cursor-ew-resize touch-pan-y opacity-0"
         />
       </div>

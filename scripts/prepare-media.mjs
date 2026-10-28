@@ -36,13 +36,22 @@ const jobs = {
     stills: [4.0, 11.6, 16.3, 19.3],
     preview: [3, 6],
   },
+  "myaicademy-promo": {
+    file: "G:/trial/myAIcademy_promo_9x16_v2.mp4",
+    vertical: true,
+    poster: 33.5,
+    stills: [0.8, 66.5, 73.5, 109.5],
+    preview: [5, 6],
+    crf: 23,
+    maxrate: 3.5,
+  },
 };
 
 // Raw-vs-final breakdowns: slug → content/breakdowns/<slug>.json. Produces
 // compare/<key>-raw.jpg + -final.jpg (same moment, 1080x1920), raw.mp4 (every
 // source clip that made the cut, untouched, in edit order) and fills in the
 // measured clip metadata (resolution, frame rate, durations) in the JSON.
-const breakdowns = ["own-the-elements"];
+const breakdowns = ["own-the-elements", "myaicademy-promo"];
 
 // Text-free shots for the silent hero background loop: [file, start, length].
 const hero = [
@@ -78,8 +87,9 @@ for (const [slug, j] of Object.entries(jobs)) {
   console.log(`▸ ${slug}`);
   // Full film: H.264 high profile, faststart so playback begins before download ends.
   if (todo(join(dir, "film.mp4")))
-    ff("-i", src, "-vf", full, "-r", "30", "-c:v", "libx264", "-preset", "slow", "-crf", "21",
-      "-maxrate", "8M", "-bufsize", "16M", "-pix_fmt", "yuv420p", "-profile:v", "high",
+    // Long films can set a lower `maxrate` (Mbps) to keep the download sensible.
+    ff("-i", src, "-vf", full, "-r", "30", "-c:v", "libx264", "-preset", "slow", "-crf", String(j.crf ?? 21),
+      "-maxrate", `${j.maxrate ?? 8}M`, "-bufsize", `${(j.maxrate ?? 8) * 2}M`, "-pix_fmt", "yuv420p", "-profile:v", "high",
       "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", join(dir, "film.mp4"));
   // Silent hover preview loop.
   if (todo(join(dir, "preview.mp4")))
@@ -111,7 +121,8 @@ for (const slug of breakdowns) {
   const dir = join(OUT, slug);
   const cmp = join(dir, "compare");
   mkdirSync(cmp, { recursive: true });
-  const rawFile = (id) => join(cfg.rawDir, `${id}.mp4`);
+  // Clip ids are file names; a bare id means <id>.mp4.
+  const rawFile = (id) => join(cfg.rawDir, /\.\w+$/.test(id) ? id : `${id}.mp4`);
   // Fill a 1080x1920 frame regardless of the source's exact vertical ratio.
   const fill = "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920";
 
@@ -149,14 +160,16 @@ for (const slug of breakdowns) {
   }
 
   // Measured facts for the page: every file delivered, and which ones were used.
-  const delivered = readdirSync(cfg.rawDir).filter((f) => /\.(mp4|mov)$/i.test(f));
-  const meta = Object.fromEntries(delivered.map((f) => [f.replace(/\.\w+$/, ""), probe(join(cfg.rawDir, f))]));
+  // `rawFiles` limits the count to the listed files when the folder also holds other renders.
+  const delivered = cfg.rawFiles ?? readdirSync(cfg.rawDir).filter((f) => /\.(mp4|mov)$/i.test(f));
+  const meta = {};
+  for (const f of delivered) meta[f] = meta[f.replace(/\.\w+$/, "")] = probe(join(cfg.rawDir, f));
   cfg.clips = cfg.clips.map((c) => ({ ...c, ...pick(meta[c.id]) }));
   cfg.stats = {
     delivered: delivered.length,
     used: new Set(cfg.clips.map((c) => c.id).filter(Boolean)).size,
     shots: cfg.clips.length,
-    rawSeconds: Math.round(Object.values(meta).reduce((s, m) => s + m.duration, 0)),
+    rawSeconds: Math.round(delivered.reduce((s, f) => s + meta[f].duration, 0)),
     finalSeconds: Math.round(probe(cfg.final).duration * 10) / 10,
   };
   writeFileSync(cfgPath, JSON.stringify(cfg, null, 2) + "\n");

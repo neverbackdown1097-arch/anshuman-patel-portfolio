@@ -1,0 +1,125 @@
+{
+  "rawDir": "G:/trial",
+  "rawFiles": [
+    "MM 1.mov"
+  ],
+  "final": "G:/trial/myAIcademy_promo_9x16_v2.mp4",
+  "fps": 30,
+  "display": {
+    "eyebrow": "The edit room · Before → After",
+    "headline": [
+      "Same footage.",
+      "New story."
+    ],
+    "intro": "Left: the talking-head edit as it was delivered — no captions, no graphics. Right: the finished promo. Same timeline, frame for frame. Press play and watch the motion-design layer arrive.",
+    "rawTag": "Before",
+    "finalTag": "After",
+    "rawMeta": "Delivered edit · no graphics",
+    "finalCaption": "Captions · UI · data graphics · sound on",
+    "compareTitle": "Before the graphics. After.",
+    "stats": [
+      {
+        "value": "2:01",
+        "label": "Runtime"
+      },
+      {
+        "value": "6",
+        "label": "Chapters"
+      },
+      {
+        "value": "9:16",
+        "label": "Vertical, 4K source"
+      }
+    ]
+  },
+  "clips": [
+    {
+      "from": 0,
+      "to": 3615,
+      "id": "MM 1.mov",
+      "start": 0,
+      "label": "Delivered edit — talking head, no captions or graphics",
+      "width": 2160,
+      "height": 3840,
+      "fps": 30
+    }
+  ],
+  "pairs": [
+    {
+      "key": "hook",
+      "title": "The hook",
+      "finalAt": 0.8,
+      "id": "MM 1.mov",
+      "rawAt": 0.8,
+      "changes": [
+        "Notification cards stack in: \"Workflow changed again\", \"New AI model released\"",
+        "Word-by-word kinetic captions",
+        "Punch-in reframe for a tighter, more personal vertical frame"
+      ]
+    },
+    {
+      "key": "problem",
+      "title": "Out of date",
+      "finalAt": 5,
+      "id": "MM 1.mov",
+      "rawAt": 5,
+      "changes": [
+        "Headline type lands on the key line",
+        "Course-progress bar as a visual metaphor",
+        "Chapter tag: 01 The problem"
+      ]
+    },
+    {
+      "key": "founder",
+      "title": "Meet the founder",
+      "finalAt": 33.5,
+      "id": "MM 1.mov",
+      "rawAt": 33.5,
+      "changes": [
+        "Name lower-third: Malika, Founder & CEO",
+        "Brand word highlighted in the caption",
+        "Chapter tag: 02 The next step"
+      ]
+    },
+    {
+      "key": "tools",
+      "title": "The tools people use",
+      "finalAt": 66.5,
+      "id": "MM 1.mov",
+      "rawAt": 66.5,
+      "changes": [
+        "Tool cards cycle in time with the voice",
+        "Animated toolbar UI under the name"
+      ]
+    },
+    {
+      "key": "counter",
+      "title": "Always current",
+      "finalAt": 73.5,
+      "id": "MM 1.mov",
+      "rawAt": 73.5,
+      "changes": [
+        "Ring counter counts up to the course refresh cycle",
+        "Chapter tag: 04 Always current"
+      ]
+    },
+    {
+      "key": "mission",
+      "title": "The mission",
+      "finalAt": 109.5,
+      "id": "MM 1.mov",
+      "rawAt": 109.5,
+      "changes": [
+        "Big-number goal graphic: 100 million people AI fluent",
+        "\"By 2030\" pill and chapter tag: 06 The mission"
+      ]
+    }
+  ],
+  "stats": {
+    "delivered": 1,
+    "used": 1,
+    "shots": 1,
+    "rawSeconds": 121,
+    "finalSeconds": 120.5
+  }
+}

@@ -92,7 +92,8 @@ export function ProjectTile({ project, index, sizes }: { project: Project; index
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent opacity-80 transition-opacity duration-700 group-hover:opacity-40" />
             {project.breakdown && (
               <span className="label pointer-events-none absolute bottom-3 left-3 flex items-center gap-2 bg-bone px-2.5 py-1.5 text-ink">
-                Raw <span aria-hidden className="text-signal">→</span> Final
+                {project.breakdown.display?.rawTag ?? "Raw"} <span aria-hidden className="text-signal">→</span>{" "}
+                {project.breakdown.display?.finalTag ?? "Final"}
               </span>
             )}
             {project.placeholder && (

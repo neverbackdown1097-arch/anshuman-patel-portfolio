@@ -13,6 +13,7 @@
  */
 
 import ownTheElements from "./breakdowns/own-the-elements.json";
+import myAIcademy from "./breakdowns/myaicademy-promo.json";
 
 export const categories = [
   "Cinematic Storytelling",
@@ -41,10 +42,24 @@ export type Breakdown = {
   pairs: { key: string; title: string; changes: string[]; raw: string; final: string }[];
   stats: { delivered: number; used: number; shots: number; rawSeconds: number; finalSeconds: number };
   extras: { value: string; label: string }[];
+  /** Optional wording overrides, e.g. "Before / After" when the source is a delivered edit, not raw rushes. */
+  display?: {
+    eyebrow?: string;
+    headline?: [string, string];
+    intro?: string;
+    rawTag?: string;
+    finalTag?: string;
+    rawMeta?: string;
+    finalCaption?: string;
+    compareTitle?: string;
+    /** Replaces the measured stats strip entirely. */
+    stats?: { value: string; label: string }[];
+  };
 };
 
-type BreakdownJson = Omit<Breakdown, "rawReel" | "rawPoster" | "finalReel" | "finalPoster" | "pairs" | "extras"> & {
+type BreakdownJson = Omit<Breakdown, "rawReel" | "rawPoster" | "finalReel" | "finalPoster" | "pairs" | "extras" | "display"> & {
   pairs: { key: string; title: string; changes: string[] }[];
+  display?: Omit<NonNullable<Breakdown["display"]>, "headline"> & { headline?: string[] };
 };
 
 const breakdown = (slug: string, json: BreakdownJson, extras: Breakdown["extras"] = []): Breakdown => ({
@@ -63,6 +78,10 @@ const breakdown = (slug: string, json: BreakdownJson, extras: Breakdown["extras"
     final: `/media/${slug}/compare/${p.key}-final.jpg`,
   })),
   extras,
+  display: json.display && {
+    ...json.display,
+    headline: json.display.headline ? [json.display.headline[0], json.display.headline[1]] : undefined,
+  },
 });
 
 export type Project = {
@@ -235,6 +254,41 @@ export const projects: Project[] = [
         "“Cat Walk” edited to the picture, layered with fabric, leather, zip, heel and camera-shutter effects so each look has its own texture.",
       color:
         "Each shot graded to match the others first, then a shared campaign finish — deeper contrast and slightly restrained saturation for a premium, editorial feel.",
+    },
+  },
+  {
+    slug: "myaicademy-promo",
+    title: "Personalised AI Learning for Every Role",
+    subtitle: "Most AI courses are out of date.",
+    brand: "myAIcademy",
+    context: "Promo for myAIcademy",
+    date: "2026-10-27",
+    categories: ["SaaS & Product Videos", "Motion Graphics", "Social Media Videos"],
+    format: "9:16",
+    duration: 120.5,
+    summary:
+      "A two-minute founder-led promo for myAIcademy: a talking-head edit turned into a product story with kinetic captions, UI cards and data graphics.",
+    role: ["Motion graphics", "Kinetic captions", "UI animation", "Reframing"],
+    tools: [],
+    credits: ["Talking-head footage supplied for the project"],
+    media: media("myaicademy-promo", "Malika, founder and CEO of myAIcademy, with her name lower-third and an animated caption", [
+      "Notification cards reading Workflow changed again and New AI model released above the presenter",
+      "A Canva tool card with an animated toolbar under the line The tools people actually use",
+      "A ring counter counting up the course refresh cycle beside the presenter",
+      "A big-number graphic reading 100 million people AI fluent, with a By 2030 pill",
+    ]),
+    breakdown: breakdown("myaicademy-promo", myAIcademy),
+    story: {
+      overview:
+        "A vertical promo where the founder explains, in her own words, why most AI courses go stale — and how myAIcademy keeps learning personal and current.",
+      challenge:
+        "Two minutes of one person talking is a long time on a feed. The edit had to keep attention second by second without ever pulling focus from the speaker.",
+      concept:
+        "Turn the talk into a product. Six numbered chapters — the problem, the next step, how it works, always current, learn and get certified, the mission — each with its own visual system.",
+      edit:
+        "Punch-in reframes tighten the vertical frame and change the rhythm between thoughts; chapter tags and a brand pill keep viewers oriented all the way to the app end card.",
+      motion:
+        "Word-by-word captions with highlighted key terms, a name lower-third, notification stacks, tool cards, ring counters, a data line and a closing end card with store badges.",
     },
   },
   {
