@@ -7,6 +7,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
 import { formatDuration, type Project } from "@/content/projects";
 import { useMediaQuery } from "@/lib/use-media-query";
 import { ClipReveal } from "./reveal";
+import { aspectClass } from "@/lib/format";
 
 /**
  * Gallery card. Poster at rest. On hover/focus (mouse) — or, on touch
@@ -61,7 +62,7 @@ export function ProjectTile({ project, index, sizes }: { project: Project; index
       >
         <div ref={frameRef}>
           <ClipReveal
-            className={`relative overflow-hidden bg-coal ${vertical ? "aspect-[4/5] lg:aspect-[3/4]" : "aspect-video"}`}
+            className={`relative overflow-hidden bg-coal ${vertical ? "aspect-[4/5] lg:aspect-[3/4]" : aspectClass[project.format]}`}
           >
             <motion.div className="absolute inset-0" style={{ scale: zoom }}>
               <Image

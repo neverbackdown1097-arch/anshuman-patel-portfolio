@@ -36,6 +36,13 @@ const jobs = {
     stills: [4.0, 11.6, 16.3, 19.3],
     preview: [3, 6],
   },
+  "the-art-of-movement": {
+    file: "C:/Users/never/Videos/art-of-movement/renders/the-art-of-movement_1920x1440_30fps.mp4",
+    format: "4:3",
+    poster: 15.5,
+    stills: [4.5, 10.5, 25.5, 38.5],
+    preview: [11, 6],
+  },
   "myaicademy-promo": {
     file: "G:/trial/myAIcademy_promo_9x16_v2.mp4",
     vertical: true,
@@ -82,8 +89,8 @@ for (const [slug, j] of Object.entries(jobs)) {
   const dir = join(OUT, slug);
   mkdirSync(dir, { recursive: true });
   const src = isAbsolute(j.file) ? j.file : join(SRC, j.file);
-  const full = j.vertical ? "scale=1080:1920" : "scale=1920:1080";
-  const small = j.vertical ? "scale=360:640" : "scale=640:360";
+  const full = j.vertical ? "scale=1080:1920" : j.format === "4:3" ? "scale=1920:1440" : "scale=1920:1080";
+  const small = j.vertical ? "scale=360:640" : j.format === "4:3" ? "scale=640:480" : "scale=640:360";
   console.log(`▸ ${slug}`);
   // Full film: H.264 high profile, faststart so playback begins before download ends.
   if (todo(join(dir, "film.mp4")))

@@ -17,6 +17,7 @@ import { VideoPlayer } from "@/components/video-player";
 import { ClipReveal, Eyebrow, LineReveal, Reveal } from "@/components/reveal";
 import { JsonLd } from "@/components/json-ld";
 import { EditRoom } from "@/components/edit-room";
+import { aspectClass, frameSize } from "@/lib/format";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -39,7 +40,7 @@ export async function generateMetadata({ params }: PageProps<"/work/[slug]">): P
       url: `/work/${p.slug}`,
       title: `${p.title} | ${site.name}`,
       description: p.summary,
-      images: [{ url: p.media.poster, width: p.format === "9:16" ? 1080 : 1920, height: p.format === "9:16" ? 1920 : 1080, alt: p.media.posterAlt }],
+      images: [{ url: p.media.poster, ...frameSize[p.format], alt: p.media.posterAlt }],
     },
     twitter: { card: "summary_large_image", title: `${p.title} | ${site.name}`, description: p.summary, images: [p.media.poster] },
   };
@@ -175,10 +176,10 @@ export default async function CaseStudy({ params }: PageProps<"/work/[slug]">) {
                 </p>
               </Reveal>
             </section>
-            {breaks[i] && <Stills stills={breaks[i]} all={stills} vertical={vertical} />}
+            {breaks[i] && <Stills stills={breaks[i]} all={stills} format={p.format} />}
           </div>
         ))}
-        {leftover.length > 0 && <Stills stills={leftover} all={stills} vertical={vertical} />}
+        {leftover.length > 0 && <Stills stills={leftover} all={stills} format={p.format} />}
       </div>
 
       <Credits project={p} />
@@ -188,7 +189,8 @@ export default async function CaseStudy({ params }: PageProps<"/work/[slug]">) {
   );
 }
 
-function Stills({ stills, all, vertical }: { stills: Still[]; all: Still[]; vertical: boolean }) {
+function Stills({ stills, all, format }: { stills: Still[]; all: Still[]; format: Project["format"] }) {
+  const vertical = format === "9:16";
   if (!stills.length) return null;
   const single = stills.length === 1;
   return (
@@ -202,7 +204,7 @@ function Stills({ stills, all, vertical }: { stills: Still[]; all: Still[]; vert
           key={s.src}
           className={vertical ? (i === 1 ? "mt-16 md:mt-28" : "") : single ? "" : i === 0 ? "md:col-span-7" : "md:col-span-5 md:mt-32"}
         >
-          <ClipReveal className={`relative overflow-hidden bg-coal ${vertical ? "aspect-[9/16]" : "aspect-video"}`} delay={i * 0.1}>
+          <ClipReveal className={`relative overflow-hidden bg-coal ${aspectClass[format]}`} delay={i * 0.1}>
             <Image
               src={s.src}
               alt={s.alt}

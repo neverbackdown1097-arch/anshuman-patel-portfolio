@@ -12,6 +12,7 @@
  * ─────────────────────────────────────────────────────────────────────────
  */
 
+import type { Format } from "@/lib/format";
 import ownTheElements from "./breakdowns/own-the-elements.json";
 import myAIcademy from "./breakdowns/myaicademy-promo.json";
 
@@ -96,7 +97,7 @@ export type Project = {
   /** Publication date (YYYY-MM-DD). */
   date: string;
   categories: Category[];
-  format: "16:9" | "9:16";
+  format: Format;
   /** Running time in seconds. */
   duration: number;
   /** One or two sentences for cards and meta descriptions. */
@@ -210,6 +211,43 @@ export const projects: Project[] = [
         "A 120 bpm track re-mapped to the edit — a pulse for the hook, a breakdown for the principles, a re-entry for the journey and a clean resolve on the logo — plus custom interface sounds for ticks, traces and confirmations.",
       color:
         "Codevibe's own navy, blue and teal. Soft glows and deep navy gradients keep it premium and readable at any size. Mastered in 4K.",
+    },
+  },
+  {
+    slug: "the-art-of-movement",
+    title: "The Art of Movement",
+    subtitle: "Make every frame matter.",
+    context: "Self-initiated typography film",
+    date: "2026-10-30",
+    categories: ["Kinetic Typography", "Motion Graphics"],
+    format: "4:3",
+    duration: 40,
+    summary:
+      "A 40-second typography film in a Swiss editorial style — two grounds, two accent colours and one idea, cut to a 120 BPM grid.",
+    role: ["Concept", "Kinetic typography", "3D type", "Motion design", "Sound design"],
+    tools: [],
+    credits: ["Score: original, synthesised", "Impacts and whooshes: Pixabay (Pixabay Content License)", "Type: Inter, League Gothic, Helvetica Bold"],
+    media: media("the-art-of-movement", "Extruded 3D letters reading BEYOND THE FRAME inside a cobalt rectangle, reflected on a black floor", [
+      "STARTS WITH AN IDEA. in white type on black, the full stop in lime",
+      "REDEFINE. in condensed type on paper, with RE set in cobalt",
+      "DESIGN IS HOW IDEAS on a drawn grid beside a cobalt column holding a lime dot",
+      "The closing line THE ART OF MOVEMENT. under MAKE EVERY FRAME MATTER.",
+    ]),
+    story: {
+      overview:
+        "A short film made to prove one thing to a creative director: control of type, time and space — and to leave them remembering the last line.",
+      challenge:
+        "No footage, no product, no voiceover. Forty seconds of words have to carry the whole film, and every move has to feel designed rather than decorated.",
+      concept:
+        "Swiss editorial print, not a screen. Two grounds — night and paper — and two accents with strict jobs: lime is only ever the idea, cobalt is only ever structure. A single white dot opens the film and returns as every lime full stop.",
+      edit:
+        "Six scenes on a 120 BPM grid, every cut on a beat: an idea, a run of verbs, a 3D interlude, four principles, a thesis line and a finale that lands on the last impact and holds.",
+      motion:
+        "Letter staggers of one to two frames, whip-pans, split-screen converges and slit masks. The middle scene is real 3D — extruded, bevelled type lit warm with a cobalt rim and a mirror floor, while the camera threads a corridor of letters.",
+      sound:
+        "An original synthesised score — kick, sub, drones, mechanical ticks, risers and glitches — with each hit placed one frame after the picture. Mastered to −14 LUFS.",
+      color:
+        "Black #080808 and paper #F3F0E8, with lime #C8FF32 and cobalt #244BFF used sparingly. No glows, no gradients, no bloom.",
     },
   },
   {

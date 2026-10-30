@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { formatDuration } from "@/content/projects";
 import { useIsClient } from "@/lib/use-media-query";
+import type { Format } from "@/lib/format";
 
 type Status = "idle" | "loading" | "playing" | "paused" | "ended" | "error";
 
@@ -13,7 +14,7 @@ type Props = {
   poster: string;
   posterAlt: string;
   title: string;
-  format?: "16:9" | "9:16";
+  format?: Format;
   /** Known running time, shown before metadata loads. */
   duration?: number;
   /** Load the poster eagerly (for players above the fold). */
@@ -143,7 +144,13 @@ export function VideoPlayer({ src, poster, posterAlt, title, format = "16:9", du
       onFocus={poke}
       className={`group/player relative overflow-hidden bg-coal ${
         isFullscreen ? "flex h-full w-full items-center justify-center bg-black" : ""
-      } ${vertical && !isFullscreen ? "mx-auto aspect-[9/16] max-h-[86svh] w-auto max-w-full" : "aspect-video w-full"}`}
+      } ${
+        vertical && !isFullscreen
+          ? "mx-auto aspect-[9/16] max-h-[86svh] w-auto max-w-full"
+          : format === "4:3" && !isFullscreen
+            ? "mx-auto aspect-[4/3] w-full max-w-[min(100%,calc(86svh*4/3))]"
+            : "aspect-video w-full"
+      }`}
       style={vertical && !isFullscreen ? { height: "min(86svh, 1100px)" } : undefined}
     >
       <video

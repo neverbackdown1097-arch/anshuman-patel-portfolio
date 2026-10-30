@@ -87,7 +87,7 @@ export function WorkIndex({ projects }: { projects: Project[] }) {
           {hovered && (
             <motion.div
               key={hovered.slug}
-              className={`relative ml-8 -translate-y-1/2 overflow-hidden ${hovered.format === "9:16" ? "h-[22rem] w-[12.4rem]" : "h-[13.5rem] w-[24rem]"}`}
+              className={`relative ml-8 -translate-y-1/2 overflow-hidden ${hovered.format === "9:16" ? "h-[22rem] w-[12.4rem]" : hovered.format === "4:3" ? "h-[18rem] w-[24rem]" : "h-[13.5rem] w-[24rem]"}`}
               initial={{ opacity: 0, scale: 0.92, clipPath: "inset(15% 15% 15% 15%)" }}
               animate={{ opacity: 1, scale: 1, clipPath: "inset(0% 0% 0% 0%)" }}
               exit={{ opacity: 0, scale: 0.96 }}
