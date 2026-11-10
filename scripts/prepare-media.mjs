@@ -4,7 +4,7 @@
 // FFMPEG_PATH overrides the ffmpeg binary. Existing outputs are skipped;
 // pass --force to rebuild them.
 import { spawnSync } from "node:child_process";
-import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync, rmSync } from "node:fs";
+import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync, rmSync } from "node:fs";
 import { isAbsolute, join, resolve } from "node:path";
 import { tmpdir } from "node:os";
 
@@ -35,6 +35,13 @@ const jobs = {
     poster: 29.6,
     stills: [4.0, 11.6, 16.3, 19.3],
     preview: [3, 6],
+  },
+  "cellular-genesis": {
+    file: "C:/Users/never/biotech-scroll-demo/render/cellular_genesis_preview.mp4",
+    frames: "C:/Users/never/biotech-scroll-demo/site/frames",
+    poster: 5.98,
+    stills: [0.5, 3.0, 4.8, 6.4],
+    preview: [0, 6.6],
   },
   "the-art-of-movement": {
     file: "C:/Users/never/Videos/art-of-movement/renders/the-art-of-movement_1920x1440_30fps.mp4",
@@ -108,6 +115,13 @@ for (const [slug, j] of Object.entries(jobs)) {
   for (const [name, t] of frames) {
     const p = join(dir, `${name}.jpg`);
     if (todo(p)) ff("-ss", String(t), "-i", src, "-frames:v", "1", "-vf", full, "-q:v", "2", p);
+  }
+  // Optional numbered image sequence for scroll-scrubbed playback, copied as-is.
+  if (j.frames) {
+    const fdir = join(dir, "frames");
+    mkdirSync(fdir, { recursive: true });
+    for (const f of readdirSync(j.frames).filter((f) => /\.(webp|jpg|png)$/i.test(f)))
+      if (todo(join(fdir, f))) copyFileSync(join(j.frames, f), join(fdir, f));
   }
 }
 

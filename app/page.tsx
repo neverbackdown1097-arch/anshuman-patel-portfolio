@@ -12,6 +12,8 @@ import {
 import { JsonLd } from "@/components/json-ld";
 import { ProductFeature } from "@/components/product-feature";
 import { products } from "@/content/products";
+import { ThreeDSection } from "@/components/three-d-section";
+import { publishedProjects } from "@/content/projects";
 
 export default function Home() {
   const sameAs = [site.social.linkedin, site.social.instagram, site.social.x, site.social.vimeo, site.social.youtube].filter(
@@ -46,6 +48,7 @@ export default function Home() {
       <ShowreelSection />
       <SkillsMarquee />
       <WorkSection />
+      <ThreeDSection projects={publishedProjects.filter((p) => p.categories.includes("3D Animation"))} />
       {products.map((p) => (
         <ProductFeature key={p.slug} p={p} />
       ))}

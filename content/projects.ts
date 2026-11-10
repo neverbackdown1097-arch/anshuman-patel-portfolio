@@ -24,6 +24,7 @@ export const categories = [
   "Social Media Videos",
   "Travel Films",
   "SaaS & Product Videos",
+  "3D Animation",
 ] as const;
 
 export type Category = (typeof categories)[number];
@@ -127,6 +128,19 @@ export type Project = {
   placeholder?: boolean;
   /** Optional raw-vs-final section shown under the film. */
   breakdown?: Breakdown;
+  /** Optional numbered frame sequence the visitor scrubs by scrolling. */
+  scrollSequence?: ScrollSequenceData;
+};
+
+export type ScrollSequenceData = {
+  /** Folder under /public, e.g. "/media/slug/frames". Files are <prefix><n padded>.<ext>, numbered from 1. */
+  dir: string;
+  prefix: string;
+  digits: number;
+  ext: string;
+  count: number;
+  /** Phases end at the given frame (inclusive) and set the overlay copy. */
+  phases: { end: number; label: string; title: string; body: string }[];
 };
 
 const media = (slug: string, posterAlt: string, stills: string[]) => ({
@@ -214,12 +228,60 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "cellular-genesis",
+    title: "Cellular Genesis",
+    subtitle: "A scroll-driven 3D hero for a biotech brand.",
+    context: "3D concept study",
+    date: "2026-10-31",
+    categories: ["3D Animation", "Motion Graphics"],
+    format: "16:9",
+    duration: 6.7,
+    summary:
+      "A fully procedural Blender study for a regenerative-medicine website: 160 rendered frames that play as you scroll — forwards and back.",
+    role: ["3D modelling", "Look development", "Lighting", "Animation", "Scroll integration"],
+    tools: ["Blender 5.2", "EEVEE"],
+    credits: ["Concept study — the cell, molecules and fibres are stylised, not a medical illustration"],
+    media: media("cellular-genesis", "Luminous cells joined by glowing fibres against dark space, from the Cellular Genesis 3D study", [
+      "A single translucent cell with a warm glowing nucleus, at rest in dark space",
+      "Satellite cells appearing around the central cell as particles drift outward",
+      "The camera close to the membrane, organelles turning around the bright nucleus",
+      "The camera pulled back to a network of cells and fibres, leaving dark space below",
+    ]),
+    scrollSequence: {
+      dir: "/media/cellular-genesis/frames",
+      prefix: "f_",
+      digits: 3,
+      ext: "webp",
+      count: 160,
+      phases: [
+        { end: 40, label: "I · Introduction", title: "A single cell, at rest", body: "The cell breathes slowly — centred for a headline or a portrait." },
+        { end: 80, label: "II · Emergence", title: "Life begins to gather", body: "Particles expand outward and satellite cells appear around the centre." },
+        { end: 125, label: "III · Immersion", title: "Inside the network", body: "Fibres connect the cells while the camera skims the membrane." },
+        { end: 160, label: "IV · Transition", title: "Resolve, then make room", body: "The camera pulls back and leaves dark space for the next section." },
+      ],
+    },
+    story: {
+      overview:
+        "A 3D hero for the language of a longevity and regenerative-medicine brand: translucent membranes, a warm nucleus, satellite cells and fibres that grow into a network.",
+      challenge:
+        "Scroll-driven heroes need every frame to read in both directions and survive any screen. The animation had to work as a film and as 160 still frames chosen by the visitor's scroll position.",
+      concept:
+        "Four phases on one camera move — introduction, emergence, immersion, transition — ending in dark negative space so the page's next section can follow naturally.",
+      edit:
+        "160 frames at 24 fps (6.7 s of source). Phases are timed to frame ranges so the copy on the page can change exactly with the picture.",
+      motion:
+        "A fully procedural Blender scene: noise-displaced membranes that breathe, three depth layers of particles for parallax, satellite cells and fibres that grow along curves.",
+      color:
+        "Emissive x-ray membranes, a coral nucleus and teal accents, finished with compositor bloom and an AgX grade. Web frames are 1600 × 900 WebP, 5.4 MB for the whole sequence.",
+    },
+  },
+  {
     slug: "the-art-of-movement",
     title: "The Art of Movement",
     subtitle: "Make every frame matter.",
     context: "Self-initiated typography film",
     date: "2026-10-30",
-    categories: ["Kinetic Typography", "Motion Graphics"],
+    categories: ["Kinetic Typography", "Motion Graphics", "3D Animation"],
     format: "4:3",
     duration: 40,
     summary:

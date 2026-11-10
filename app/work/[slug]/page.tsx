@@ -17,6 +17,7 @@ import { VideoPlayer } from "@/components/video-player";
 import { ClipReveal, Eyebrow, LineReveal, Reveal } from "@/components/reveal";
 import { JsonLd } from "@/components/json-ld";
 import { EditRoom } from "@/components/edit-room";
+import { ScrollSequence } from "@/components/scroll-sequence";
 import { aspectClass, frameSize } from "@/lib/format";
 
 export function generateStaticParams() {
@@ -154,9 +155,19 @@ export default async function CaseStudy({ params }: PageProps<"/work/[slug]">) {
               preload
             />
           </div>
-          <p className="label mt-4 text-center text-dim">Final film · sound on · press F for fullscreen</p>
+          <p className="label mt-4 text-center text-dim">
+            {p.scrollSequence
+              ? "Preview render · silent · keep scrolling to play it frame by frame"
+              : "Final film · sound on · press F for fullscreen"}
+          </p>
         </Reveal>
       </section>
+
+      {p.scrollSequence && (
+        <div className="mt-24 md:mt-36">
+          <ScrollSequence seq={p.scrollSequence} title={p.title} />
+        </div>
+      )}
 
       {p.breakdown && <EditRoom b={p.breakdown} title={p.title} />}
 
