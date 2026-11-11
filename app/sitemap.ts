@@ -23,7 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       images: [`${site.url}${p.media.poster}`],
       videos: [
         {
-          title: p.title,
+          title: p.seoTitle ?? p.title,
           thumbnail_loc: `${site.url}${p.media.poster}`,
           description: p.summary,
           content_loc: `${site.url}${p.media.film}`,

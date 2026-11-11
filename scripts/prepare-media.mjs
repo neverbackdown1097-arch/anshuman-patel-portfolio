@@ -50,6 +50,15 @@ const jobs = {
     stills: [4.5, 10.5, 25.5, 38.5],
     preview: [11, 6],
   },
+  "product-launch-ui": {
+    file: "C:/Users/never/motion-reel/renders/motion-reel-4x3.mp4",
+    format: "4:3",
+    scale: "1600:1200",
+    fps: 60,
+    poster: 9.3,
+    stills: [7.8, 12.3, 14.8, 25],
+    preview: [7.6, 6],
+  },
   "myaicademy-promo": {
     file: "G:/trial/myAIcademy_promo_9x16_v2.mp4",
     vertical: true,
@@ -96,13 +105,14 @@ for (const [slug, j] of Object.entries(jobs)) {
   const dir = join(OUT, slug);
   mkdirSync(dir, { recursive: true });
   const src = isAbsolute(j.file) ? j.file : join(SRC, j.file);
-  const full = j.vertical ? "scale=1080:1920" : j.format === "4:3" ? "scale=1920:1440" : "scale=1920:1080";
+  // `scale` keeps a native size (no upscaling); `fps` keeps a higher source frame rate.
+  const full = j.scale ? `scale=${j.scale}` : j.vertical ? "scale=1080:1920" : j.format === "4:3" ? "scale=1920:1440" : "scale=1920:1080";
   const small = j.vertical ? "scale=360:640" : j.format === "4:3" ? "scale=640:480" : "scale=640:360";
   console.log(`▸ ${slug}`);
   // Full film: H.264 high profile, faststart so playback begins before download ends.
   if (todo(join(dir, "film.mp4")))
     // Long films can set a lower `maxrate` (Mbps) to keep the download sensible.
-    ff("-i", src, "-vf", full, "-r", "30", "-c:v", "libx264", "-preset", "slow", "-crf", String(j.crf ?? 21),
+    ff("-i", src, "-vf", full, "-r", String(j.fps ?? 30), "-c:v", "libx264", "-preset", "slow", "-crf", String(j.crf ?? 21),
       "-maxrate", `${j.maxrate ?? 8}M`, "-bufsize", `${(j.maxrate ?? 8) * 2}M`, "-pix_fmt", "yuv420p", "-profile:v", "high",
       "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", join(dir, "film.mp4"));
   // Silent hover preview loop.

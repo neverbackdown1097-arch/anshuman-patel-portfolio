@@ -89,6 +89,8 @@ const breakdown = (slug: string, json: BreakdownJson, extras: Breakdown["extras"
 export type Project = {
   slug: string;
   title: string;
+  /** Optional full title for search results and sharing, when `title` is a shortened display version. */
+  seoTitle?: string;
   /** Short line under the title, e.g. the film's tagline. */
   subtitle: string;
   /** Brand the work was made for. Leave undefined for self-initiated work. */
@@ -225,6 +227,48 @@ export const projects: Project[] = [
         "A 120 bpm track re-mapped to the edit — a pulse for the hook, a breakdown for the principles, a re-entry for the journey and a clean resolve on the logo — plus custom interface sounds for ticks, traces and confirmations.",
       color:
         "Codevibe's own navy, blue and teal. Soft glows and deep navy gradients keep it premium and readable at any size. Mastered in 4K.",
+    },
+  },
+  {
+    slug: "product-launch-ui",
+    title: "Apple-Style UI Animation and Kinetic Typography",
+    subtitle: "Product launch video for apps and SaaS.",
+    seoTitle: "Apple-Style UI Animation and Kinetic Typography | Product Launch Video for Apps and SaaS",
+    context: "Self-initiated product launch film",
+    date: "2026-11-11",
+    categories: ["SaaS & Product Videos", "Motion Graphics", "Kinetic Typography"],
+    format: "4:3",
+    duration: 30,
+    summary:
+      "A 30-second product launch film in a clean, Apple-style language: animated app UI and kinetic typography on bold colour fields, cut to a 120 BPM beat at 60 fps.",
+    role: ["Concept & script", "UI animation", "Kinetic typography", "Motion design", "Sound design"],
+    tools: [],
+    credits: [
+      "Music: “Fun Pop Music” by ViacheslavStarostin (Pixabay Content License)",
+      "Type: Inter",
+      "All interface elements are original — no real app icons, logos or brand names",
+    ],
+    media: media("product-launch-ui", "A grid of glossy app icons on a mint field above the word launches.", [
+      "A phone screen with icons, toggles and a slider coming to life above the line until it moves.",
+      "A growth chart drawing upwards on a white card above the word onboarding.",
+      "A row of five orange toggles switching on above app store previews.",
+      "A chat thread: hey, can you make one of these for us? answered with yes. let's talk.",
+    ]),
+    story: {
+      overview:
+        "A launch-style film that sells one idea to product teams: a great app deserves to move. It works as a portfolio piece and as a template for app, feature and SaaS launch videos.",
+      challenge:
+        "Thirty seconds, no footage and no voiceover. The interface and the words had to do all of the selling — and stay readable on a phone in a muted autoplay feed.",
+      concept:
+        "Problem, snap, proof, promise, call to action. A flat, static screen that nobody remembers snaps alive, the same motion powers launches, onboarding, feature drops and app store previews, and the film closes on a conversation with the viewer: “hey, can you make one of these for us?” — “yes. let's talk.”",
+      edit:
+        "Cut to a 120 BPM grid, so every scene change lands on the half-second beat. The showcase runs 1.5-second beats that tighten to 1-second beats, and the film loops seamlessly back to its first frame.",
+      motion:
+        "Rendered at 60 fps for smooth interface motion. Type and cards settle on a soft ease-out, while icons, toggles, chat bubbles and the dynamic-island pill get a small spring overshoot. Every colour change is carried by something on screen — a full stop, a tap ripple, an icon, a chart's end point or a chat bubble — so no cut feels like a cut.",
+      sound:
+        "A bright pop track slowed from 123 to 120 BPM to lock to the edit, with taps, clicks, pops, whooshes and a notification placed on the picture. Mastered to −14 LUFS for social.",
+      color:
+        "One flat colour field per scene — blue, coral, yellow, mint, violet and tangerine — with white or near-black Inter ExtraBold at tight tracking. No gradients behind the type; depth comes from soft shadows and blurred drifting icons.",
     },
   },
   {

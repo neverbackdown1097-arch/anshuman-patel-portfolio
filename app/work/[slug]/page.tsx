@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: PageProps<"/work/[slug]">): P
   const { slug } = await params;
   const p = getProject(slug);
   if (!p) return {};
-  const title = `${p.title} — ${p.categories[0]} Case Study`;
+  const title = p.seoTitle ?? `${p.title} — ${p.categories[0]} Case Study`;
   return {
     title,
     description: p.summary,
@@ -39,11 +39,11 @@ export async function generateMetadata({ params }: PageProps<"/work/[slug]">): P
     openGraph: {
       type: "video.other",
       url: `/work/${p.slug}`,
-      title: `${p.title} | ${site.name}`,
+      title: p.seoTitle ?? `${p.title} | ${site.name}`,
       description: p.summary,
       images: [{ url: p.media.poster, ...frameSize[p.format], alt: p.media.posterAlt }],
     },
-    twitter: { card: "summary_large_image", title: `${p.title} | ${site.name}`, description: p.summary, images: [p.media.poster] },
+    twitter: { card: "summary_large_image", title: p.seoTitle ?? `${p.title} | ${site.name}`, description: p.summary, images: [p.media.poster] },
   };
 }
 
@@ -81,7 +81,7 @@ export default async function CaseStudy({ params }: PageProps<"/work/[slug]">) {
             {
               "@context": "https://schema.org",
               "@type": "VideoObject",
-              name: p.title,
+              name: p.seoTitle ?? p.title,
               description: p.summary,
               thumbnailUrl: [abs(p.media.poster)],
               uploadDate: p.date,
