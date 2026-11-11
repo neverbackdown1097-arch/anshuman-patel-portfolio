@@ -230,6 +230,47 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "saas-explainer",
+    title: "SaaS Explainer Video",
+    subtitle: "From talk to tasks. Automatically.",
+    context: "Spec launch film for Driftly, a concept SaaS",
+    date: "2026-11-11",
+    categories: ["SaaS & Product Videos", "Motion Graphics", "Kinetic Typography"],
+    format: "16:9",
+    duration: 30,
+    summary:
+      "A 30-second SaaS explainer for Driftly, a concept app that turns meetings into shipped tasks: kinetic type, dark glass UI and one unbroken chain of motion at 60 fps.",
+    role: ["Concept & script", "UI design", "UI animation", "Kinetic typography", "Sound design"],
+    tools: [],
+    credits: [
+      "Music: “Product Tech” by The_Mountain (Pixabay Content License)",
+      "Type: Inter, JetBrains Mono",
+      "Driftly and its interface are original concept designs",
+    ],
+    media: media("saas-explainer", "The Driftly board with five tasks in Done and a Sprint shipped toast, above the line Ships while you sleep", [
+      "Where did the decisions go? over a pile of chat messages, notes and notifications",
+      "The Driftly wordmark with the line From talk to tasks. Automatically.",
+      "A meeting transcript where highlighted sentences lift out into task cards, captioned Captures every decision",
+      "The Driftly wordmark above Join the waitlist, with task cards orbiting around it",
+    ]),
+    story: {
+      overview:
+        "A launch explainer for a SaaS product that listens to your meetings and turns what was said into assigned, finished tasks. Built to stop a muted scroll and make one idea stick: meetings became shipped tasks.",
+      challenge:
+        "Explain an AI workflow product in 30 seconds without a voiceover — problem, product, proof and call to action — while every line stays readable on mute.",
+      concept:
+        "One object carries the whole film. A point becomes the dot of the i in Driftly, the wordmark docks into the app's window bar, transcript sentences lift out and become task cards, the “Sprint shipped” toast stretches into a baseline rule, and that rule becomes the call-to-action button.",
+      edit:
+        "Problem first: “You had 14 meetings this week”, then 34 messages and notifications pile in until the screen freezes on “Where did the decisions go?” Everything collapses into a single point, the product reveals itself, and the board plays out To do, Doing, Done before “Less meetings. Less chasing. More shipping.” The last frame flows back into the first, so it loops.",
+      motion:
+        "Rendered at 60 fps. Type and UI settle on a soft ease-out with 25–30 ms character staggers, exits run faster than entrances, and the UI rig tilts slightly in 3D with blurred far layers for depth. No bounce on interface elements, so it feels like a real product.",
+      sound:
+        "“Product Tech” placed so its full section enters on the product reveal, with interface foley — clicks, keys, pops, whooshes and a sub hit — on the picture. Loudness-normalised for social.",
+      color:
+        "Near-black ground with fine grain and a vignette, off-white type and dark glass UI. A single violet-to-cyan gradient is reserved for the words that matter — 14, decisions, tasks and More shipping — and for the button.",
+    },
+  },
+  {
     slug: "product-launch-ui",
     title: "Apple-Style UI Animation and Kinetic Typography",
     subtitle: "Product launch video for apps and SaaS.",

@@ -50,6 +50,13 @@ const jobs = {
     stills: [4.5, 10.5, 25.5, 38.5],
     preview: [11, 6],
   },
+  "saas-explainer": {
+    file: "C:/Users/never/driftly/renders/driftly-launch-16x9.mp4",
+    fps: 60,
+    poster: 20,
+    stills: [6, 10, 12.5, 27.5],
+    preview: [17.5, 6],
+  },
   "product-launch-ui": {
     file: "C:/Users/never/motion-reel/renders/motion-reel-4x3.mp4",
     format: "4:3",
