@@ -50,6 +50,14 @@ const jobs = {
     stills: [4.5, 10.5, 25.5, 38.5],
     preview: [11, 6],
   },
+  "atlas-dashboard-film": {
+    file: "C:/Users/never/CODEVIBE_ATLAS_DASHBOARD_FILM/render/CODEVIBE_ATLAS_Dashboard_Film_1440x1080_4x3_30fps.mp4",
+    format: "4:3",
+    scale: "1440:1080",
+    poster: 24,
+    stills: [3, 14, 28, 44],
+    preview: [19, 6],
+  },
   "saas-explainer": {
     file: "C:/Users/never/driftly/renders/driftly-launch-16x9.mp4",
     fps: 60,

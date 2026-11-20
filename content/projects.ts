@@ -17,8 +17,8 @@ import ownTheElements from "./breakdowns/own-the-elements.json";
 import myAIcademy from "./breakdowns/myaicademy-promo.json";
 
 export const categories = [
+  "Motion Graphics Design",
   "Cinematic Storytelling",
-  "Motion Graphics",
   "Kinetic Typography",
   "Brand Films",
   "Social Media Videos",
@@ -160,7 +160,7 @@ export const projects: Project[] = [
     subtitle: "Make them feel it.",
     context: "Self-initiated film",
     date: "2026-10-22",
-    categories: ["Cinematic Storytelling"],
+    categories: ["Cinematic Storytelling", "Motion Graphics Design"],
     format: "16:9",
     duration: 68.5,
     summary:
@@ -198,7 +198,7 @@ export const projects: Project[] = [
     brand: "Codevibe",
     context: "SaaS brand film for Codevibe",
     date: "2026-10-24",
-    categories: ["SaaS & Product Videos", "Motion Graphics", "Brand Films"],
+    categories: ["SaaS & Product Videos", "Motion Graphics Design", "Brand Films"],
     format: "16:9",
     duration: 58,
     summary:
@@ -230,12 +230,55 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "atlas-dashboard-film",
+    title: "Atlas Dashboard Film",
+    subtitle: "The world, at a glance.",
+    brand: "Codevibe",
+    context: "Product film for Codevibe's Atlas dashboard",
+    date: "2026-11-20",
+    categories: ["Motion Graphics Design", "SaaS & Product Videos"],
+    format: "4:3",
+    duration: 45,
+    summary:
+      "A 45-second product film for Atlas, a travel-operations dashboard built by Codevibe: one 3D camera travels across the real interface while every number, chart and row comes to life.",
+    role: ["Motion design", "UI animation", "3D camera", "Sound design"],
+    tools: ["After Effects"],
+    credits: [
+      "Interface: the live Atlas showcase on codevibe.in, animated from real captures",
+      "Music: “Product Tech” by The_Mountain (Pixabay Content License)",
+      "Sound effects: Pixabay (Pixabay Content License)",
+      "Figures are the product's illustrative sample data",
+    ],
+    media: media("atlas-dashboard-film", "The Atlas Journey Pulse timeline with 17 November selected above a list of upcoming trips", [
+      "MEET ATLAS beside the dashboard assembling from skeleton blocks",
+      "The Confirmed bookings card lifted out of the dashboard as its number counts up",
+      "South Iceland expanded from the destination card to full frame",
+      "The ATLAS end card: The world, at a glance, designed and maintained by Codevibe",
+    ]),
+    story: {
+      overview:
+        "A product film for Atlas, the travel-operations dashboard Codevibe designed and built. Its job: show a travel business everything Atlas gives them — journeys, bookings, travellers and revenue — in under a minute, on the real product.",
+      challenge:
+        "A dense desktop dashboard has to read clearly in a 45-second film, and nothing could be faked: every interface pixel had to be the real product, yet still feel alive.",
+      concept:
+        "Treat the dashboard as a world to fly through. The page assembles itself, then one camera tours it in reading order — greeting, KPIs, Journey Pulse, destinations, activity and bookings — before pulling back to show it all at once: the world, at a glance.",
+      edit:
+        "Six movements over 45 seconds: assembly, arrival, the four KPI cards, the 14-day Journey Pulse, the South Iceland spotlight and the Europe filter, then activity and bookings. Short captions — “Every number tells a story.”, “Every departure. Every detail.” — keep it readable on mute.",
+      motion:
+        "Every section is a 3D layer at its true position on the page, so a single camera can travel, push in and pull back with real depth. KPI cards lift in 2.5D and count up, sparklines and bars grow back out of the real pixels, rows take the product's actual hover state and the Europe tab shows its real filtered view. Built with native After Effects tools only.",
+      sound:
+        "“Product Tech” cut so its groove lands on the dashboard reveal and its outro carries the logo, with a 69-cue sheet of interface sounds placed on every count, click and ping. Mastered to −14 LUFS.",
+      color:
+        "The product's own off-white canvas, navy and Codevibe blue, framed by a deep navy reveal at the end. Re-framed shot by shot for 4:3 so every focused component stays whole.",
+    },
+  },
+  {
     slug: "saas-explainer",
     title: "SaaS Explainer Video",
     subtitle: "From talk to tasks. Automatically.",
     context: "Spec launch film for Driftly, a concept SaaS",
     date: "2026-11-11",
-    categories: ["SaaS & Product Videos", "Motion Graphics", "Kinetic Typography"],
+    categories: ["SaaS & Product Videos", "Motion Graphics Design", "Kinetic Typography"],
     format: "16:9",
     duration: 30,
     summary:
@@ -277,7 +320,7 @@ export const projects: Project[] = [
     seoTitle: "Apple-Style UI Animation and Kinetic Typography | Product Launch Video for Apps and SaaS",
     context: "Self-initiated product launch film",
     date: "2026-11-11",
-    categories: ["SaaS & Product Videos", "Motion Graphics", "Kinetic Typography"],
+    categories: ["SaaS & Product Videos", "Motion Graphics Design", "Kinetic Typography"],
     format: "4:3",
     duration: 30,
     summary:
@@ -318,7 +361,7 @@ export const projects: Project[] = [
     subtitle: "A scroll-driven 3D hero for a biotech brand.",
     context: "3D concept study",
     date: "2026-10-31",
-    categories: ["3D Animation", "Motion Graphics"],
+    categories: ["3D Animation", "Motion Graphics Design"],
     format: "16:9",
     duration: 6.7,
     summary:
@@ -366,7 +409,7 @@ export const projects: Project[] = [
     subtitle: "Make every frame matter.",
     context: "Self-initiated typography film",
     date: "2026-10-30",
-    categories: ["Kinetic Typography", "Motion Graphics", "3D Animation"],
+    categories: ["Kinetic Typography", "Motion Graphics Design", "3D Animation"],
     format: "4:3",
     duration: 40,
     summary:
@@ -403,7 +446,7 @@ export const projects: Project[] = [
     subtitle: "Not just outerwear. An attitude.",
     context: "Spec campaign — women's outerwear",
     date: "2026-10-24",
-    categories: ["Brand Films", "Social Media Videos", "Cinematic Storytelling"],
+    categories: ["Brand Films", "Social Media Videos", "Cinematic Storytelling", "Motion Graphics Design"],
     format: "9:16",
     duration: 35,
     summary:
@@ -448,7 +491,7 @@ export const projects: Project[] = [
     brand: "myAIcademy",
     context: "Promo for myAIcademy",
     date: "2026-10-27",
-    categories: ["SaaS & Product Videos", "Motion Graphics", "Social Media Videos"],
+    categories: ["SaaS & Product Videos", "Motion Graphics Design", "Social Media Videos"],
     format: "9:16",
     duration: 120.5,
     summary:
@@ -520,7 +563,7 @@ export const projects: Project[] = [
     subtitle: "Your brand. Unmissable.",
     context: "Self-initiated typography film",
     date: "2026-10-22",
-    categories: ["Kinetic Typography", "Social Media Videos"],
+    categories: ["Kinetic Typography", "Social Media Videos", "Motion Graphics Design"],
     format: "16:9",
     duration: 21,
     summary:
@@ -555,7 +598,7 @@ export const projects: Project[] = [
     brand: "TOALT",
     context: "Launch reel for TOALT",
     date: "2026-10-19",
-    categories: ["Social Media Videos", "Travel Films"],
+    categories: ["Social Media Videos", "Travel Films", "Motion Graphics Design"],
     format: "9:16",
     duration: 33.6,
     summary:
@@ -587,7 +630,7 @@ export const projects: Project[] = [
     subtitle: "Start + Scale + Sustain = Agency.",
     context: "Motion design film",
     date: "2026-10-10",
-    categories: ["Motion Graphics", "Kinetic Typography"],
+    categories: ["Motion Graphics Design", "Kinetic Typography"],
     format: "16:9",
     duration: 22,
     summary:
@@ -620,7 +663,7 @@ export const projects: Project[] = [
     brand: "Codevibe",
     context: "Brand reel for Codevibe",
     date: "2026-10-18",
-    categories: ["Brand Films", "Social Media Videos", "Motion Graphics"],
+    categories: ["Brand Films", "Social Media Videos", "Motion Graphics Design"],
     format: "9:16",
     duration: 30,
     summary:
@@ -652,7 +695,7 @@ export const projects: Project[] = [
     brand: "Codevibe",
     context: "Typography reel for Codevibe",
     date: "2026-10-22",
-    categories: ["Kinetic Typography", "Social Media Videos"],
+    categories: ["Kinetic Typography", "Social Media Videos", "Motion Graphics Design"],
     format: "9:16",
     duration: 45,
     summary:
@@ -682,7 +725,7 @@ export const projects: Project[] = [
     subtitle: "Designed to feel different.",
     context: "Self-initiated UI motion reel",
     date: "2026-10-18",
-    categories: ["Motion Graphics", "SaaS & Product Videos"],
+    categories: ["Motion Graphics Design", "SaaS & Product Videos"],
     format: "16:9",
     duration: 27,
     summary:
@@ -711,7 +754,7 @@ export const projects: Project[] = [
     brand: "Codevibe",
     context: "Pitch film for Codevibe",
     date: "2026-06-12",
-    categories: ["Motion Graphics", "Brand Films", "SaaS & Product Videos"],
+    categories: ["Motion Graphics Design", "Brand Films", "SaaS & Product Videos"],
     format: "16:9",
     duration: 35,
     summary:
@@ -740,7 +783,7 @@ export const projects: Project[] = [
     brand: "Codevibe",
     context: "Social reel for Codevibe",
     date: "2026-05-14",
-    categories: ["Motion Graphics", "Social Media Videos"],
+    categories: ["Motion Graphics Design", "Social Media Videos"],
     format: "9:16",
     duration: 25,
     summary: "A neon-lit vertical reel for Codevibe built from glowing type, HUD framing and the brand mark.",
@@ -767,7 +810,7 @@ export const projects: Project[] = [
     brand: "Codevibe",
     context: "Services reel for Codevibe",
     date: "2026-05-14",
-    categories: ["Motion Graphics", "Social Media Videos"],
+    categories: ["Motion Graphics Design", "Social Media Videos"],
     format: "9:16",
     duration: 35,
     summary: "A vertical services menu for Codevibe — frontend, backend, commerce and landing pages, one card at a time.",
