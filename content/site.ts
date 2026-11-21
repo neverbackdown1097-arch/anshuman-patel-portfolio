@@ -126,6 +126,7 @@ export const site = {
       "Brand film",
       "Social media content",
       "Travel film",
+      "Video essay",
       "SaaS / product video",
       "Something else",
     ],

@@ -50,6 +50,12 @@ const jobs = {
     stills: [4.5, 10.5, 25.5, 38.5],
     preview: [11, 6],
   },
+  "quietest-person-wins": {
+    file: "C:/Users/never/QUIET_ROOM_VIDEO_ESSAY/render/Why_the_Quietest_Person_Wins_16x9_1920x1080.mp4",
+    poster: 18,
+    stills: [3, 10.5, 25, 38],
+    preview: [12, 6],
+  },
   "atlas-dashboard-film": {
     file: "C:/Users/never/CODEVIBE_ATLAS_DASHBOARD_FILM/render/CODEVIBE_ATLAS_Dashboard_Film_1440x1080_4x3_30fps.mp4",
     format: "4:3",

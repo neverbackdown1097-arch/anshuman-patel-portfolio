@@ -25,6 +25,7 @@ export const categories = [
   "Travel Films",
   "SaaS & Product Videos",
   "3D Animation",
+  "Video Essays",
 ] as const;
 
 export type Category = (typeof categories)[number];
@@ -227,6 +228,49 @@ export const projects: Project[] = [
         "A 120 bpm track re-mapped to the edit — a pulse for the hook, a breakdown for the principles, a re-entry for the journey and a clean resolve on the logo — plus custom interface sounds for ticks, traces and confirmations.",
       color:
         "Codevibe's own navy, blue and teal. Soft glows and deep navy gradients keep it premium and readable at any size. Mastered in 4K.",
+    },
+  },
+  {
+    slug: "quietest-person-wins",
+    title: "Why the Quietest Person Wins",
+    subtitle: "A mixed-media video essay.",
+    context: "Self-initiated video essay",
+    date: "2026-11-21",
+    categories: ["Video Essays", "Motion Graphics Design", "Cinematic Storytelling"],
+    format: "16:9",
+    duration: 45,
+    summary:
+      "A 45-second mixed-media video essay on quiet confidence: marble statues, a stop-motion paper collage and VHS tape, cut to a narrated voice.",
+    role: ["Concept & script", "Editing", "Collage & motion design", "VHS effects", "Sound design"],
+    tools: ["After Effects"],
+    credits: [
+      "Images: Pixabay (Pixabay Content License)",
+      "Music: “Our Story In The Past (Sad Piano)” by leberch (Pixabay)",
+      "Sound effects: Pixabay",
+      "Voiceover: synthetic voice (Kokoro)",
+      "Type: Playfair Display, Cormorant Garamond, Pinyon Script, VCR OSD Mono",
+    ],
+    media: media("quietest-person-wins", "A torn paper title card reading Why Quiet People Win, with Win circled in red marker, among taped statue polaroids", [
+      "A black-and-white marble face in deep black, captioned Have you ever noticed…",
+      "Seven silhouettes on a pink VHS grid with the centre one lit, under the loudest person in the room…",
+      "They observe. highlighted on the VHS grid with a live REC timecode",
+      "A draped marble bust beside the line Confidence doesn't need an audience.",
+    ]),
+    story: {
+      overview:
+        "A short video essay — the format of YouTube's commentary and self-improvement channels — on one idea: the quietest person in the room is often the most powerful. Built to hold attention for 45 seconds on narration, type and texture alone.",
+      challenge:
+        "No footage and no presenter. A handful of still images, one voice and some type had to carry a full argument, and feel cinematic rather than like a slideshow.",
+      concept:
+        "Three visual worlds, each with its own job. Marble statues in black space carry the big, timeless statements. A pink VHS grid plays the noisy, modern world of the loudest person in the room. A cream paper collage — torn cards, polaroids and red tape — holds the title and the ending.",
+      edit:
+        "Cut to the voice: hook on a marble face, the question on VHS, the title slapped onto paper, three quiet verbs — they listen, they observe, they choose their words — then a held statue for the payoff line before the collage returns to close. The music drops out for a beat just before the final word.",
+      motion:
+        "The collage moves at a 12 fps stop-motion rate, and a red marker circle draws around “Win”. The VHS world has real per-channel chromatic aberration, scanlines, a tracking band and a tape-stop between worlds. The statues drift and push in slowly while the quote reveals word by word in sync with the voice. Film grain and a soft vignette sit over everything.",
+      sound:
+        "A slow piano bed ducked under the narration, with shutter clicks for the silhouettes, paper rustles and tape rips for the collage, VHS rewind and glitch effects, whooshes, sub hits and a rain bed for the final line. Mastered to −14 LUFS.",
+      color:
+        "Three palettes: cream paper #EFE9DF with burgundy #7A1F2B, blush VHS pink #E58FB0 and pure black-and-white marble.",
     },
   },
   {

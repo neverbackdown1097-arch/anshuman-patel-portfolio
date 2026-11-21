@@ -221,9 +221,9 @@ export function VideoPlayer({ src, poster, posterAlt, title, format = "16:9", du
               <span className="flex size-20 items-center justify-center rounded-full border border-bone/40 bg-ink/30 backdrop-blur-sm transition-[transform,background-color,border-color] duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover/player:scale-110 group-hover/player:border-signal group-hover/player:bg-signal md:size-24">
                 {status === "ended" ? <ReplayIcon /> : <PlayIcon />}
               </span>
-              <span className="label hidden text-bone sm:block">
+              <span className="label hidden rounded-sm bg-ink/55 px-3 py-2 text-bone backdrop-blur-sm sm:block">
                 {status === "ended" ? "Replay" : "Play film"}
-                <span className="block text-mute">{fmt(length)}</span>
+                <span className="block text-bone/70">{fmt(length)}</span>
               </span>
             </span>
           </button>
