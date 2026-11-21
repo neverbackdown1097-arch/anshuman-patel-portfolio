@@ -50,6 +50,21 @@ const jobs = {
     stills: [4.5, 10.5, 25.5, 38.5],
     preview: [11, 6],
   },
+  "codevibe-chaos-to-clarity": {
+    file: "G:/motion graphics/CodeVibe - Chaos to Clarity - 9x16 (1080x1920).mp4",
+    vertical: true,
+    poster: 21,
+    stills: [1.5, 7, 15, 27],
+    preview: [17.5, 6],
+  },
+  "halcyon-saas-launch": {
+    file: "G:/motion graphics/saas-launch-4x3-music.mp4",
+    format: "4:3",
+    scale: "1440:1080",
+    poster: 24,
+    stills: [9, 12, 18.5, 29.5],
+    preview: [8, 6],
+  },
   "quietest-person-wins": {
     file: "C:/Users/never/QUIET_ROOM_VIDEO_ESSAY/render/Why_the_Quietest_Person_Wins_16x9_1920x1080.mp4",
     poster: 18,

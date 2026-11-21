@@ -231,6 +231,85 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "codevibe-chaos-to-clarity",
+    title: "Chaos to Clarity",
+    subtitle: "Less complexity. More possibilities.",
+    brand: "Codevibe",
+    context: "Brand reel for Codevibe",
+    date: "2026-11-16",
+    categories: ["Motion Graphics Design", "Kinetic Typography", "Brand Films", "Social Media Videos"],
+    format: "9:16",
+    duration: 30,
+    summary:
+      "A 30-second vertical brand reel for Codevibe that turns a wall of noise into order: kinetic type, morphing shapes and a 3D editorial layout, built natively in After Effects.",
+    role: ["Concept", "Motion design", "Kinetic typography", "Logo animation", "Sound design"],
+    tools: ["After Effects"],
+    credits: [
+      "Music: “Hybrid Clock” (Pixabay Content License)",
+      "Sound effects: Mixkit free library",
+      "Type: Anton, Inter, JetBrains Mono",
+    ],
+    media: media("codevibe-chaos-to-clarity", "LESS COMPLEXITY. MORE POSSIBILITIES. set in an editorial grid on cream, with MORE in a violet gradient", [
+      "TOO MANY IDEAS. in boxed headlines over a storm of shapes, words and colour",
+      "A clean modular grid of icons and tags building as the chaos resolves into order",
+      "Glowing blocks morphing into an AI network under DESIGNED WITH PURPOSE. and ENGINEERED TO SCALE.",
+      "The Codevibe logo glowing on a deep violet gradient",
+    ]),
+    story: {
+      overview:
+        "A vertical brand reel for Codevibe, a software studio, built around one promise: they take the chaos of building a digital product and turn it into clarity.",
+      challenge:
+        "Say what a full-service tech studio does — web, apps, AI and cloud — in 30 seconds of silent-friendly vertical video, with no footage, no voiceover and no screen recordings.",
+      concept:
+        "Show the feeling before the service. The reel opens on overload — too many ideas, one big challenge — then a single orange catalyst snaps everything into a modular grid. From there the film stays ordered: engineering, impact and finally the brand.",
+      edit:
+        "Four movements joined by match cuts: Chaos to Clarity, The Engineering, The Impact and The Brand Reveal. Every transition hands one shape or word to the next scene, so the 30 seconds play as a single move.",
+      motion:
+        "Around 124 shapes and words fly on a camera rig for the chaos, with boxed headlines, an invert-flash freeze and trim-path grids. Sixteen blocks morph from a web page to a browser, a phone, an AI network, a cloud grid and a UI layout. The impact scene uses a 3D camera with per-letter flips, and the exact Codevibe vector logo resolves with a light sweep.",
+      sound:
+        "“Hybrid Clock” entered from its strongest section, with around 40 placed sound effects — one per cue — for impacts, snaps, whooshes and the logo hit.",
+      color:
+        "Cream paper, ink black, violet-to-blue gradients and one orange accent reserved for the catalyst. Codevibe's own blue carries the logo.",
+    },
+  },
+  {
+    slug: "halcyon-saas-launch",
+    title: "Halcyon SaaS Launch Film",
+    subtitle: "Designed to move business forward.",
+    context: "Spec launch film for Halcyon, a concept analytics SaaS",
+    date: "2026-11-06",
+    categories: ["SaaS & Product Videos", "Motion Graphics Design"],
+    format: "4:3",
+    duration: 30,
+    summary:
+      "A 30-second SaaS product launch film for Halcyon, a concept analytics dashboard: animated product UI, feature callouts and a premium dark look in 4:3.",
+    role: ["Concept & script", "UI design", "UI animation", "Motion design", "Sound design"],
+    tools: [],
+    credits: ["Halcyon and its interface are original concept designs", "Music: royalty-free licensed track"],
+    media: media("halcyon-saas-launch", "The Halcyon dashboard surrounded by floating cards for live visitors, a 94 health score and a completed workflow", [
+      "The Halcyon overview dashboard with revenue, active users, conversion and a daily revenue chart",
+      "A cursor hovering the revenue chart to reveal a $106.4K tooltip",
+      "Busywork, automated. beside a weekly revenue sync workflow ticking through its steps",
+      "The end line DESIGNED TO MOVE BUSINESS FORWARD. above the Halcyon logo",
+    ]),
+    story: {
+      overview:
+        "A launch film for a SaaS analytics product: show what it does, prove it with the interface, and end on a line people remember — all in 30 seconds.",
+      challenge:
+        "Dashboards are dense and static. The film had to make one feel alive and easy to understand at a glance, without a voiceover.",
+      concept:
+        "A dark, premium product world. A glass panel opens into the product, the dashboard comes to life, and three features — the overview, automated workflows and performance insights — each get their own beat before everything comes together.",
+      edit:
+        "Hook, product reveal, three feature chapters with a progress indicator, a hero composition and the end card. Each chapter is a short line of copy plus the UI that proves it.",
+      motion:
+        "Numbers count up, the revenue chart draws on and a cursor scrubs it for a live tooltip. Workflow steps tick off one by one, the health score ring fills, and the final shot floats the dashboard in 3D with live cards orbiting around it.",
+      sound:
+        "A music bed edited to the chapters, with interface sounds on counts, clicks and confirmations.",
+      color:
+        "Near-black navy with soft blue light, glass panels and a single indigo-to-violet gradient for the key words and the logo.",
+    },
+  },
+  {
     slug: "quietest-person-wins",
     title: "Why the Quietest Person Wins",
     subtitle: "A mixed-media video essay.",
