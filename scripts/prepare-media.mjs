@@ -50,6 +50,13 @@ const jobs = {
     stills: [4.5, 10.5, 25.5, 38.5],
     preview: [11, 6],
   },
+  "codevibe-brief-to-live": {
+    file: "C:/Users/never/Documents/codevibe-reel/Codevibe-Reel-9x16.mp4",
+    vertical: true,
+    poster: 10.6,
+    stills: [1.5, 14.5, 18.2, 21],
+    preview: [9, 6],
+  },
   "codevibe-chaos-to-clarity": {
     file: "G:/motion graphics/CodeVibe - Chaos to Clarity - 9x16 (1080x1920).mp4",
     vertical: true,

@@ -231,6 +231,48 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "codevibe-brief-to-live",
+    title: "From Brief to Live",
+    subtitle: "Code that moves business forward.",
+    brand: "Codevibe",
+    context: "Process reel for Codevibe",
+    date: "2026-11-22",
+    categories: ["Motion Graphics Design", "SaaS & Product Videos", "Social Media Videos"],
+    format: "9:16",
+    duration: 22,
+    summary:
+      "A 22-second vertical reel for Codevibe that answers a client's first question — “How long will it take?” — by showing a travel-booking app go from brief to live, screen by screen.",
+    role: ["Concept & script", "UI design", "UI animation", "Motion design", "Original soundtrack"],
+    tools: ["After Effects"],
+    credits: [
+      "Soundtrack: original, synthesised for this reel (120 BPM)",
+      "Type: Space Grotesk, Inter, JetBrains Mono",
+      "Logo: Codevibe's official mark, rebuilt from its exact vector geometry",
+    ],
+    media: media("codevibe-brief-to-live", "A phone showing a Bali booking calendar under a teal Build label, with feature tags floating around it", [
+      "A client message bubble asking: We need an app. How long will it take?",
+      "One idea. Every screen. — the same travel brand on a laptop, a phone and a tablet",
+      "You’re live. above a deploy-to-production panel at 100 percent: tests passed, build complete, deployed",
+      "The Codevibe logo with Code that Moves Business Forward and a Start your project button",
+    ]),
+    story: {
+      overview:
+        "A short process reel for Codevibe, a software studio. Instead of listing services, it answers the question every client asks first — how long will it take? — by showing one app being made, from the brief to launch day.",
+      challenge:
+        "Show an entire product build — scoping, code, design, testing and deployment — in 22 seconds of vertical video, clearly enough to follow on mute.",
+      concept:
+        "Tell it as one project. A client's message turns into a brief (“A booking app for my travel business”), the code starts, and the app assembles itself through four steps — Design, Build, Test, Ship — before it goes live on every screen.",
+      edit:
+        "A chat-style hook, the brief, a four-step build where the phone swipes between the home, booking, payment and admin screens, a multi-device moment, the deploy and the brand end card — all on a 120 BPM grid.",
+      motion:
+        "Every interface element is drawn first as a thin wireframe and then floods into the real UI. The calendar range snaps on, payment fields type themselves, admin numbers count up and bars spring into place. Feature tags orbit the phone, the deploy bar runs to 100 percent, and the Codevibe mark is rebuilt stroke by stroke from its official geometry. Built natively in After Effects from a single script, with every curve baked per frame.",
+      sound:
+        "An original 120 BPM soundtrack synthesised in code — kick, bass, pads and hats — with UI clicks, ticks and blips placed on every tap, keystroke and confirmation.",
+      color:
+        "Codevibe navy and deep teal for the opening and the end card, a clean off-white workspace for the build, and the brand's blue and teal reserved for actions and key words.",
+    },
+  },
+  {
     slug: "codevibe-chaos-to-clarity",
     title: "Chaos to Clarity",
     subtitle: "Less complexity. More possibilities.",
