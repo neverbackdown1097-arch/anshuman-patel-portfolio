@@ -231,6 +231,50 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "codevibe-your-idea-built",
+    title: "Your Idea. Built.",
+    subtitle: "Real products. Real reviews. Thirty seconds.",
+    brand: "Codevibe",
+    context: "Showcase reel for Codevibe",
+    date: "2026-11-23",
+    categories: ["Motion Graphics Design", "SaaS & Product Videos", "Social Media Videos", "3D Animation"],
+    format: "9:16",
+    duration: 30,
+    summary:
+      "A 30-second vertical showcase reel for Codevibe: five live client products spin through a 3D laptop-and-phone rig, followed by real Google reviews, the studio's numbers and a call to action.",
+    role: ["Concept & script", "Motion design", "3D device animation", "UI animation", "Original soundtrack"],
+    tools: ["After Effects"],
+    credits: [
+      "Soundtrack: original, synthesised for this reel (118 BPM)",
+      "Screens: Codevibe's live client products — Utazzo Holidays, Fix Departures, TOALT, reelrr and TrueFareTrip",
+      "Reviews: quoted from Codevibe's Google reviews",
+      "Type: Space Grotesk, Inter, JetBrains Mono",
+      "Logo: Codevibe's official mark, rebuilt from its exact vector geometry",
+    ],
+    media: media("codevibe-your-idea-built", "A 3D laptop and phone showing the Utazzo Holidays site, with a label card reading Travel platform rebuild and 100K+ travellers served", [
+      "Your idea. Built. — bold navy type with Built. inside a glossy blue pill",
+      "The TOALT website on a laptop and phone, labelled Website + CRM, with glossy app icons orbiting",
+      "What our clients say — three five-star Google review cards from the founders of reelrr, TOALT and Utazzo Holidays",
+      "The Codevibe logo on navy with Code that Moves Business Forward and a Book a free call button being clicked",
+    ]),
+    story: {
+      overview:
+        "A short showcase reel for Codevibe, a software studio. Its job is simple: prove the work. In 30 seconds it shows five products the studio actually shipped, what their founders said about it, and how to get in touch.",
+      challenge:
+        "Fit a portfolio, social proof and a call to action into one vertical reel that reads on mute — without it turning into a slideshow of screenshots.",
+      concept:
+        "Open with the promise — “Your idea. Built.” — then keep the products in one continuous 3D scene. A laptop and a phone hold the stage while each client's site takes its turn, so the reel feels like one move rather than five cuts. Reviews and numbers follow as proof, and the end card turns it into an action.",
+      edit:
+        "Six beats on a 118 BPM grid: the hook, the logo build, Our Work (five products, about two seconds each), Google reviews, numbers and the end card. Every scene change lands on a downbeat.",
+      motion:
+        "The hook's words rise in one by one and “Built.” fills a pill that grows from a circle, with a gloss band sweeping across it. In the work scene the phone makes a full turn at each project boundary and its screen switches while it is edge-on, under a slow 3D camera with depth of field, orbiting glossy icon tiles and label cards. Review cards stack upward in 3D, counters and bars spring up, and a cursor clicks “Book a free call” with a ripple. Built natively in After Effects from a single script, with every curve baked per frame.",
+      sound:
+        "An original 118 BPM soundtrack synthesised in code — kick, claps, bass, pads and hats — with a riser into the logo, a whoosh on each phone spin, a soft tick per review card and a click on the final button.",
+      color:
+        "A bright off-white stage with drifting blue and teal light, thin glowing arcs in the Codevibe palette, and a navy end card so the call to action lands with contrast.",
+    },
+  },
+  {
     slug: "codevibe-brief-to-live",
     title: "From Brief to Live",
     subtitle: "Code that moves business forward.",

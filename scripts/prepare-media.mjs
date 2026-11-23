@@ -50,6 +50,14 @@ const jobs = {
     stills: [4.5, 10.5, 25.5, 38.5],
     preview: [11, 6],
   },
+  "codevibe-your-idea-built": {
+    file: "C:/Users/never/Documents/codevibe-reel2/Codevibe-Reel-30s-9x16.mp4",
+    vertical: true,
+    fps: 60,
+    poster: 6.6,
+    stills: [2.2, 11, 23, 28.6],
+    preview: [5.2, 6],
+  },
   "codevibe-brief-to-live": {
     file: "C:/Users/never/Documents/codevibe-reel/Codevibe-Reel-9x16.mp4",
     vertical: true,
