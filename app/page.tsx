@@ -13,6 +13,7 @@ import { JsonLd } from "@/components/json-ld";
 import { ProductFeature } from "@/components/product-feature";
 import { products } from "@/content/products";
 import { ThreeDSection } from "@/components/three-d-section";
+import { GraphicDesignSection } from "@/components/graphic-design-section";
 import { publishedProjects } from "@/content/projects";
 
 export default function Home() {
@@ -49,6 +50,7 @@ export default function Home() {
       <SkillsMarquee />
       <WorkSection />
       <ThreeDSection projects={publishedProjects.filter((p) => p.categories.includes("3D Animation"))} />
+      <GraphicDesignSection projects={publishedProjects.filter((p) => p.kind === "design")} />
       {products.map((p) => (
         <ProductFeature key={p.slug} p={p} />
       ))}

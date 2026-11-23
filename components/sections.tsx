@@ -85,7 +85,7 @@ export function WorkSection() {
         </div>
         <Reveal className="lg:col-span-4 lg:pb-3" delay={0.15}>
           <p className="max-w-sm text-bone/75">
-            Brand films, kinetic typography, motion graphics and social edits — each with a short case study on how it was
+            Brand films, kinetic typography, motion graphics, social edits and graphic design — each with a short case study on how it was
             made.
           </p>
           <Link href="/work" className="label link-underline mt-5 inline-block text-bone">
@@ -167,48 +167,30 @@ export function ServicesSection() {
             <CurrencyToggle />
           </Reveal>
 
-          <ol className="mt-8 border-t border-line md:mt-10">
-            {site.services.map((s, i) => (
-              <li key={s.id} className="border-b border-line">
-                <Reveal
-                  className="group grid gap-4 py-9 md:grid-cols-[4rem_1fr] md:gap-x-6 lg:grid-cols-12 lg:gap-8 lg:py-12"
-                  y={20}
-                >
-                  <span className="label pt-2 text-signal lg:col-span-1 lg:pt-3">{String(i + 1).padStart(2, "0")} —</span>
-                  <div className="md:col-start-2 lg:contents">
-                    <div className="lg:col-span-5">
-                      <h3 className="display text-[clamp(2.1rem,8vw,3.75rem)] text-bone transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)] lg:text-[clamp(2rem,3.6vw,3.75rem)] lg:group-hover:translate-x-3">
-                        {s.title}
-                      </h3>
-                      <p className="label mt-3 text-dim">{s.scope}</p>
-                    </div>
-                    <div className="mt-4 lg:col-span-4 lg:mt-1">
-                      <p className="max-w-md text-bone/75">{s.body}</p>
-                      <ul className="mt-4 flex flex-wrap gap-2" aria-label={`Included in ${s.title}`}>
-                        {s.includes.map((x) => (
-                          <li key={x} className="label rounded-full border border-line px-3 py-1.5 text-bone/70">
-                            {x}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="mt-6 flex items-end justify-between gap-6 lg:col-span-2 lg:mt-1 lg:flex-col lg:items-end lg:justify-start lg:text-right">
-                      <p>
-                        <span className="label block text-dim">From</span>
-                        <span className="display mt-1 block text-[2.5rem] leading-none text-bone">
-                          <Money usd={s.price} />
-                        </span>
-                        <span className="label mt-2 block text-dim">{s.unit}</span>
-                      </p>
-                      <span className="lg:mt-6">
-                        <InquireButton type={s.inquiryType} service={s.title} />
-                      </span>
-                    </div>
-                  </div>
-                </Reveal>
-              </li>
-            ))}
-          </ol>
+          <h3 className="label mt-12 flex items-center gap-4 text-dim md:mt-14">
+            <span className="text-signal">A</span> Video &amp; motion
+          </h3>
+          <div className="mt-5">
+            <ServiceList items={site.services} />
+          </div>
+
+          {/* Graphic design */}
+          <div id="design-rates" className="scroll-mt-[calc(var(--nav-h)+1rem)] pt-16 md:pt-24">
+            <div className="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-8">
+              <h3 className="label flex items-center gap-4 text-dim lg:col-span-8">
+                <span className="text-signal">B</span> Graphic design · Photoshop
+              </h3>
+              <Reveal className="lg:col-span-4" delay={0.1}>
+                <p className="max-w-sm text-bone/75">
+                  Posters, social creatives, web heroes and retouching — designed with the same eye for story and
+                  composition as the films.
+                </p>
+              </Reveal>
+            </div>
+            <div className="mt-8">
+              <ServiceList items={site.designServices} start={site.services.length} />
+            </div>
+          </div>
 
           {/* Monthly plans */}
           <div id="pricing" className="scroll-mt-[calc(var(--nav-h)+1rem)] pt-20 md:pt-28 lg:pt-36">
@@ -319,6 +301,56 @@ export function ServicesSection() {
         </div>
       </CurrencyProvider>
     </section>
+  );
+}
+
+type ServiceItem = (typeof site.services)[number] | (typeof site.designServices)[number];
+
+/** One group of services (video or graphic design), numbered on from `start`. */
+function ServiceList({ items, start = 0 }: { items: readonly ServiceItem[]; start?: number }) {
+  return (
+    <ol className="border-t border-line">
+      {items.map((s, i) => (
+        <li key={s.id} className="border-b border-line">
+          <Reveal
+            className="group grid gap-4 py-9 md:grid-cols-[4rem_1fr] md:gap-x-6 lg:grid-cols-12 lg:gap-8 lg:py-12"
+            y={20}
+          >
+            <span className="label pt-2 text-signal lg:col-span-1 lg:pt-3">{String(start + i + 1).padStart(2, "0")} —</span>
+            <div className="md:col-start-2 lg:contents">
+              <div className="lg:col-span-5">
+                <h3 className="display text-[clamp(2.1rem,8vw,3.75rem)] text-bone transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)] lg:text-[clamp(2rem,3.6vw,3.75rem)] lg:group-hover:translate-x-3">
+                  {s.title}
+                </h3>
+                <p className="label mt-3 text-dim">{s.scope}</p>
+              </div>
+              <div className="mt-4 lg:col-span-4 lg:mt-1">
+                <p className="max-w-md text-bone/75">{s.body}</p>
+                <ul className="mt-4 flex flex-wrap gap-2" aria-label={`Included in ${s.title}`}>
+                  {s.includes.map((x) => (
+                    <li key={x} className="label rounded-full border border-line px-3 py-1.5 text-bone/70">
+                      {x}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="mt-6 flex items-end justify-between gap-6 lg:col-span-2 lg:mt-1 lg:flex-col lg:items-end lg:justify-start lg:text-right">
+                <p>
+                  <span className="label block text-dim">From</span>
+                  <span className="display mt-1 block text-[2.5rem] leading-none text-bone">
+                    <Money usd={s.price} />
+                  </span>
+                  <span className="label mt-2 block text-dim">{s.unit}</span>
+                </p>
+                <span className="lg:mt-6">
+                  <InquireButton type={s.inquiryType} service={s.title} />
+                </span>
+              </div>
+            </div>
+          </Reveal>
+        </li>
+      ))}
+    </ol>
   );
 }
 

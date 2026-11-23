@@ -69,6 +69,7 @@ export const site = {
       "Storytelling",
       "Sound Design",
       "Color Grading",
+      "Graphic Design",
     ],
     /** Add a real portrait later, e.g. { src: "/media/about/portrait.jpg", alt: "Anshuman Patel at his edit desk" } */
     portrait: null as null | { src: string; alt: string },
@@ -131,6 +132,53 @@ export const site = {
     },
   ],
 
+  /**
+   * Graphic design services (Photoshop), shown under their own heading in
+   * Services & rates. Same shape as `services`; prices are starting prices in USD.
+   */
+  designServices: [
+    {
+      id: "poster",
+      inquiryType: "Poster / key visual design",
+      title: "Posters & Key Visuals",
+      scope: "One design · print or digital",
+      body: "Campaign posters and hero visuals with photo compositing, retouching and editorial typography, ready for print or screen.",
+      includes: ["Concept & layout", "Compositing & retouching", "Typography", "Print-ready PDF + web exports", "2 revision rounds"],
+      price: 80,
+      unit: "per design",
+    },
+    {
+      id: "social-design",
+      inquiryType: "Social media creatives",
+      title: "Social Media Creatives",
+      scope: "Pack of 5 posts · feed + story sizes",
+      body: "A consistent set of posts, carousels or ad creatives in your brand's look, sized for every placement.",
+      includes: ["5 designs", "1:1, 4:5 + 9:16 sizes", "Brand-matched type & colour", "Editable layouts on request", "2 revision rounds"],
+      price: 150,
+      unit: "per pack",
+    },
+    {
+      id: "web-ui",
+      inquiryType: "Web & UI design",
+      title: "Web & UI Hero Design",
+      scope: "Landing-page hero · desktop + mobile",
+      body: "Above-the-fold website designs that work as a campaign image and as a real interface, handed off ready to build.",
+      includes: ["Desktop + mobile layouts", "UI components & states", "Image art direction", "Layered PSD + exports", "2 revision rounds"],
+      price: 250,
+      unit: "per screen set",
+    },
+    {
+      id: "retouch",
+      inquiryType: "Photo retouching & compositing",
+      title: "Retouching & Compositing",
+      scope: "Product, portrait & campaign images",
+      body: "Clean cut-outs, skin and product retouching, colour grading and composites that look photographed, not pasted.",
+      includes: ["Masking & cut-outs", "Skin / product retouch", "Colour grade", "High-res export"],
+      price: 20,
+      unit: "per image",
+    },
+  ],
+
   pricing: {
     /** USD → INR rate used by the currency switch. INR prices are rounded. Update when the rate moves. */
     inrRate: 88,
@@ -188,6 +236,10 @@ export const site = {
       "Motion graphics / kinetic type",
       "Brand or product film",
       "3D product animation",
+      "Poster / key visual design",
+      "Social media creatives",
+      "Web & UI design",
+      "Photo retouching & compositing",
       "Monthly plan",
       "Cinematic video editing",
       "Travel film",
@@ -221,7 +273,7 @@ export const site = {
   },
 
   footer: {
-    roles: "Video editor · Motion designer",
+    roles: "Video editor · Motion designer · Graphic designer",
     tagline: "Let's create something that matters.",
   },
 
@@ -237,6 +289,9 @@ export const site = {
       "cinematic video editing",
       "brand video editor",
       "video editing services",
+      "graphic designer",
+      "poster design",
+      "Photoshop designer",
     ],
     locale: "en_IN",
   },
@@ -246,6 +301,7 @@ export const site = {
 export const navItems = [
   { label: "Work", href: "/#work" },
   { label: "3D", href: "/#three-d" },
+  { label: "Design", href: "/#graphic-design" },
   { label: "Shop", href: "/#shop" },
   { label: "About", href: "/#about" },
   { label: "Services", href: "/#services" },

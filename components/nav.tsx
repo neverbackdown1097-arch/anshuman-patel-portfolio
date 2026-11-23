@@ -94,8 +94,8 @@ export function Nav() {
         </Link>
 
         <div className="hidden items-center gap-10 md:flex">
-          <Availability className="hidden lg:flex" />
-          <ul className="flex items-center gap-8">
+          <Availability className="hidden xl:flex" />
+          <ul className="flex items-center gap-5 lg:gap-8">
             {navItems.map((item) => (
               <li key={item.href}>
                 <Link href={item.href} className="label link-underline py-1 text-bone/85 hover:text-bone">
