@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import type { Project } from "@/content/projects";
+import { isVertical } from "@/lib/format";
 import { FilterBar, filterProjects, type Filter } from "./filter-bar";
 import { ProjectTile } from "./project-tile";
 
@@ -17,7 +18,7 @@ const NARROW = "(min-width: 1024px) 34vw, (min-width: 768px) 48vw, 100vw";
  */
 function layout(items: Project[]) {
   const out: { cls: string; sizes: string }[] = [];
-  const tall = (p: Project) => p.format === "9:16";
+  const tall = (p: Project) => isVertical(p.format);
   const sizes = (cls: string) => (/span-[78]/.test(cls) ? WIDE : NARROW);
   for (let i = 0; i < items.length; i += 2) {
     const a = items[i];

@@ -18,7 +18,7 @@ import { ClipReveal, Eyebrow, LineReveal, Reveal } from "@/components/reveal";
 import { JsonLd } from "@/components/json-ld";
 import { EditRoom } from "@/components/edit-room";
 import { ScrollSequence } from "@/components/scroll-sequence";
-import { aspectClass, frameSize } from "@/lib/format";
+import { aspectClass, frameSize, isVertical } from "@/lib/format";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -69,10 +69,16 @@ export default async function CaseStudy({ params }: PageProps<"/work/[slug]">) {
   const index = projects.indexOf(p);
   const next = nextProject(p.slug);
   const isDesign = p.kind === "design";
-  const vertical = p.format === "9:16";
+  const vertical = isVertical(p.format);
   const sections = storySections
     .filter((s) => p.story[s.key])
-    .map((s) => ({ ...s, label: (isDesign && designLabels[s.key]) || s.label }));
+    .map((s) => ({
+      ...s,
+      label:
+        isDesign && s.key === "motion" && !p.categories.includes("UI & Web Design")
+          ? "Typography"
+          : (isDesign && designLabels[s.key]) || s.label,
+    }));
   const stills = p.media.stills;
   // Stills are woven between the story sections so the page stays visual-first.
   const breaks: Record<number, Still[]> = vertical
@@ -177,14 +183,14 @@ export default async function CaseStudy({ params }: PageProps<"/work/[slug]">) {
       {p.media.full && (
         <section aria-label="Final design" className="shell mt-14 md:mt-20">
           <Reveal delay={0.5}>
-            <figure>
+            <figure className={p.media.full.height > p.media.full.width ? "md:mx-auto md:max-w-[46rem]" : ""}>
               <a href={p.media.full.src} target="_blank" rel="noopener" data-cursor="Zoom" className="block overflow-hidden bg-coal">
                 <Image
                   src={p.media.full.src}
                   alt={p.media.full.alt}
                   width={p.media.full.width}
                   height={p.media.full.height}
-                  sizes="(min-width: 1440px) 1360px, 100vw"
+                  sizes={p.media.full.height > p.media.full.width ? "(min-width: 768px) 46rem, 100vw" : "(min-width: 1440px) 1360px, 100vw"}
                   quality={85}
                   priority
                   className="h-auto w-full"
@@ -263,7 +269,7 @@ export default async function CaseStudy({ params }: PageProps<"/work/[slug]">) {
 }
 
 function Stills({ stills, all, format }: { stills: Still[]; all: Still[]; format: Project["format"] }) {
-  const vertical = format === "9:16";
+  const vertical = isVertical(format);
   if (!stills.length) return null;
   const single = stills.length === 1;
   return (

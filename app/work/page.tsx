@@ -24,7 +24,7 @@ export default function WorkPage() {
       />
       <Reveal delay={0.3}>
         <p className="mt-8 max-w-xl text-lg text-bone/75">
-          Brand films, motion graphics, kinetic typography, social edits and UI design by {site.name}. Choose any project to see the
+          Brand films, motion graphics, kinetic typography, social edits, UI and poster design by {site.name}. Choose any project to see the
           work and how it was made.
         </p>
       </Reveal>

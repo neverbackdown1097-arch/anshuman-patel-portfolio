@@ -27,6 +27,7 @@ export const categories = [
   "3D Animation",
   "Video Essays",
   "UI & Web Design",
+  "Poster & Print Design",
 ] as const;
 
 export type Category = (typeof categories)[number];
@@ -242,6 +243,55 @@ export const projects: Project[] = [
         "A 120 bpm track re-mapped to the edit — a pulse for the hook, a breakdown for the principles, a re-entry for the journey and a clean resolve on the logo — plus custom interface sounds for ticks, traces and confirmations.",
       color:
         "Codevibe's own navy, blue and teal. Soft glows and deep navy gradients keep it premium and readable at any size. Mastered in 4K.",
+    },
+  },
+  {
+    slug: "elorina-urban-collection",
+    title: "Elorina — Urban Collection Poster",
+    subtitle: "Say nothing. Wear everything.",
+    context: "Concept campaign poster for Elorina, a fashion label",
+    date: "2026-11-24",
+    categories: ["Poster & Print Design"],
+    kind: "design",
+    format: "4:5",
+    duration: 0,
+    summary:
+      "A campaign poster for the Elorina Urban Collection, Autumn-Winter 2026: a model in a red blazer stepping out of a black frame on raw concrete, set against a quiet column of editorial type. Designed and retouched in Photoshop at print resolution.",
+    role: ["Art direction", "Poster & layout design", "Photo compositing", "Retouching & colour"],
+    tools: ["Photoshop"],
+    credits: [
+      "Model photograph: Adobe Stock #410831670",
+      "Type: Anton, Acumin Pro Extra Condensed, Segoe UI, Arial",
+      "Print size: 2400 × 3000 px at 300 ppi (8 × 10 in)",
+    ],
+    media: design(
+      "elorina-urban-collection",
+      {
+        width: 2400,
+        height: 3000,
+        alt: "The Elorina Urban Collection poster: a woman in a red blazer stepping out of a black frame on grey concrete, beside the line Say nothing. Wear everything. and the ELORINA wordmark",
+      },
+      "The Elorina poster: a woman in a red blazer breaking out of a black frame on grey concrete, with the ELORINA wordmark",
+      [
+        "Exploded view of the poster's four layer groups: concrete ground, black frame with light falloff, the model cut-out and the typography",
+        "Detail: the model's head rising above the top edge of the frame, red lips and hands framing the face",
+        "Detail: the type column, season label, divider and the condensed tagline above the ELORINA wordmark",
+        "Detail: the ELORINA wordmark, the brand description with lime highlights and the blazer spilling past the frame edge",
+      ],
+    ),
+    story: {
+      overview:
+        "A launch poster for N°01, the Autumn-Winter 2026 Urban Collection of Elorina, a concept fashion label. One image has to carry the brand's attitude: confidence that does not need to raise its voice.",
+      challenge:
+        "Make a single studio portrait feel like a campaign, not a stock photo with a logo on it, and give the brand line room to breathe on a portrait print format.",
+      concept:
+        "Say nothing. Wear everything. The model steps out of the frame — her head rises above its top edge and the blazer spills past its side — so the clothes literally refuse to stay inside the picture, while the type stays calm and quiet around her.",
+      edit:
+        "A strict two-column split. The framed portrait holds the left half; the right half is a single column of type hung from one margin: collection label, season line, a hairline divider, the tagline, then the wordmark and description anchored low. Generous empty concrete between them does the talking.",
+      motion:
+        "Anton for the ELORINA wordmark, Acumin Pro Extra Condensed Light for the tagline, widely tracked Arial for the season label and credit, and Segoe UI for the description, with key phrases picked out in the same soft lime as the season label.",
+      color:
+        "A cool concrete-grain ground, a black frame with a white keyline and a 70 percent studio light falloff, and multiply shadows under both the frame and the model so she sits physically in front of it. The red of the blazer and lips is the only saturated colour on the poster.",
     },
   },
   {

@@ -7,7 +7,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
 import { formatLabel, type Project } from "@/content/projects";
 import { useMediaQuery } from "@/lib/use-media-query";
 import { ClipReveal } from "./reveal";
-import { aspectClass } from "@/lib/format";
+import { aspectClass, isVertical } from "@/lib/format";
 
 /**
  * Gallery card. Poster at rest. On hover/focus (mouse) — or, on touch
@@ -24,7 +24,7 @@ export function ProjectTile({ project, index, sizes }: { project: Project; index
   const reduce = useReducedMotion();
   const finePointer = useMediaQuery("(hover: hover) and (pointer: fine)");
   const touch = useMediaQuery("(hover: none)");
-  const vertical = project.format === "9:16";
+  const vertical = isVertical(project.format);
   const hasPreview = Boolean(project.media.preview) && !reduce;
   const previewing = hasPreview && ((finePointer && hovering) || (touch && centred));
 
