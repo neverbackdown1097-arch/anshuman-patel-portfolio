@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring } from "motion/react";
-import { formatDuration, type Project } from "@/content/projects";
+import { formatLabel, type Project } from "@/content/projects";
 import { FilterBar, filterProjects, type Filter } from "./filter-bar";
 
 /**
@@ -68,7 +68,7 @@ export function WorkIndex({ projects }: { projects: Project[] }) {
                 </span>
                 <span className="label text-mute md:col-span-3">{p.categories.slice(0, 2).join(" · ")}</span>
                 <span className="label text-dim md:col-span-2">
-                  {p.format} · {formatDuration(p.duration)}
+                  {formatLabel(p)}
                 </span>
                 <span className="label hidden text-right text-dim md:col-span-1 md:block">{p.date.slice(0, 4)}</span>
               </Link>

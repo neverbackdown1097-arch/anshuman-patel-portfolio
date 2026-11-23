@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { formatDuration, type Project } from "@/content/projects";
+import { formatLabel, type Project } from "@/content/projects";
 import { useMediaQuery } from "@/lib/use-media-query";
 import { ClipReveal } from "./reveal";
 import { aspectClass } from "@/lib/format";
@@ -132,7 +132,7 @@ export function ProjectTile({ project, index, sizes }: { project: Project; index
             </div>
           </div>
           <p className="label shrink-0 pt-1 text-right text-dim">
-            {project.format} · {formatDuration(project.duration)}
+            {formatLabel(project)}
             <span className="block">{project.date.slice(0, 4)}</span>
           </p>
         </div>

@@ -11,7 +11,9 @@ import { LoopVideo } from "./loop-video";
  */
 export function ThreeDSection({ projects }: { projects: Project[] }) {
   if (!projects.length) return null;
-  const lead = projects.find((p) => p.scrollSequence) ?? projects[0];
+  const films = projects.filter((p) => p.media.film);
+  if (!films.length) return null;
+  const lead = films.find((p) => p.scrollSequence) ?? films[0];
   const rest = projects.filter((p) => p !== lead);
   const phases = lead.scrollSequence?.phases ?? [];
 
@@ -44,7 +46,7 @@ export function ThreeDSection({ projects }: { projects: Project[] }) {
           <Link href={`/work/${lead.slug}`} data-cursor="Explore" className="group relative block overflow-hidden">
             <div className="relative aspect-[4/3] bg-[#05080d] sm:aspect-video">
               <LoopVideo
-                src={lead.media.film}
+                src={lead.media.film!}
                 poster={lead.media.poster}
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.03]"
               />

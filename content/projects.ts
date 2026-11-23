@@ -26,6 +26,7 @@ export const categories = [
   "SaaS & Product Videos",
   "3D Animation",
   "Video Essays",
+  "UI & Web Design",
 ] as const;
 
 export type Category = (typeof categories)[number];
@@ -111,8 +112,13 @@ export type Project = {
   tools: string[];
   /** Third-party material used (music, stock). Shown on the case study. */
   credits: string[];
+  /** "design" = a still design (no film): shown full size instead of a video player. */
+  kind?: "design";
   media: {
-    film: string;
+    /** Absent on design projects. */
+    film?: string;
+    /** Design projects: the full-resolution artwork shown in place of the film. */
+    full?: { src: string; width: number; height: number; alt: string };
     preview?: string;
     poster: string;
     posterAlt: string;
@@ -149,6 +155,14 @@ export type ScrollSequenceData = {
 const media = (slug: string, posterAlt: string, stills: string[]) => ({
   film: `/media/${slug}/film.mp4`,
   preview: `/media/${slug}/preview.mp4`,
+  poster: `/media/${slug}/poster.jpg`,
+  posterAlt,
+  stills: stills.map((alt, i) => ({ src: `/media/${slug}/still-${i + 1}.jpg`, alt })),
+});
+
+/** Media for a still design: full artwork + poster + detail stills, no film. */
+const design = (slug: string, full: { width: number; height: number; alt: string }, posterAlt: string, stills: string[]) => ({
+  full: { src: `/media/${slug}/full.png`, ...full },
   poster: `/media/${slug}/poster.jpg`,
   posterAlt,
   stills: stills.map((alt, i) => ({ src: `/media/${slug}/still-${i + 1}.jpg`, alt })),
@@ -228,6 +242,56 @@ export const projects: Project[] = [
         "A 120 bpm track re-mapped to the edit — a pulse for the hook, a breakdown for the principles, a re-entry for the journey and a clean resolve on the logo — plus custom interface sounds for ticks, traces and confirmations.",
       color:
         "Codevibe's own navy, blue and teal. Soft glows and deep navy gradients keep it premium and readable at any size. Mastered in 4K.",
+    },
+  },
+  {
+    slug: "kaelo-audio-hero",
+    title: "KAELO Audio — Website Hero",
+    subtitle: "Studio-grade sound. Built to disappear around you.",
+    context: "Concept web design for KAELO, a fictional premium audio brand",
+    date: "2026-11-23",
+    categories: ["UI & Web Design"],
+    kind: "design",
+    format: "4:3",
+    duration: 0,
+    summary:
+      "A website hero for KAELO, a concept premium headphone brand: chrome typography woven around a retouched portrait, frosted-glass UI cards and a champagne-gold accent system, designed in Photoshop for desktop and mobile.",
+    role: ["Art direction", "Web & UI design", "Photo compositing", "Retouching & colour grade"],
+    tools: ["Photoshop"],
+    credits: [
+      "KAELO is a fictional brand created for this concept",
+      "Type: Gotham, Inter",
+    ],
+    media: design(
+      "kaelo-audio-hero",
+      {
+        width: 1600,
+        height: 1200,
+        alt: "The KAELO website hero: SOUND in giant chrome letters with a woman in cream headphones between them, a Now Playing glass card, a noise-cancelling toggle card and gold Pre-order Now button on deep cobalt",
+      },
+      "The KAELO website hero on a soft cool backdrop: chrome SOUND lettering around a woman wearing cream KAELO headphones",
+      [
+        "The KAELO hero shown on desktop and mobile side by side, adapted for each screen",
+        "Detail: the chrome SOUND letters passing behind and in front of the model",
+        "Detail: the frosted-glass Now Playing card and the brushed-gold K monogram on the headphones",
+        "Detail: the tagline, the Active Noise Cancelling card, the Pre-order Now and Listen to the sound buttons and feature chips",
+      ],
+    ),
+    story: {
+      overview:
+        "A landing-page hero for KAELO, a concept premium headphone brand. One screen has to sell the product's promise — studio-grade sound that disappears around you — before the visitor scrolls.",
+      challenge:
+        "Make a product hero feel like a campaign image and still work as a real interface: clear navigation, a readable headline, two calls to action and the product's key features, all above the fold, on desktop and on mobile.",
+      concept:
+        "Sound you can see. The headline SOUND is set huge in chrome and the model sits inside it, so the word wraps around her the way the headphones do. Sound-wave rings radiate from the ear cup, and the interface floats on the image as frosted glass, as if it were part of the listening experience.",
+      edit:
+        "A two-column hero: brand, label, headline, tagline, calls to action and feature chips on the left; the portrait and live UI cards on the right. The Now Playing and Noise Cancelling cards bridge the two halves and lead the eye from the face to the buttons.",
+      motion:
+        "SOUND is set in Gotham Bold with a chrome sheen and a cool edge tint, with the model cut out using a Select Subject mask so the letters pass both behind and in front of her. The UI is set in Inter: glass cards built from a 30 px backdrop blur, an 8 percent white fill, a cobalt tint, an inner highlight and a one-pixel border, plus a gold progress bar, a play button and a live waveform.",
+      sound:
+        "The mobile version is recomposed rather than shrunk: the headline sits above the face, the noise-cancelling toggle becomes a single pill and the buttons go full width for thumbs — two separate PSDs from the same system.",
+      color:
+        "Deep cobalt fading to near-black, with a champagne bloom behind the head. The portrait was graded to match: a cobalt fill on the shadow side, a champagne rim light on hair, jaw and headphones, deep blacks and a subtle teal-orange split. Gold is reserved for actions — the pre-order button, the toggle, the progress bar and the brushed-gold K monogram on the ear cup.",
     },
   },
   {
@@ -1136,6 +1200,11 @@ export function getProject(slug: string) {
 export function nextProject(slug: string) {
   const i = projects.findIndex((p) => p.slug === slug);
   return projects[(i + 1) % projects.length];
+}
+
+/** Card/list label: "16:9 · 1:08" for films, "4:3 · Design" for still designs. */
+export function formatLabel(p: Pick<Project, "format" | "duration" | "kind">) {
+  return `${p.format} · ${p.kind === "design" ? "Design" : formatDuration(p.duration)}`;
 }
 
 export function formatDuration(seconds: number) {

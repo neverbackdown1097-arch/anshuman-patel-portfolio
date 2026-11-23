@@ -21,14 +21,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly" as const,
       priority: 0.8,
       images: [`${site.url}${p.media.poster}`],
-      videos: [
-        {
-          title: p.seoTitle ?? p.title,
-          thumbnail_loc: `${site.url}${p.media.poster}`,
-          description: p.summary,
-          content_loc: `${site.url}${p.media.film}`,
-        },
-      ],
+      videos: p.media.film
+        ? [
+            {
+              title: p.seoTitle ?? p.title,
+              thumbnail_loc: `${site.url}${p.media.poster}`,
+              description: p.summary,
+              content_loc: `${site.url}${p.media.film}`,
+            },
+          ]
+        : undefined,
     })),
   ];
 }

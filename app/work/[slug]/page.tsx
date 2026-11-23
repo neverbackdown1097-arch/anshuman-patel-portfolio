@@ -24,6 +24,14 @@ export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
 }
 
+/** Story headings for still designs, where film terms (editing, sound, grading) don't apply. */
+const designLabels: Partial<Record<keyof Project["story"], string>> = {
+  edit: "Layout & composition",
+  motion: "Typography & interface",
+  sound: "Responsive design",
+  color: "Colour & retouching",
+};
+
 const abs = (path: string) => (path.startsWith("http") ? path : `${site.url}${path}`);
 
 export async function generateMetadata({ params }: PageProps<"/work/[slug]">): Promise<Metadata> {
@@ -37,11 +45,17 @@ export async function generateMetadata({ params }: PageProps<"/work/[slug]">): P
     alternates: { canonical: `/work/${p.slug}` },
     robots: p.placeholder ? { index: false } : undefined,
     openGraph: {
-      type: "video.other",
+      type: p.kind === "design" ? "article" : "video.other",
       url: `/work/${p.slug}`,
       title: p.seoTitle ?? `${p.title} | ${site.name}`,
       description: p.summary,
-      images: [{ url: p.media.poster, ...frameSize[p.format], alt: p.media.posterAlt }],
+      images: [
+        {
+          url: p.media.poster,
+          ...(p.media.full ? { width: p.media.full.width, height: p.media.full.height } : frameSize[p.format]),
+          alt: p.media.posterAlt,
+        },
+      ],
     },
     twitter: { card: "summary_large_image", title: p.seoTitle ?? `${p.title} | ${site.name}`, description: p.summary, images: [p.media.poster] },
   };
@@ -54,8 +68,11 @@ export default async function CaseStudy({ params }: PageProps<"/work/[slug]">) {
 
   const index = projects.indexOf(p);
   const next = nextProject(p.slug);
+  const isDesign = p.kind === "design";
   const vertical = p.format === "9:16";
-  const sections = storySections.filter((s) => p.story[s.key]);
+  const sections = storySections
+    .filter((s) => p.story[s.key])
+    .map((s) => ({ ...s, label: (isDesign && designLabels[s.key]) || s.label }));
   const stills = p.media.stills;
   // Stills are woven between the story sections so the page stays visual-first.
   const breaks: Record<number, Still[]> = vertical
@@ -69,7 +86,10 @@ export default async function CaseStudy({ params }: PageProps<"/work/[slug]">) {
   const meta = [
     { k: p.brand ? "Brand" : "Context", v: p.brand ?? p.context },
     { k: "Year", v: p.date.slice(0, 4) },
-    { k: "Format", v: `${p.format} · ${formatDuration(p.duration)}` },
+    {
+      k: "Format",
+      v: p.media.full ? `Still design · ${p.media.full.width} × ${p.media.full.height}` : `${p.format} · ${formatDuration(p.duration)}`,
+    },
     { k: "Discipline", v: p.categories.join(", ") },
   ];
 
@@ -78,17 +98,29 @@ export default async function CaseStudy({ params }: PageProps<"/work/[slug]">) {
       {!p.placeholder && (
         <JsonLd
           data={[
-            {
-              "@context": "https://schema.org",
-              "@type": "VideoObject",
-              name: p.seoTitle ?? p.title,
-              description: p.summary,
-              thumbnailUrl: [abs(p.media.poster)],
-              uploadDate: p.date,
-              duration: isoDuration(p.duration),
-              contentUrl: abs(p.media.film),
-              creator: { "@type": "Person", name: site.name, url: site.url },
-            },
+            p.media.film
+              ? {
+                  "@context": "https://schema.org",
+                  "@type": "VideoObject",
+                  name: p.seoTitle ?? p.title,
+                  description: p.summary,
+                  thumbnailUrl: [abs(p.media.poster)],
+                  uploadDate: p.date,
+                  duration: isoDuration(p.duration),
+                  contentUrl: abs(p.media.film),
+                  creator: { "@type": "Person", name: site.name, url: site.url },
+                }
+              : {
+                  "@context": "https://schema.org",
+                  "@type": "CreativeWork",
+                  name: p.seoTitle ?? p.title,
+                  description: p.summary,
+                  image: abs(p.media.full?.src ?? p.media.poster),
+                  thumbnailUrl: abs(p.media.poster),
+                  dateCreated: p.date,
+                  genre: p.categories[0],
+                  creator: { "@type": "Person", name: site.name, url: site.url },
+                },
             {
               "@context": "https://schema.org",
               "@type": "BreadcrumbList",
@@ -141,7 +173,36 @@ export default async function CaseStudy({ params }: PageProps<"/work/[slug]">) {
         </Reveal>
       </header>
 
+      {/* The design (still projects) */}
+      {p.media.full && (
+        <section aria-label="Final design" className="shell mt-14 md:mt-20">
+          <Reveal delay={0.5}>
+            <figure>
+              <a href={p.media.full.src} target="_blank" rel="noopener" data-cursor="Zoom" className="block overflow-hidden bg-coal">
+                <Image
+                  src={p.media.full.src}
+                  alt={p.media.full.alt}
+                  width={p.media.full.width}
+                  height={p.media.full.height}
+                  sizes="(min-width: 1440px) 1360px, 100vw"
+                  quality={85}
+                  priority
+                  className="h-auto w-full"
+                />
+              </a>
+              <figcaption className="label mt-4 text-center text-dim">
+                Final design · {p.media.full.width} × {p.media.full.height} ·{" "}
+                <a href={p.media.full.src} target="_blank" rel="noopener" className="link-underline hover:text-bone">
+                  Open full size ↗
+                </a>
+              </figcaption>
+            </figure>
+          </Reveal>
+        </section>
+      )}
+
       {/* The film */}
+      {p.media.film && (
       <section aria-label="Final film" className="shell mt-14 md:mt-20">
         <Reveal delay={0.5}>
           <div className={vertical ? "md:mx-auto md:max-w-[42rem]" : ""}>
@@ -162,6 +223,7 @@ export default async function CaseStudy({ params }: PageProps<"/work/[slug]">) {
           </p>
         </Reveal>
       </section>
+      )}
 
       {p.scrollSequence && (
         <div className="mt-24 md:mt-36">
