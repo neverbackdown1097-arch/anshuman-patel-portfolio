@@ -231,6 +231,91 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "connected-travel-crm",
+    title: "Connected Travel CRM",
+    subtitle: "Stop connecting the dots. Build what connects them.",
+    brand: "Codevibe",
+    context: "Case-study reel for Codevibe",
+    date: "2026-11-23",
+    categories: ["SaaS & Product Videos", "Motion Graphics Design", "Social Media Videos"],
+    format: "9:16",
+    duration: 47,
+    summary:
+      "A 47-second vertical case-study reel for Codevibe: how a holiday travel company's CRM was connected to the nine tools its sales team already used, told through animated product UI.",
+    role: ["Script", "UI design", "UI animation", "Motion design", "Sound design"],
+    tools: ["Remotion", "React"],
+    credits: [
+      "Case study: Codevibe's connected travel CRM for a holiday travel company",
+      "Music and sound effects: original, synthesised in code for this reel",
+      "Voiceover: synthetic text-to-speech guide voice",
+      "On-screen customer data is illustrative sample data, labelled as such in the video",
+      "Logo: Codevibe's official mark",
+    ],
+    media: media("connected-travel-crm", "One customer. One connected system. — a CRM customer record linked to WhatsApp, telephony, Gemini, e-signature, payments, lead ads and travel tools", [
+      "CHASE. over an e-signature request pending for six days and an inbox full of follow-ups",
+      "Publish → Deliver. — an itinerary arriving on the customer's WhatsApp and by email",
+      "Every call. More insight. — a call transcribed, translated, summarised and scored on an 11-point review",
+      "Stop connecting the dots. Build what connects them. over a glowing teal line joining points",
+    ]),
+    story: {
+      overview:
+        "A case-study reel for Codevibe, a software studio. A holiday travel company's sales team was juggling nine separate tools for every enquiry; Codevibe connected them all to a single customer record inside its CRM. The reel tells that story in under a minute.",
+      challenge:
+        "Explain an integration project — WhatsApp, cloud telephony, AI call review, e-signature, two payment gateways, lead ads, a travel inventory API and file storage — to non-technical viewers, in vertical video, without showing a real customer's data.",
+      concept:
+        "Problem, then system. The reel opens on the friction — one enquiry, nine tools, a team chasing signatures and payments — then a single line sweeps through the noise and every tool snaps onto one customer record. From there each automation gets its own beat: publish → deliver, every call → more insight, pay → sign.",
+      edit:
+        "Six sections: the hook, the friction, the transformation, the product walkthrough, the value and the brand close. Each automation is shown as cause and effect, with the voiceover landing on the click, the message or the signature it describes.",
+      motion:
+        "Every visual is original UI animated in code — no stock footage. Windows stack and blur behind bold kinetic headlines, connector cards fly into orbit around the CRM record, an itinerary lands in a WhatsApp chat, a call waveform runs through transcribe, translate, summarise and score, and a payment triggers a contract that signs itself. The customer timeline then fills in, step by step, as the proof.",
+      sound:
+        "An original soundtrack and sound effects synthesised in code, with UI clicks, sends and confirmations placed on each action, under a synthetic text-to-speech guide voiceover.",
+      color:
+        "Deep navy with soft grid light so the white product UI pops, and Codevibe's teal reserved for the connected moments — the line, the links and the key words.",
+    },
+  },
+  {
+    slug: "type-is-power",
+    title: "Type Is Power",
+    subtitle: "Think beyond. Create. Disrupt. Make it move.",
+    context: "Personal kinetic typography film",
+    date: "2026-11-23",
+    categories: ["Kinetic Typography", "Motion Graphics Design", "3D Animation"],
+    format: "4:3",
+    duration: 20,
+    summary:
+      "A 20-second kinetic typography film in 4:3: chrome and extruded 3D type that flips, shatters and reforms, cut to a cinematic trailer score — built entirely in code with Three.js and HTML.",
+    role: ["Concept", "Typography", "3D type animation", "Motion design", "Sound design"],
+    tools: ["Three.js", "HyperFrames"],
+    credits: [
+      "Music: “Brain Implant” by VasilYatsevich (Pixabay Content License)",
+      "Sound effects: Universfield, BryanSantosBreton, DRAGON-STUDIO and lucadialessandro (Pixabay)",
+      "Type: Archivo Black, Anton, Dela Gothic One, IBM Plex Mono",
+    ],
+    media: media("type-is-power", "TYPE IS POWER. in chrome 3D letters glowing white to violet on a deep blue-purple gradient", [
+      "THINK BEYOND in chrome type, lit by a burst of light along a violet horizon line",
+      "CREATE in extruded blue-violet 3D letters with a pink light ribbon passing through",
+      "DISRUPT in magenta 3D type breaking into fragments between floating spheres and glass shapes",
+      "MAKE IT MOVE set at an angle in an editorial grid with type-metric annotations, in a violet-to-blue gradient",
+    ]),
+    story: {
+      overview:
+        "A personal type study: five words, twenty seconds, and the idea that letters alone can carry a whole film. No footage, no logo — just type, light and rhythm.",
+      challenge:
+        "Make typography feel physical — heavy, reflective and three-dimensional — and still keep every word readable at speed, in a 4:3 frame.",
+      concept:
+        "A short manifesto that escalates. THINK BEYOND appears out of a line of light, CREATE builds itself, DISRUPT breaks apart, MAKE IT MOVE goes flat and editorial, and everything converges into the closing line: TYPE IS POWER.",
+      edit:
+        "Locked to a 100 BPM trailer cue with the first downbeat at 1.9 seconds. Five sections, each built around one hit — the chrome impact, the letter flips, the shatter and reform, the punch-in and the final light sweep before the fade to black.",
+      motion:
+        "A real-time Three.js stage renders chrome and extruded letters, light ribbons, spheres, glass and fragments. Every frame is a pure function of time, sampled 10 to 26 times per frame for true motion blur and lens depth of field, then finished with bloom, subtle chromatic aberration, grain and an ACES grade. The MAKE IT MOVE section switches to a flat editorial layout with Anton type-metric annotations.",
+      sound:
+        "“Brain Implant”, entered from its strongest section, with about twenty placed effects — booms, a braam, risers, swooshes and impacts — each tied to a specific hit, mixed to −14 LUFS.",
+      color:
+        "Deep blue and violet throughout, magenta and coral for DISRUPT, a hot orange-to-blue gradient for MAKE IT MOVE, and chrome white for the final line.",
+    },
+  },
+  {
     slug: "codevibe-your-idea-built",
     title: "Your Idea. Built.",
     subtitle: "Real products. Real reviews. Thirty seconds.",

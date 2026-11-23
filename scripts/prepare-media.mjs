@@ -50,6 +50,22 @@ const jobs = {
     stills: [4.5, 10.5, 25.5, 38.5],
     preview: [11, 6],
   },
+  "connected-travel-crm": {
+    file: "G:/motion graphics/codevibe-crm-reel/out/codevibe-connected-travel-crm.mp4",
+    vertical: true,
+    poster: 18.6,
+    stills: [9.6, 21.8, 26.5, 43],
+    preview: [15, 6],
+  },
+  "type-is-power": {
+    file: "G:/motion graphics/TYPE IS POWER - Kinetic Typography Film - 4x3 (1440x1080).mp4",
+    format: "4:3",
+    scale: "1440:1080",
+    fps: 24,
+    poster: 17.6,
+    stills: [2.4, 6.2, 10.3, 14.6],
+    preview: [3.2, 6],
+  },
   "codevibe-your-idea-built": {
     file: "C:/Users/never/Documents/codevibe-reel2/Codevibe-Reel-30s-9x16.mp4",
     vertical: true,
