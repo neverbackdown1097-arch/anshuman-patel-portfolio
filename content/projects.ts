@@ -253,6 +253,55 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "velmora-ember-noir",
+    title: "VELMORA — Ember Noir",
+    subtitle: "Where darkness becomes desire.",
+    context: "Concept fragrance key visual for VELMORA, a fictional luxury perfume house",
+    date: "2026-11-28",
+    categories: ["Poster & Print Design"],
+    kind: "design",
+    format: "4:5",
+    duration: 0,
+    summary:
+      "A launch key visual for Ember Noir, an extrait de parfum from the concept house VELMORA: a crimson bottle on a dark volcanic plinth, framed by red berries and petals and reflected in black water, under a quiet gold serif lockup. Designed as a 4:5 Instagram feed post.",
+    role: ["Art direction", "Product key visual", "Typography", "Colour grading"],
+    tools: ["Photoshop"],
+    credits: [
+      "VELMORA and Ember Noir are a fictional brand and product created for this concept",
+      "Format: 1080 × 1350 (4:5 Instagram feed post)",
+    ],
+    media: design(
+      "velmora-ember-noir",
+      {
+        width: 1080,
+        height: 1350,
+        alt: "VELMORA Ember Noir: a square crimson perfume bottle with a dark cap on a rough black stone, red berries and petals either side, a red glow behind it, reflected in black water above the gold words EMBER NOIR, Extrait de Parfum, Where darkness becomes desire",
+      },
+      "VELMORA Ember Noir: a crimson perfume bottle on black stone in a red glow, with a gold serif lockup",
+      [
+        "The Ember Noir post as it appears in a phone feed, at 1080 × 1350",
+        "Detail: the crimson glass bottle, its framed label and the dark cap against the red halo",
+        "Detail: red berries on a bare branch and the rough volcanic plinth, catching the red rim light",
+        "Detail: the plinth's reflection in black water and the gold lockup — Ember Noir, Extrait de Parfum, Where darkness becomes desire",
+      ],
+      "jpg",
+    ),
+    story: {
+      overview:
+        "A launch key visual for Ember Noir, the extrait de parfum of VELMORA, a luxury fragrance house invented for this concept. One image has to set the mood of the scent and stop the scroll as a single 4:5 Instagram post.",
+      challenge:
+        "Fragrance cannot be shown, only suggested. The image had to say warm, dark and seductive without a model or a word of copy beyond the name, keep the bottle the clear hero at phone size, and still read as premium rather than loud in a frame that is almost entirely red and black.",
+      concept:
+        "Ember Noir: a glowing ember resting on cooled lava. The crimson bottle sits on a rough black plinth like heat held inside dark stone, with red berries and petals as hints of the fruity, floral heart and still black water below to add depth and quiet.",
+      edit:
+        "A strict centre axis: the wordmark at the top, the bottle at the optical centre on its plinth, the lockup at the bottom. A red halo sits directly behind the bottle so the glass separates from the background, while the branch on the left and the petals on the right frame the plinth without crossing it. The lower third is left to the reflection so the type has calm, dark space to sit in.",
+      motion:
+        "A high-contrast classical serif in gold, set in wide-tracked capitals to feel like engraving. The hierarchy is three steps: EMBER NOIR large, EXTRAIT DE PARFUM small, then a thin rule and the tagline, Where darkness becomes desire. The same lockup is repeated in miniature on the bottle's label, so the product and the poster carry one identity.",
+      color:
+        "Two colours and one metal. Crimson for the glass and the halo, near-black for the stone, water and edges, and warm gold reserved for the type and the bottle collar. The red falls off into black toward every corner, the plinth keeps only a red rim light, and the reflection is darkened so it never competes with the bottle above it.",
+    },
+  },
+  {
     slug: "afterglow",
     title: "Afterglow — Cinematic Portrait",
     subtitle: "One beam of light. Everything else in shadow.",

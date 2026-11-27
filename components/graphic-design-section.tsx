@@ -19,6 +19,9 @@ export function GraphicDesignSection({ projects }: { projects: Project[] }) {
   // staggered row of 4:5 cards, newest first.
   const grid = projects.length >= 3;
   const four = projects.length % 4 === 0;
+  // Counts like 5 or 8 that do not divide into rows of three: the newest two
+  // lead as a wider pair, the rest follow three across.
+  const lead = grid && !four && projects.length % 3 === 2 ? 2 : 0;
   const ordered = grid ? projects : [...tall, ...wide];
 
   return (
@@ -53,7 +56,9 @@ export function GraphicDesignSection({ projects }: { projects: Project[] }) {
             const span = grid
               ? four
                 ? `md:col-span-6 lg:col-span-3 ${i % 2 === 1 ? "lg:mt-20" : ""}`
-                : `md:col-span-6 lg:col-span-4 ${i % 3 === 1 ? "lg:mt-24" : i % 3 === 2 ? "lg:mt-12" : ""}`
+                : i < lead
+                  ? `md:col-span-6 ${i === 1 ? "lg:mt-24" : ""}`
+                  : `md:col-span-6 lg:col-span-4 ${(i - lead) % 3 === 1 ? "lg:mt-24" : (i - lead) % 3 === 2 ? "lg:mt-12" : ""}`
               : ordered.length === 1
                 ? "md:col-span-8 md:col-start-3"
                 : portrait
@@ -70,14 +75,14 @@ export function GraphicDesignSection({ projects }: { projects: Project[] }) {
                       src={p.media.poster}
                       alt={p.media.posterAlt}
                       fill
-                      sizes={grid ? (four ? "(min-width: 1024px) 24vw, (min-width: 768px) 48vw, 100vw" : "(min-width: 1024px) 31vw, (min-width: 768px) 48vw, 100vw") : portrait ? "(min-width: 768px) 40vw, 100vw" : "(min-width: 768px) 56vw, 100vw"}
+                      sizes={i < lead ? "(min-width: 768px) 48vw, 100vw" : grid ? (four ? "(min-width: 1024px) 24vw, (min-width: 768px) 48vw, 100vw" : "(min-width: 1024px) 31vw, (min-width: 768px) 48vw, 100vw") : portrait ? "(min-width: 768px) 40vw, 100vw" : "(min-width: 768px) 56vw, 100vw"}
                       className="object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.04]"
                     />
                   </ClipReveal>
                   <div className="mt-5 flex items-start justify-between gap-6">
                     <div className="min-w-0">
                       <p className="label text-dim">{p.categories[0]}</p>
-                      <h3 className={`display mt-2 text-bone ${grid ? (four ? "text-[clamp(1.6rem,2vw,2rem)]" : "text-[clamp(1.7rem,2.6vw,2.4rem)]") : "text-[clamp(1.9rem,4vw,2.9rem)]"} transition-colors group-hover:text-signal`}>
+                      <h3 className={`display mt-2 text-bone ${i < lead ? "text-[clamp(1.9rem,3.4vw,2.9rem)]" : grid ? (four ? "text-[clamp(1.6rem,2vw,2rem)]" : "text-[clamp(1.7rem,2.6vw,2.4rem)]") : "text-[clamp(1.9rem,4vw,2.9rem)]"} transition-colors group-hover:text-signal`}>
                         {p.title}
                       </h3>
                       <p className="mt-2 max-w-md text-bone/70">{p.subtitle}</p>
