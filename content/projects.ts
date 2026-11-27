@@ -28,6 +28,7 @@ export const categories = [
   "Video Essays",
   "UI & Web Design",
   "Poster & Print Design",
+  "Photo Manipulation",
 ] as const;
 
 export type Category = (typeof categories)[number];
@@ -249,6 +250,50 @@ export const projects: Project[] = [
         "A 120 bpm track re-mapped to the edit — a pulse for the hook, a breakdown for the principles, a re-entry for the journey and a clean resolve on the logo — plus custom interface sounds for ticks, traces and confirmations.",
       color:
         "Codevibe's own navy, blue and teal. Soft glows and deep navy gradients keep it premium and readable at any size. Mastered in 4K.",
+    },
+  },
+  {
+    slug: "afterglow",
+    title: "Afterglow — Cinematic Portrait",
+    subtitle: "One beam of light. Everything else in shadow.",
+    context: "Personal cinematic relight and colour study",
+    date: "2026-11-27",
+    categories: ["Photo Manipulation", "Poster & Print Design"],
+    kind: "design",
+    format: "4:5",
+    duration: 0,
+    summary:
+      "A flat, evenly lit studio portrait relit in Photoshop: a deep teal room and a single warm orange beam that cuts straight through the face, as if a door had opened on a film set. Every light in the frame was built in post.",
+    role: ["Art direction", "Photo manipulation", "Relighting", "Colour grading & retouching"],
+    tools: ["Photoshop"],
+    credits: ["Format: 1600 × 2000 at 300 ppi (4:5)", "All lighting effects built in Photoshop"],
+    media: design(
+      "afterglow",
+      {
+        width: 1600,
+        height: 2000,
+        alt: "Afterglow: a woman in a wide-brimmed hat looking over her shoulder in a deep teal room, a narrow vertical beam of orange light falling across one eye, her lips and her shirt",
+      },
+      "Afterglow: a woman in a hat in a teal room, cut by a single vertical beam of orange light",
+      [
+        "Before and after: the raw, evenly lit portrait on a dark grey backdrop beside the final teal-and-orange relight",
+        "Detail: the orange beam splitting the face — one eye in warm light, the other in cool shadow",
+        "Detail: the beam crossing the linen shirt, warm fabric texture inside it and teal shadow either side",
+        "The layer build: the final image above its eight Photoshop groups, from the original photograph to grain and finishing",
+      ],
+      "jpg",
+    ),
+    story: {
+      overview:
+        "Afterglow is a relighting study: take an ordinary, evenly lit studio portrait and give it the drama of a single practical light on a film set, built entirely in Photoshop.",
+      challenge:
+        "The original photograph is soft, frontal and neutral: a beige hat, a white shirt, a dark grey wall. Everything had to be rebuilt in post — the room, the light direction and the colour — while the face stayed believable and the skin stayed skin.",
+      concept:
+        "A door opens somewhere off camera and one thin beam of warm light falls across her. Inside the beam she is warm and present; outside it, she belongs to the cool blue night. Half revealed, half hidden.",
+      edit:
+        "The beam is placed just left of centre so it crosses the eye, the lips and the fingers in one vertical line, then runs down the shirt to the bottom of the frame. The teal glow behind the head and the vignette push all attention back into that line.",
+      color:
+        "Eight groups, built in order. A base correction with curves, cooler neutrals and a soft-light teal gradient map. A painted environment: a midnight blue base, cyan light behind the model, haze, dark edges and a floor fade. The beam itself is a masked warm-gel gradient map with its own curves, while outside it the subject is pushed to teal and darkened to low key, plus a glowing shaft with a hot core. Then orange spill and bloom, a teal rim light on the hair and shoulders, saturation control and eye clarity on the face, a 50 percent grey dodge-and-burn layer, a vignette, rich-black curves and 6 percent film grain.",
     },
   },
   {
