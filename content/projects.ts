@@ -162,8 +162,14 @@ const media = (slug: string, posterAlt: string, stills: string[]) => ({
 });
 
 /** Media for a still design: full artwork + poster + detail stills, no film. */
-const design = (slug: string, full: { width: number; height: number; alt: string }, posterAlt: string, stills: string[]) => ({
-  full: { src: `/media/${slug}/full.png`, ...full },
+const design = (
+  slug: string,
+  full: { width: number; height: number; alt: string },
+  posterAlt: string,
+  stills: string[],
+  ext: "png" | "jpg" = "png",
+) => ({
+  full: { src: `/media/${slug}/full.${ext}`, ...full },
   poster: `/media/${slug}/poster.jpg`,
   posterAlt,
   stills: stills.map((alt, i) => ({ src: `/media/${slug}/still-${i + 1}.jpg`, alt })),
@@ -243,6 +249,56 @@ export const projects: Project[] = [
         "A 120 bpm track re-mapped to the edit — a pulse for the hook, a breakdown for the principles, a re-entry for the journey and a clean resolve on the logo — plus custom interface sounds for ticks, traces and confirmations.",
       color:
         "Codevibe's own navy, blue and teal. Soft glows and deep navy gradients keep it premium and readable at any size. Mastered in 4K.",
+    },
+  },
+  {
+    slug: "in-motion",
+    title: "In Motion — Visual Study 001",
+    subtitle: "The art of movement.",
+    context: "Personal visual study in experimental art direction",
+    date: "2026-11-27",
+    categories: ["Poster & Print Design"],
+    kind: "design",
+    format: "4:5",
+    duration: 0,
+    summary:
+      "A still image that feels like it is moving: a studio portrait turned into a burst of motion trails, fading echoes and light streaks on a molten orange ground, finished with a quiet Inter type lockup. Built in Photoshop from a single untouched photograph.",
+    role: ["Art direction", "Poster design", "Photo manipulation", "Colour grading"],
+    tools: ["Photoshop"],
+    credits: [
+      "Original photograph: Pexels #31530218",
+      "Type: Inter",
+      "Format: 1080 × 1350 (4:5 social poster)",
+    ],
+    media: design(
+      "in-motion",
+      {
+        width: 1080,
+        height: 1350,
+        alt: "The In Motion poster: a woman in profile on a glowing orange-red background, her head and hair dissolving into horizontal motion trails and ghost echoes, above the words IN MOTION",
+      },
+      "The In Motion poster: a woman in profile dissolving into motion trails on a glowing orange background",
+      [
+        "Before and after: the untouched grey-backdrop studio photograph beside the finished orange In Motion poster",
+        "Detail: the sharp profile of the face against the orange glow, with the motion trails pulling away behind her",
+        "Detail: the fading echo ghosts and horizontal light streaks above the line The art of movement",
+        "The layer build: the poster above its seven Photoshop groups — background, subject, motion trails, light effects, colour grading, typography and finishing",
+      ],
+      "jpg",
+    ),
+    story: {
+      overview:
+        "Visual Study 001 is a self-initiated experiment: how far can a single still photograph be pushed until it reads as movement, as time passing inside one frame?",
+      challenge:
+        "Start from a calm, evenly lit studio profile on a grey backdrop and make it feel fast, warm and cinematic without losing the face — the one part of the image that has to stay perfectly sharp.",
+      concept:
+        "An experiment in time, speed and identity. The face holds still while everything behind it smears into the past: the head leaves trails and echoes of itself across the frame, like a long exposure of a single turn.",
+      edit:
+        "The subject is cut out, mirrored to face into the frame and set right of centre, so the trails have the whole left side to travel across. The type is pushed to the edges: a hairline header, the IN MOTION title anchored at the foot and two small captions underneath.",
+      motion:
+        "Inter throughout: a huge, tightly set Inter Bold title against widely tracked Inter SemiBold labels, with hairline rules echoing the horizontal light streaks.",
+      color:
+        "The grey backdrop was replaced with a built background: a near-black base, an amber light behind the head and a deep red falling to the lower left. The motion is layered as four directional trails (35 to 260 px) and three echo ghosts that grow blurrier and fainter with distance, plus light streaks from a 420 px motion blur. A warm gradient map, curves, richer reds, an amber rim light on the hair, a vignette and 9 percent film grain tie it together.",
     },
   },
   {

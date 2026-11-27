@@ -15,8 +15,10 @@ export function GraphicDesignSection({ projects }: { projects: Project[] }) {
   if (!projects.length) return null;
   const tall = projects.filter((p) => isVertical(p.format));
   const wide = projects.filter((p) => !isVertical(p.format));
-  // Pair a portrait design with a landscape one for an editorial split.
-  const ordered = [...tall, ...wide];
+  // Two designs: a portrait/landscape editorial split. Three or more: a
+  // staggered row of 4:5 cards, newest first.
+  const grid = projects.length >= 3;
+  const ordered = grid ? projects : [...tall, ...wide];
 
   return (
     <section id="graphic-design" aria-labelledby="graphic-design-title" className="border-t border-line">
@@ -47,26 +49,32 @@ export function GraphicDesignSection({ projects }: { projects: Project[] }) {
         <ul className="mt-12 grid gap-12 md:mt-16 md:grid-cols-12 md:gap-6 lg:gap-8">
           {ordered.map((p, i) => {
             const portrait = isVertical(p.format);
-            const span = ordered.length === 1 ? "md:col-span-8 md:col-start-3" : portrait ? "md:col-span-5" : "md:col-span-7 md:mt-24";
+            const span = grid
+              ? `md:col-span-6 lg:col-span-4 ${i % 3 === 1 ? "lg:mt-24" : i % 3 === 2 ? "lg:mt-12" : ""}`
+              : ordered.length === 1
+                ? "md:col-span-8 md:col-start-3"
+                : portrait
+                  ? "md:col-span-5"
+                  : "md:col-span-7 md:mt-24";
             return (
               <li key={p.slug} className={span}>
                 <Link href={`/work/${p.slug}`} data-cursor="View" className="group block">
                   <ClipReveal
-                    className={`relative overflow-hidden bg-coal ${portrait ? "aspect-[4/5]" : "aspect-[4/3]"}`}
+                    className={`relative overflow-hidden bg-coal ${portrait || grid ? "aspect-[4/5]" : "aspect-[4/3]"}`}
                     delay={i * 0.1}
                   >
                     <Image
                       src={p.media.poster}
                       alt={p.media.posterAlt}
                       fill
-                      sizes={portrait ? "(min-width: 768px) 40vw, 100vw" : "(min-width: 768px) 56vw, 100vw"}
+                      sizes={grid ? "(min-width: 1024px) 31vw, (min-width: 768px) 48vw, 100vw" : portrait ? "(min-width: 768px) 40vw, 100vw" : "(min-width: 768px) 56vw, 100vw"}
                       className="object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.04]"
                     />
                   </ClipReveal>
                   <div className="mt-5 flex items-start justify-between gap-6">
                     <div className="min-w-0">
                       <p className="label text-dim">{p.categories[0]}</p>
-                      <h3 className="display mt-2 text-[clamp(1.9rem,4vw,2.9rem)] text-bone transition-colors group-hover:text-signal">
+                      <h3 className={`display mt-2 text-bone ${grid ? "text-[clamp(1.7rem,2.6vw,2.4rem)]" : "text-[clamp(1.9rem,4vw,2.9rem)]"} transition-colors group-hover:text-signal`}>
                         {p.title}
                       </h3>
                       <p className="mt-2 max-w-md text-bone/70">{p.subtitle}</p>
