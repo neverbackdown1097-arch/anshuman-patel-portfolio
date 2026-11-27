@@ -253,6 +253,52 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "frosted-reveal",
+    title: "Clarity Unveiled — Frosted Reveal",
+    subtitle: "Look closer. The detail never lies.",
+    context: "Personal poster study in texture, focus and type",
+    date: "2026-11-28",
+    categories: ["Photo Manipulation", "Poster & Print Design"],
+    kind: "design",
+    format: "4:5",
+    duration: 0,
+    summary:
+      "A close-up portrait hidden behind frosted, textured glass, with one clear strip cut through it so only the eyes come through in sharp detail. Ghosted CLARITY and UNVEILED type frames the face, and a viewfinder bracket turns the reveal into a moment of focus. A 4:5 social poster.",
+    role: ["Art direction", "Poster design", "Photo manipulation", "Typography"],
+    tools: ["Photoshop"],
+    credits: ["Format: 1080 × 1350 (4:5 social poster)"],
+    media: design(
+      "frosted-reveal",
+      {
+        width: 1080,
+        height: 1350,
+        alt: "Clarity Unveiled: a face blurred behind textured frosted glass, with a single clear horizontal strip showing two sharp blue-green eyes, LOOK CLOSER above it, THE DETAIL NEVER LIES below, and the faded words CLARITY and UNVEILED at the top and bottom",
+      },
+      "Clarity Unveiled: a face behind frosted glass with one clear strip revealing sharp blue-green eyes",
+      [
+        "The Frosted Reveal post as it appears in a phone feed, at 1080 × 1350",
+        "Detail: LOOK CLOSER above the clear strip, the left eye sharp against the frosted surface around it",
+        "Detail: the right eye, the viewfinder corner bracket and THE DETAIL NEVER LIES",
+        "Detail: the embossed frosted-glass texture over the blurred face, with the ghosted letters of UNVEILED below",
+      ],
+      "jpg",
+    ),
+    story: {
+      overview:
+        "Frosted Reveal is a personal poster study about attention: a face you cannot quite see, and one window where everything is perfectly clear.",
+      challenge:
+        "Hide almost the whole subject and still make the image feel like a portrait. The frosted areas had to stay readable as a face, the eyes had to be sharp enough to reward a second look, and the type had to sit inside the texture instead of floating on top of it.",
+      concept:
+        "Clarity is unveiled. The frosted glass is everything we usually see — soft, surface-level, out of focus. One clean cut opens it up, and the detail behind it is the truth. The copy says the idea twice: LOOK CLOSER, THE DETAIL NEVER LIES.",
+      edit:
+        "The clear strip runs the full width at eye level, about a third of the way down, and is the only sharp, saturated area in the frame. Two corner brackets, top right and bottom left, mark it like a camera viewfinder locking focus. Everything else stays soft and low-contrast, so the eye lands on the eyes first and then travels out to the type.",
+      motion:
+        "A heavy geometric sans in two roles. CLARITY and UNVEILED are set huge and ghosted into the glass, so the texture runs through the letters. LOOK CLOSER and THE DETAIL NEVER LIES are small, solid white labels placed at opposite corners of the strip, and a quiet tracked credit line closes the poster at the bottom.",
+      color:
+        "A narrow, muted palette: warm skin tones and cool slate shadows under the frost, with the full colour held back for the reveal, where the blue-green irises are the most saturated point in the image. A soft pink blush in the letters of UNVEILED echoes the skin beneath, and an embossed paper-like grain gives the glass its physical surface.",
+    },
+  },
+  {
     slug: "velmora-ember-noir",
     title: "VELMORA — Ember Noir",
     subtitle: "Where darkness becomes desire.",
